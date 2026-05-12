@@ -1,0 +1,3510 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "Program.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Api/Program.cs",
+      "source_location": "L1",
+      "community": 12,
+      "norm_label": "program.cs",
+      "id": "slotmachine_api_program_cs"
+    },
+    {
+      "label": "SlotMachine.Api.Controllers",
+      "file_type": "code",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L6",
+      "community": 3,
+      "norm_label": "slotmachine.api.controllers",
+      "id": "controllers_slotcontroller_slotmachine_api_controllers"
+    },
+    {
+      "label": "ControllerBase",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "community": 3,
+      "norm_label": "controllerbase",
+      "id": "controllerbase"
+    },
+    {
+      "label": ".RunAudit()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L47",
+      "community": 3,
+      "norm_label": ".runaudit()",
+      "id": "controllers_slotcontroller_slotcontroller_runaudit"
+    },
+    {
+      "label": "SlotMachine.Api.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Api/obj/Debug/net9.0/SlotMachine.Api.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "slotmachine.api.assemblyinfo.cs",
+      "id": "slotmachine_api_obj_debug_net9_0_slotmachine_api_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.Api.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Api/obj/Debug/net9.0/SlotMachine.Api.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 14,
+      "norm_label": "slotmachine.api.globalusings.g.cs",
+      "id": "slotmachine_api_obj_debug_net9_0_slotmachine_api_globalusings_g_cs"
+    },
+    {
+      "label": "SlotMachine.Api.MvcApplicationPartsAssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Api/obj/Debug/net9.0/SlotMachine.Api.MvcApplicationPartsAssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 15,
+      "norm_label": "slotmachine.api.mvcapplicationpartsassemblyinfo.cs",
+      "id": "slotmachine_api_obj_debug_net9_0_slotmachine_api_mvcapplicationpartsassemblyinfo_cs"
+    },
+    {
+      "label": "DependencyInjection.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DependencyInjection.cs",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "dependencyinjection.cs",
+      "id": "slotmachine_application_dependencyinjection_cs"
+    },
+    {
+      "label": ".AddApplication()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DependencyInjection.cs",
+      "source_location": "L8",
+      "community": 5,
+      "norm_label": ".addapplication()",
+      "id": "slotmachine_application_dependencyinjection_dependencyinjection_addapplication"
+    },
+    {
+      "label": "AuditResultDto.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DTOs/AuditResultDto.cs",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "auditresultdto.cs",
+      "id": "slotmachine_application_dtos_auditresultdto_cs"
+    },
+    {
+      "label": "CreatePlayerRequest.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DTOs/CreatePlayerRequest.cs",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "createplayerrequest.cs",
+      "id": "slotmachine_application_dtos_createplayerrequest_cs"
+    },
+    {
+      "label": "PlayerDto.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DTOs/PlayerDto.cs",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "playerdto.cs",
+      "id": "slotmachine_application_dtos_playerdto_cs"
+    },
+    {
+      "label": "SlotMachine.Application.DTOs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DTOs/PlayerDto.cs",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "slotmachine.application.dtos",
+      "id": "dtos_playerdto_slotmachine_application_dtos"
+    },
+    {
+      "label": "SpinResponseDto.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/DTOs/SpinResponseDto.cs",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "spinresponsedto.cs",
+      "id": "slotmachine_application_dtos_spinresponsedto_cs"
+    },
+    {
+      "label": "SlotMachine.Application.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/obj/Debug/net9.0/SlotMachine.Application.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 16,
+      "norm_label": "slotmachine.application.assemblyinfo.cs",
+      "id": "slotmachine_application_obj_debug_net9_0_slotmachine_application_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.Application.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/obj/Debug/net9.0/SlotMachine.Application.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 17,
+      "norm_label": "slotmachine.application.globalusings.g.cs",
+      "id": "slotmachine_application_obj_debug_net9_0_slotmachine_application_globalusings_g_cs"
+    },
+    {
+      "label": "SlotMachine.Application.Services",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L8",
+      "community": 3,
+      "norm_label": "slotmachine.application.services",
+      "id": "services_slotappservice_slotmachine_application_services"
+    },
+    {
+      "label": "IPlayerRepository",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L13",
+      "community": 1,
+      "norm_label": "iplayerrepository",
+      "id": "iplayerrepository"
+    },
+    {
+      "label": "IRandomGenerator",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L9",
+      "community": 9,
+      "norm_label": "irandomgenerator",
+      "id": "irandomgenerator"
+    },
+    {
+      "label": "IAuditLogger",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L15",
+      "community": 1,
+      "norm_label": "iauditlogger",
+      "id": "iauditlogger"
+    },
+    {
+      "label": "SlotMachine",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L10",
+      "community": 0,
+      "norm_label": "slotmachine",
+      "id": "slotmachine"
+    },
+    {
+      "label": ".CreatePlayer()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L28",
+      "community": 3,
+      "norm_label": ".createplayer()",
+      "id": "services_slotappservice_slotappservice_createplayer"
+    },
+    {
+      "label": ".PlaySpin()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L45",
+      "community": 3,
+      "norm_label": ".playspin()",
+      "id": "services_slotappservice_slotappservice_playspin"
+    },
+    {
+      "label": ".RunAuditSimulation()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L80",
+      "community": 3,
+      "norm_label": ".runauditsimulation()",
+      "id": "services_slotappservice_slotappservice_runauditsimulation"
+    },
+    {
+      "label": "Player.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L1",
+      "community": 0,
+      "norm_label": "player.cs",
+      "id": "slotmachine_domain_entities_player_cs"
+    },
+    {
+      "label": "SlotMachine.Domain.Entities",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L1",
+      "community": 0,
+      "norm_label": "slotmachine.domain.entities",
+      "id": "entities_player_slotmachine_domain_entities"
+    },
+    {
+      "label": ".Debit()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L17",
+      "community": 0,
+      "norm_label": ".debit()",
+      "id": "entities_player_player_debit"
+    },
+    {
+      "label": ".Credit()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L24",
+      "community": 0,
+      "norm_label": ".credit()",
+      "id": "entities_player_player_credit"
+    },
+    {
+      "label": "decimal",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L11",
+      "community": 0,
+      "norm_label": "decimal",
+      "id": "decimal"
+    },
+    {
+      "label": "Symbol",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L12",
+      "community": 0,
+      "norm_label": "symbol",
+      "id": "symbol"
+    },
+    {
+      "label": ".Spin()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L26",
+      "community": 0,
+      "norm_label": ".spin()",
+      "id": "entities_slotmachine_slotmachine_spin"
+    },
+    {
+      "label": ".GenerateRow()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L55",
+      "community": 0,
+      "norm_label": ".generaterow()",
+      "id": "entities_slotmachine_slotmachine_generaterow"
+    },
+    {
+      "label": ".CalculateRowPrize()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L64",
+      "community": 0,
+      "norm_label": ".calculaterowprize()",
+      "id": "entities_slotmachine_slotmachine_calculaterowprize"
+    },
+    {
+      "label": ".GetRandomSymbol()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L73",
+      "community": 0,
+      "norm_label": ".getrandomsymbol()",
+      "id": "entities_slotmachine_slotmachine_getrandomsymbol"
+    },
+    {
+      "label": "SlotMachine.Domain.Interfaces",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Interfaces/IAuditLogger.cs",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "slotmachine.domain.interfaces",
+      "id": "interfaces_iauditlogger_slotmachine_domain_interfaces"
+    },
+    {
+      "label": ".LogAction()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Interfaces/IAuditLogger.cs",
+      "source_location": "L5",
+      "community": 1,
+      "norm_label": ".logaction()",
+      "id": "interfaces_iauditlogger_iauditlogger_logaction"
+    },
+    {
+      "label": ".GetById()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Interfaces/IPlayerRepository.cs",
+      "source_location": "L7",
+      "community": 1,
+      "norm_label": ".getbyid()",
+      "id": "interfaces_iplayerrepository_iplayerrepository_getbyid"
+    },
+    {
+      "label": ".Save()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Interfaces/IPlayerRepository.cs",
+      "source_location": "L8",
+      "community": 1,
+      "norm_label": ".save()",
+      "id": "interfaces_iplayerrepository_iplayerrepository_save"
+    },
+    {
+      "label": ".Next()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Interfaces/IRandomGenerator.cs",
+      "source_location": "L7",
+      "community": 9,
+      "norm_label": ".next()",
+      "id": "interfaces_irandomgenerator_irandomgenerator_next"
+    },
+    {
+      "label": "SlotMachine.Domain.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/obj/Debug/net9.0/SlotMachine.Domain.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 18,
+      "norm_label": "slotmachine.domain.assemblyinfo.cs",
+      "id": "slotmachine_domain_obj_debug_net9_0_slotmachine_domain_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.Domain.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/obj/Debug/net9.0/SlotMachine.Domain.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 19,
+      "norm_label": "slotmachine.domain.globalusings.g.cs",
+      "id": "slotmachine_domain_obj_debug_net9_0_slotmachine_domain_globalusings_g_cs"
+    },
+    {
+      "label": "SlotMachine.Domain.Services",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L5",
+      "community": 6,
+      "norm_label": "slotmachine.domain.services",
+      "id": "services_slotauditor_slotmachine_domain_services"
+    },
+    {
+      "label": ".RunSimulation()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L14",
+      "community": 6,
+      "norm_label": ".runsimulation()",
+      "id": "services_slotauditor_slotauditor_runsimulation"
+    },
+    {
+      "label": ".CalculateRTP()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L34",
+      "community": 6,
+      "norm_label": ".calculatertp()",
+      "id": "services_slotauditor_slotauditor_calculatertp"
+    },
+    {
+      "label": ".CalculateHouseEdge()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L41",
+      "community": 6,
+      "norm_label": ".calculatehouseedge()",
+      "id": "services_slotauditor_slotauditor_calculatehouseedge"
+    },
+    {
+      "label": ".Reset()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L47",
+      "community": 6,
+      "norm_label": ".reset()",
+      "id": "services_slotauditor_slotauditor_reset"
+    },
+    {
+      "label": "Symbol.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/ValueObjects/Symbol.cs",
+      "source_location": "L1",
+      "community": 0,
+      "norm_label": "symbol.cs",
+      "id": "slotmachine_domain_valueobjects_symbol_cs"
+    },
+    {
+      "label": "SlotMachine.Domain.ValueObjects",
+      "file_type": "code",
+      "source_file": "SlotMachine.Domain/ValueObjects/Symbol.cs",
+      "source_location": "L1",
+      "community": 0,
+      "norm_label": "slotmachine.domain.valueobjects",
+      "id": "valueobjects_symbol_slotmachine_domain_valueobjects"
+    },
+    {
+      "label": ".AddInfrastructure()",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/DependencyInjection.cs",
+      "source_location": "L11",
+      "community": 5,
+      "norm_label": ".addinfrastructure()",
+      "id": "slotmachine_infrastructure_dependencyinjection_dependencyinjection_addinfrastructure"
+    },
+    {
+      "label": "SlotMachine.Infrastructure.Logging",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/Logging/FileAuditLogger.cs",
+      "source_location": "L4",
+      "community": 5,
+      "norm_label": "slotmachine.infrastructure.logging",
+      "id": "logging_fileauditlogger_slotmachine_infrastructure_logging"
+    },
+    {
+      "label": "FileAuditLogger",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/Logging/FileAuditLogger.cs",
+      "source_location": "L6",
+      "community": 1,
+      "norm_label": "fileauditlogger",
+      "id": "logging_fileauditlogger_fileauditlogger"
+    },
+    {
+      "label": "SlotMachine.Infrastructure.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/obj/Debug/net9.0/SlotMachine.Infrastructure.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 20,
+      "norm_label": "slotmachine.infrastructure.assemblyinfo.cs",
+      "id": "slotmachine_infrastructure_obj_debug_net9_0_slotmachine_infrastructure_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.Infrastructure.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/obj/Debug/net9.0/SlotMachine.Infrastructure.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 21,
+      "norm_label": "slotmachine.infrastructure.globalusings.g.cs",
+      "id": "slotmachine_infrastructure_obj_debug_net9_0_slotmachine_infrastructure_globalusings_g_cs"
+    },
+    {
+      "label": "SlotMachine.Infrastructure.Repositories",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L6",
+      "community": 1,
+      "norm_label": "slotmachine.infrastructure.repositories",
+      "id": "repositories_inmemoryplayerrepository_slotmachine_infrastructure_repositories"
+    },
+    {
+      "label": "ConcurrentDictionary",
+      "file_type": "code",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L10",
+      "community": 1,
+      "norm_label": "concurrentdictionary",
+      "id": "concurrentdictionary"
+    },
+    {
+      "label": "SlotMachine.feature.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L1",
+      "community": 2,
+      "norm_label": "slotmachine.feature.cs",
+      "id": "slotmachine_testspecs_features_slotmachine_feature_cs"
+    },
+    {
+      "label": "JogarNaSlotMachineFeature",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L20",
+      "community": 2,
+      "norm_label": "jogarnaslotmachinefeature",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature"
+    },
+    {
+      "label": "ITestRunner",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L26",
+      "community": 2,
+      "norm_label": "itestrunner",
+      "id": "itestrunner"
+    },
+    {
+      "label": "string",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L28",
+      "community": 2,
+      "norm_label": "string",
+      "id": "string"
+    },
+    {
+      "label": "ITestOutputHelper",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L31",
+      "community": 2,
+      "norm_label": "itestoutputhelper",
+      "id": "itestoutputhelper"
+    },
+    {
+      "label": ".FeatureSetup()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L42",
+      "community": 2,
+      "norm_label": ".featuresetup()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_featuresetup"
+    },
+    {
+      "label": ".FeatureTearDown()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L50",
+      "community": 2,
+      "norm_label": ".featureteardown()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_featureteardown"
+    },
+    {
+      "label": ".TestInitialize()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L56",
+      "community": 2,
+      "norm_label": ".testinitialize()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_testinitialize"
+    },
+    {
+      "label": ".TestTearDown()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L60",
+      "community": 2,
+      "norm_label": ".testteardown()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_testteardown"
+    },
+    {
+      "label": ".ScenarioInitialize()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L65",
+      "community": 2,
+      "norm_label": ".scenarioinitialize()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_scenarioinitialize"
+    },
+    {
+      "label": ".ScenarioStart()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L71",
+      "community": 2,
+      "norm_label": ".scenariostart()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariostart"
+    },
+    {
+      "label": ".ScenarioCleanup()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L76",
+      "community": 2,
+      "norm_label": ".scenariocleanup()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariocleanup"
+    },
+    {
+      "label": ".FeatureBackground()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L81",
+      "community": 2,
+      "norm_label": ".featurebackground()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_featurebackground"
+    },
+    {
+      "label": ".JogadorRealizaUmGiroEGanhaEmTodasAsLinhas()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L98",
+      "community": 2,
+      "norm_label": ".jogadorrealizaumgiroeganhaemtodasaslinhas()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas"
+    },
+    {
+      "label": ".JogadorRealizaUmGiroENaoGanhaNada()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L138",
+      "community": 2,
+      "norm_label": ".jogadorrealizaumgiroenaoganhanada()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada"
+    },
+    {
+      "label": ".JogadorTentaGirarSemSaldoSuficiente()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L178",
+      "community": 2,
+      "norm_label": ".jogadortentagirarsemsaldosuficiente()",
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente"
+    },
+    {
+      "label": "FixtureData",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L215",
+      "community": 2,
+      "norm_label": "fixturedata",
+      "id": "features_slotmachine_feature_fixturedata"
+    },
+    {
+      "label": ".Dispose()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L225",
+      "community": 2,
+      "norm_label": ".dispose()",
+      "id": "features_slotmachine_feature_fixturedata_dispose"
+    },
+    {
+      "label": "Hooks.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L1",
+      "community": 10,
+      "norm_label": "hooks.cs",
+      "id": "slotmachine_testspecs_hooks_hooks_cs"
+    },
+    {
+      "label": "SlotMachine.Test.Specs.Hooks",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L5",
+      "community": 10,
+      "norm_label": "slotmachine.test.specs.hooks",
+      "id": "hooks_hooks_slotmachine_test_specs_hooks"
+    },
+    {
+      "label": "Hooks",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L7",
+      "community": 10,
+      "norm_label": "hooks",
+      "id": "hooks_hooks_hooks"
+    },
+    {
+      "label": ".BeforeTestRun()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L11",
+      "community": 10,
+      "norm_label": ".beforetestrun()",
+      "id": "hooks_hooks_hooks_beforetestrun"
+    },
+    {
+      "label": ".BeforeScenario()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L22",
+      "community": 10,
+      "norm_label": ".beforescenario()",
+      "id": "hooks_hooks_hooks_beforescenario"
+    },
+    {
+      "label": ".AfterScenario()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L31",
+      "community": 10,
+      "norm_label": ".afterscenario()",
+      "id": "hooks_hooks_hooks_afterscenario"
+    },
+    {
+      "label": ".AfterTestRun()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L42",
+      "community": 10,
+      "norm_label": ".aftertestrun()",
+      "id": "hooks_hooks_hooks_aftertestrun"
+    },
+    {
+      "label": "SlotMachine.TestSpecs.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/obj/Debug/net9.0/SlotMachine.TestSpecs.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 22,
+      "norm_label": "slotmachine.testspecs.assemblyinfo.cs",
+      "id": "slotmachine_testspecs_obj_debug_net9_0_slotmachine_testspecs_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.TestSpecs.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/obj/Debug/net9.0/SlotMachine.TestSpecs.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 23,
+      "norm_label": "slotmachine.testspecs.globalusings.g.cs",
+      "id": "slotmachine_testspecs_obj_debug_net9_0_slotmachine_testspecs_globalusings_g_cs"
+    },
+    {
+      "label": "xUnit.AssemblyHooks.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/obj/Debug/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L1",
+      "community": 11,
+      "norm_label": "xunit.assemblyhooks.cs",
+      "id": "slotmachine_testspecs_obj_debug_net9_0_xunit_assemblyhooks_cs"
+    },
+    {
+      "label": "SlotMachine_Test_Specs_XUnitAssemblyFixture",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L10",
+      "community": 11,
+      "norm_label": "slotmachine_test_specs_xunitassemblyfixture",
+      "id": "net9_0_xunit_assemblyhooks_slotmachine_test_specs_xunitassemblyfixture"
+    },
+    {
+      "label": "Assembly",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L13",
+      "community": 11,
+      "norm_label": "assembly",
+      "id": "assembly"
+    },
+    {
+      "label": "SlotMachine_Test_Specs_SpecFlowNonParallelizableFeaturesCollectionDefinition",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L29",
+      "community": 11,
+      "norm_label": "slotmachine_test_specs_specflownonparallelizablefeaturescollectiondefinition",
+      "id": "net9_0_xunit_assemblyhooks_slotmachine_test_specs_specflownonparallelizablefeaturescollectiondefinition"
+    },
+    {
+      "label": "SlotMachine.Test.Specs.StepDefinitions",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L10",
+      "community": 0,
+      "norm_label": "slotmachine.test.specs.stepdefinitions",
+      "id": "stepdefinitions_slotmachinesteps_slotmachine_test_specs_stepdefinitions"
+    },
+    {
+      "label": "Player",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L15",
+      "community": 0,
+      "norm_label": "player",
+      "id": "player"
+    },
+    {
+      "label": "SpinResult",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L18",
+      "community": 0,
+      "norm_label": "spinresult",
+      "id": "spinresult"
+    },
+    {
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L19",
+      "community": 0,
+      "norm_label": "exception",
+      "id": "exception"
+    },
+    {
+      "label": ".DadoQueEuSouUmJogadorChamado()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L27",
+      "community": 0,
+      "norm_label": ".dadoqueeusouumjogadorchamado()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoqueeusouumjogadorchamado"
+    },
+    {
+      "label": ".DadoEuPossuoUmSaldoInicialDe()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L34",
+      "community": 0,
+      "norm_label": ".dadoeupossuoumsaldoinicialde()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoeupossuoumsaldoinicialde"
+    },
+    {
+      "label": ".DadoQueAMaquinaEstaConfiguradaParaRetornarSempreOSimbolo()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L42",
+      "community": 0,
+      "norm_label": ".dadoqueamaquinaestaconfiguradapararetornarsempreosimbolo()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoqueamaquinaestaconfiguradapararetornarsempreosimbolo"
+    },
+    {
+      "label": ".QuandoEuClicoNoBotaoDeGirar()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L56",
+      "community": 0,
+      "norm_label": ".quandoeucliconobotaodegirar()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_quandoeucliconobotaodegirar"
+    },
+    {
+      "label": ".EntaoOSistemaDeveDebitarDoMeuSaldo()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L71",
+      "community": 0,
+      "norm_label": ".entaoosistemadevedebitardomeusaldo()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoosistemadevedebitardomeusaldo"
+    },
+    {
+      "label": ".EntaoOMeuSaldoAtualizadoDeveSer()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L79",
+      "community": 0,
+      "norm_label": ".entaoomeusaldoatualizadodeveser()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoomeusaldoatualizadodeveser"
+    },
+    {
+      "label": ".EntaoOResultadoDeveIndicarQueEuSouUmVencedorComPremioDe()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L86",
+      "community": 0,
+      "norm_label": ".entaooresultadodeveindicarqueeusouumvencedorcompremiode()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaooresultadodeveindicarqueeusouumvencedorcompremiode"
+    },
+    {
+      "label": ".EntaoOResultadoDeveIndicarQueEuNaoGanheiPremios()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L95",
+      "community": 0,
+      "norm_label": ".entaooresultadodeveindicarqueeunaoganheipremios()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaooresultadodeveindicarqueeunaoganheipremios"
+    },
+    {
+      "label": ".EntaoOSistemaDeveImpedirOGiro()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L103",
+      "community": 0,
+      "norm_label": ".entaoosistemadeveimpedirogiro()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoosistemadeveimpedirogiro"
+    },
+    {
+      "label": ".EntaoExibirAMensagemDeErro()",
+      "file_type": "code",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L109",
+      "community": 0,
+      "norm_label": ".entaoexibiramensagemdeerro()",
+      "id": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoexibiramensagemdeerro"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Api.Controllers",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L9",
+      "community": 3,
+      "norm_label": "slotmachine.test.unittest.api.controllers",
+      "id": "controllers_slotcontrollertests_slotmachine_test_unittest_api_controllers"
+    },
+    {
+      "label": "SlotController",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L14",
+      "community": 3,
+      "norm_label": "slotcontroller",
+      "id": "slotcontroller"
+    },
+    {
+      "label": ".CreatePlayer_WhenRequestIsValid_ShouldReturnOk()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L22",
+      "community": 3,
+      "norm_label": ".createplayer_whenrequestisvalid_shouldreturnok()",
+      "id": "controllers_slotcontrollertests_slotcontrollertests_createplayer_whenrequestisvalid_shouldreturnok"
+    },
+    {
+      "label": ".CreatePlayer_WhenExceptionOccurs_ShouldReturnBadRequest()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L40",
+      "community": 3,
+      "norm_label": ".createplayer_whenexceptionoccurs_shouldreturnbadrequest()",
+      "id": "controllers_slotcontrollertests_slotcontrollertests_createplayer_whenexceptionoccurs_shouldreturnbadrequest"
+    },
+    {
+      "label": ".Spin_WhenPlayerExists_ShouldReturnSpinResult()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L56",
+      "community": 3,
+      "norm_label": ".spin_whenplayerexists_shouldreturnspinresult()",
+      "id": "controllers_slotcontrollertests_slotcontrollertests_spin_whenplayerexists_shouldreturnspinresult"
+    },
+    {
+      "label": ".Spin_WhenPlayerNotFound_ShouldReturnBadRequest()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L72",
+      "community": 3,
+      "norm_label": ".spin_whenplayernotfound_shouldreturnbadrequest()",
+      "id": "controllers_slotcontrollertests_slotcontrollertests_spin_whenplayernotfound_shouldreturnbadrequest"
+    },
+    {
+      "label": ".RunAudit_ShouldReturnAuditDto()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L87",
+      "community": 3,
+      "norm_label": ".runaudit_shouldreturnauditdto()",
+      "id": "controllers_slotcontrollertests_slotcontrollertests_runaudit_shouldreturnauditdto"
+    },
+    {
+      "label": "AuditResultDtoTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L10",
+      "community": 4,
+      "norm_label": "auditresultdtotests",
+      "id": "dtos_auditresultdtotests_auditresultdtotests"
+    },
+    {
+      "label": ".AuditResultDto_ShouldStoreValuesCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L12",
+      "community": 4,
+      "norm_label": ".auditresultdto_shouldstorevaluescorrectly()",
+      "id": "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_shouldstorevaluescorrectly"
+    },
+    {
+      "label": ".AuditResultDto_ShouldBeImmutable()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L29",
+      "community": 4,
+      "norm_label": ".auditresultdto_shouldbeimmutable()",
+      "id": "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_shouldbeimmutable"
+    },
+    {
+      "label": ".AuditResultDto_Equality_ShouldBeBasedOnValue()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L43",
+      "community": 4,
+      "norm_label": ".auditresultdto_equality_shouldbebasedonvalue()",
+      "id": "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_equality_shouldbebasedonvalue"
+    },
+    {
+      "label": ".CreatePlayerRequest_ShouldInitializeCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L12",
+      "community": 5,
+      "norm_label": ".createplayerrequest_shouldinitializecorrectly()",
+      "id": "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_shouldinitializecorrectly"
+    },
+    {
+      "label": ".CreatePlayerRequest_Equality_ShouldBeBasedOnValue()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L27",
+      "community": 5,
+      "norm_label": ".createplayerrequest_equality_shouldbebasedonvalue()",
+      "id": "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_equality_shouldbebasedonvalue"
+    },
+    {
+      "label": ".CreatePlayerRequest_ShouldAcceptAnyData_LeavingValidationToDomain()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L39",
+      "community": 5,
+      "norm_label": ".createplayerrequest_shouldacceptanydata_leavingvalidationtodomain()",
+      "id": "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_shouldacceptanydata_leavingvalidationtodomain"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Application.DTOs",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L8",
+      "community": 4,
+      "norm_label": "slotmachine.test.unittest.application.dtos",
+      "id": "dtos_playerdtotests_slotmachine_test_unittest_application_dtos"
+    },
+    {
+      "label": "PlayerDtoTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L10",
+      "community": 4,
+      "norm_label": "playerdtotests",
+      "id": "dtos_playerdtotests_playerdtotests"
+    },
+    {
+      "label": ".PlayerDto_ShouldStoreValuesCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L12",
+      "community": 4,
+      "norm_label": ".playerdto_shouldstorevaluescorrectly()",
+      "id": "dtos_playerdtotests_playerdtotests_playerdto_shouldstorevaluescorrectly"
+    },
+    {
+      "label": ".PlayerDto_Equality_ShouldBeBasedOnValue()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L29",
+      "community": 4,
+      "norm_label": ".playerdto_equality_shouldbebasedonvalue()",
+      "id": "dtos_playerdtotests_playerdtotests_playerdto_equality_shouldbebasedonvalue"
+    },
+    {
+      "label": ".PlayerDto_ShouldBeImmutable()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L42",
+      "community": 4,
+      "norm_label": ".playerdto_shouldbeimmutable()",
+      "id": "dtos_playerdtotests_playerdtotests_playerdto_shouldbeimmutable"
+    },
+    {
+      "label": "SpinResponseDtoTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L5",
+      "community": 4,
+      "norm_label": "spinresponsedtotests",
+      "id": "dtos_spinresponsedtotests_spinresponsedtotests"
+    },
+    {
+      "label": ".SpinResponseDto_ShouldStoreValuesCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L7",
+      "community": 4,
+      "norm_label": ".spinresponsedto_shouldstorevaluescorrectly()",
+      "id": "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_shouldstorevaluescorrectly"
+    },
+    {
+      "label": ".SpinResponseDto_ShouldHandleLossCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L31",
+      "community": 4,
+      "norm_label": ".spinresponsedto_shouldhandlelosscorrectly()",
+      "id": "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_shouldhandlelosscorrectly"
+    },
+    {
+      "label": ".SpinResponseDto_Rows_ShouldHaveCorrectDimensions()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L50",
+      "community": 4,
+      "norm_label": ".spinresponsedto_rows_shouldhavecorrectdimensions()",
+      "id": "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_rows_shouldhavecorrectdimensions"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Application.Services",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L9",
+      "community": 1,
+      "norm_label": "slotmachine.test.unittest.application.services",
+      "id": "services_slotappservicetests_slotmachine_test_unittest_application_services"
+    },
+    {
+      "label": "SlotAppServiceTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L11",
+      "community": 1,
+      "norm_label": "slotappservicetests",
+      "id": "services_slotappservicetests_slotappservicetests"
+    },
+    {
+      "label": "SlotAppService",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L16",
+      "community": 3,
+      "norm_label": "slotappservice",
+      "id": "slotappservice"
+    },
+    {
+      "label": ".CreatePlayer_ShouldSaveInRepository_AndLogAction()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L29",
+      "community": 1,
+      "norm_label": ".createplayer_shouldsaveinrepository_andlogaction()",
+      "id": "services_slotappservicetests_slotappservicetests_createplayer_shouldsaveinrepository_andlogaction"
+    },
+    {
+      "label": ".PlaySpin_WhenPlayerExists_ShouldUpdateBalance_Save_AndLog()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L50",
+      "community": 1,
+      "norm_label": ".playspin_whenplayerexists_shouldupdatebalance_save_andlog()",
+      "id": "services_slotappservicetests_slotappservicetests_playspin_whenplayerexists_shouldupdatebalance_save_andlog"
+    },
+    {
+      "label": ".RunAuditSimulation_ShouldReturnValidAuditResult_AndLogSimulation()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L73",
+      "community": 1,
+      "norm_label": ".runauditsimulation_shouldreturnvalidauditresult_andlogsimulation()",
+      "id": "services_slotappservicetests_slotappservicetests_runauditsimulation_shouldreturnvalidauditresult_andlogsimulation"
+    },
+    {
+      "label": ".PlaySpin_WhenPlayerDoesNotExist_ShouldThrowException()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L92",
+      "community": 1,
+      "norm_label": ".playspin_whenplayerdoesnotexist_shouldthrowexception()",
+      "id": "services_slotappservicetests_slotappservicetests_playspin_whenplayerdoesnotexist_shouldthrowexception"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Domain.Entities",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L6",
+      "community": 8,
+      "norm_label": "slotmachine.test.unittest.domain.entities",
+      "id": "entities_playertests_slotmachine_test_unittest_domain_entities"
+    },
+    {
+      "label": "PlayerTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L8",
+      "community": 8,
+      "norm_label": "playertests",
+      "id": "entities_playertests_playertests"
+    },
+    {
+      "label": ".CreatePlayer_WithValidData_ShouldInitializeCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L10",
+      "community": 8,
+      "norm_label": ".createplayer_withvaliddata_shouldinitializecorrectly()",
+      "id": "entities_playertests_playertests_createplayer_withvaliddata_shouldinitializecorrectly"
+    },
+    {
+      "label": ".Debit_WithSufficientBalance_ShouldReduceBalance()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L26",
+      "community": 8,
+      "norm_label": ".debit_withsufficientbalance_shouldreducebalance()",
+      "id": "entities_playertests_playertests_debit_withsufficientbalance_shouldreducebalance"
+    },
+    {
+      "label": ".Debit_WithInsufficientBalance_ShouldThrowException()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L40",
+      "community": 8,
+      "norm_label": ".debit_withinsufficientbalance_shouldthrowexception()",
+      "id": "entities_playertests_playertests_debit_withinsufficientbalance_shouldthrowexception"
+    },
+    {
+      "label": ".Credit_ShouldIncreaseBalance()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L55",
+      "community": 8,
+      "norm_label": ".credit_shouldincreasebalance()",
+      "id": "entities_playertests_playertests_credit_shouldincreasebalance"
+    },
+    {
+      "label": "SlotMachineTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L7",
+      "community": 8,
+      "norm_label": "slotmachinetests",
+      "id": "entities_slotmachinetests_slotmachinetests"
+    },
+    {
+      "label": ".Spin_ShouldDebitBalance_RegardlessOfResult()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L18",
+      "community": 8,
+      "norm_label": ".spin_shoulddebitbalance_regardlessofresult()",
+      "id": "entities_slotmachinetests_slotmachinetests_spin_shoulddebitbalance_regardlessofresult"
+    },
+    {
+      "label": ".Spin_WhenPlayerWins_ShouldCreditPrizeCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L33",
+      "community": 8,
+      "norm_label": ".spin_whenplayerwins_shouldcreditprizecorrectly()",
+      "id": "entities_slotmachinetests_slotmachinetests_spin_whenplayerwins_shouldcreditprizecorrectly"
+    },
+    {
+      "label": ".Spin_WithInsufficientBalance_ShouldThrowException()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L53",
+      "community": 8,
+      "norm_label": ".spin_withinsufficientbalance_shouldthrowexception()",
+      "id": "entities_slotmachinetests_slotmachinetests_spin_withinsufficientbalance_shouldthrowexception"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Domain.Services",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L5",
+      "community": 6,
+      "norm_label": "slotmachine.test.unittest.domain.services",
+      "id": "services_slotauditortests_slotmachine_test_unittest_domain_services"
+    },
+    {
+      "label": "SlotAuditorTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L7",
+      "community": 6,
+      "norm_label": "slotauditortests",
+      "id": "services_slotauditortests_slotauditortests"
+    },
+    {
+      "label": "SlotAuditor",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L11",
+      "community": 6,
+      "norm_label": "slotauditor",
+      "id": "slotauditor"
+    },
+    {
+      "label": ".CalculateRTP_ShouldReturnCorrectPercentage()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L20",
+      "community": 6,
+      "norm_label": ".calculatertp_shouldreturncorrectpercentage()",
+      "id": "services_slotauditortests_slotauditortests_calculatertp_shouldreturncorrectpercentage"
+    },
+    {
+      "label": ".CalculateHouseEdge_ShouldBeComplementOfRTP()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L40",
+      "community": 6,
+      "norm_label": ".calculatehouseedge_shouldbecomplementofrtp()",
+      "id": "services_slotauditortests_slotauditortests_calculatehouseedge_shouldbecomplementofrtp"
+    },
+    {
+      "label": ".Reset_ShouldClearAllCounters()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L54",
+      "community": 6,
+      "norm_label": ".reset_shouldclearallcounters()",
+      "id": "services_slotauditortests_slotauditortests_reset_shouldclearallcounters"
+    },
+    {
+      "label": ".RunSimulation_WithZeroSpins_ShouldThrowArgumentException()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L70",
+      "community": 6,
+      "norm_label": ".runsimulation_withzerospins_shouldthrowargumentexception()",
+      "id": "services_slotauditortests_slotauditortests_runsimulation_withzerospins_shouldthrowargumentexception"
+    },
+    {
+      "label": "SpinResultTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L10",
+      "community": 7,
+      "norm_label": "spinresulttests",
+      "id": "valueobjects_spinresulttests_spinresulttests"
+    },
+    {
+      "label": ".IsWinner_ShouldBeTrue_WhenPrizeIsGreaterThanZero()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L12",
+      "community": 7,
+      "norm_label": ".iswinner_shouldbetrue_whenprizeisgreaterthanzero()",
+      "id": "valueobjects_spinresulttests_spinresulttests_iswinner_shouldbetrue_whenprizeisgreaterthanzero"
+    },
+    {
+      "label": ".IsWinner_ShouldBeFalse_WhenPrizeIsZero()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L26",
+      "community": 7,
+      "norm_label": ".iswinner_shouldbefalse_whenprizeiszero()",
+      "id": "valueobjects_spinresulttests_spinresulttests_iswinner_shouldbefalse_whenprizeiszero"
+    },
+    {
+      "label": ".SpinResult_ShouldHaveDefaultBetAmount_WhenNotProvided()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L40",
+      "community": 7,
+      "norm_label": ".spinresult_shouldhavedefaultbetamount_whennotprovided()",
+      "id": "valueobjects_spinresulttests_spinresulttests_spinresult_shouldhavedefaultbetamount_whennotprovided"
+    },
+    {
+      "label": ".SpinResult_ShouldStoreRowsCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L55",
+      "community": 7,
+      "norm_label": ".spinresult_shouldstorerowscorrectly()",
+      "id": "valueobjects_spinresulttests_spinresulttests_spinresult_shouldstorerowscorrectly"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Domain.ValueObjects",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L5",
+      "community": 7,
+      "norm_label": "slotmachine.test.unittest.domain.valueobjects",
+      "id": "valueobjects_symboltests_slotmachine_test_unittest_domain_valueobjects"
+    },
+    {
+      "label": "SymbolTests",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L7",
+      "community": 7,
+      "norm_label": "symboltests",
+      "id": "valueobjects_symboltests_symboltests"
+    },
+    {
+      "label": ".Symbol_ShouldInitializePropertiesCorrectly()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L9",
+      "community": 7,
+      "norm_label": ".symbol_shouldinitializepropertiescorrectly()",
+      "id": "valueobjects_symboltests_symboltests_symbol_shouldinitializepropertiescorrectly"
+    },
+    {
+      "label": ".Symbols_WithSameValues_ShouldBeEqual()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L26",
+      "community": 7,
+      "norm_label": ".symbols_withsamevalues_shouldbeequal()",
+      "id": "valueobjects_symboltests_symboltests_symbols_withsamevalues_shouldbeequal"
+    },
+    {
+      "label": ".Symbols_WithDifferentValues_ShouldNotBeEqual()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L38",
+      "community": 7,
+      "norm_label": ".symbols_withdifferentvalues_shouldnotbeequal()",
+      "id": "valueobjects_symboltests_symboltests_symbols_withdifferentvalues_shouldnotbeequal"
+    },
+    {
+      "label": ".Symbol_ShouldHandleDifferentInputValues()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L49",
+      "community": 7,
+      "norm_label": ".symbol_shouldhandledifferentinputvalues()",
+      "id": "valueobjects_symboltests_symboltests_symbol_shouldhandledifferentinputvalues"
+    },
+    {
+      "label": "InfrastructureDependencyInjectionTests.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/InfrastructureDependencyInjectionTests.cs",
+      "source_location": "L1",
+      "community": 9,
+      "norm_label": "infrastructuredependencyinjectiontests.cs",
+      "id": "slotmachine_unittest_infrastructure_infrastructuredependencyinjectiontests_cs"
+    },
+    {
+      "label": ".AddInfrastructure_ShouldRegisterRequiredServices()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/InfrastructureDependencyInjectionTests.cs",
+      "source_location": "L11",
+      "community": 9,
+      "norm_label": ".addinfrastructure_shouldregisterrequiredservices()",
+      "id": "infrastructure_infrastructuredependencyinjectiontests_infrastructuredependencyinjectiontests_addinfrastructure_shouldregisterrequiredservices"
+    },
+    {
+      "label": ".Services_ShouldBeRegisteredAsSingleton()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/InfrastructureDependencyInjectionTests.cs",
+      "source_location": "L32",
+      "community": 9,
+      "norm_label": ".services_shouldberegisteredassingleton()",
+      "id": "infrastructure_infrastructuredependencyinjectiontests_infrastructuredependencyinjectiontests_services_shouldberegisteredassingleton"
+    },
+    {
+      "label": "InMemoryPlayerRepository",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L13",
+      "community": 1,
+      "norm_label": "inmemoryplayerrepository",
+      "id": "inmemoryplayerrepository"
+    },
+    {
+      "label": ".Save_ShouldAddPlayerToDictionary()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L20",
+      "community": 1,
+      "norm_label": ".save_shouldaddplayertodictionary()",
+      "id": "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_save_shouldaddplayertodictionary"
+    },
+    {
+      "label": ".GetById_WhenPlayerDoesNotExist_ShouldReturnNull()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L36",
+      "community": 1,
+      "norm_label": ".getbyid_whenplayerdoesnotexist_shouldreturnnull()",
+      "id": "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_getbyid_whenplayerdoesnotexist_shouldreturnnull"
+    },
+    {
+      "label": ".Save_ShouldUpdateExistingPlayer()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L46",
+      "community": 1,
+      "norm_label": ".save_shouldupdateexistingplayer()",
+      "id": "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_save_shouldupdateexistingplayer"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.Infrastructure.Services",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L8",
+      "community": 9,
+      "norm_label": "slotmachine.test.unittest.infrastructure.services",
+      "id": "services_systemrandomgeneratortests_slotmachine_test_unittest_infrastructure_services"
+    },
+    {
+      "label": "SystemRandomGenerator",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L12",
+      "community": 9,
+      "norm_label": "systemrandomgenerator",
+      "id": "systemrandomgenerator"
+    },
+    {
+      "label": ".Next_ShouldReturnValuesWithinRange()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L19",
+      "community": 9,
+      "norm_label": ".next_shouldreturnvalueswithinrange()",
+      "id": "services_systemrandomgeneratortests_systemrandomgeneratortests_next_shouldreturnvalueswithinrange"
+    },
+    {
+      "label": ".Next_ShouldBeRandomEnough()",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L37",
+      "community": 9,
+      "norm_label": ".next_shouldberandomenough()",
+      "id": "services_systemrandomgeneratortests_systemrandomgeneratortests_next_shouldberandomenough"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/obj/Debug/net9.0/SlotMachine.Test.UnitTest.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 24,
+      "norm_label": "slotmachine.test.unittest.assemblyinfo.cs",
+      "id": "slotmachine_unittest_obj_debug_net9_0_slotmachine_test_unittest_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.Test.UnitTest.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/obj/Debug/net9.0/SlotMachine.Test.UnitTest.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 25,
+      "norm_label": "slotmachine.test.unittest.globalusings.g.cs",
+      "id": "slotmachine_unittest_obj_debug_net9_0_slotmachine_test_unittest_globalusings_g_cs"
+    },
+    {
+      "label": "SlotMachine.UnitTest.AssemblyInfo.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/obj/Debug/net9.0/SlotMachine.UnitTest.AssemblyInfo.cs",
+      "source_location": "L1",
+      "community": 26,
+      "norm_label": "slotmachine.unittest.assemblyinfo.cs",
+      "id": "slotmachine_unittest_obj_debug_net9_0_slotmachine_unittest_assemblyinfo_cs"
+    },
+    {
+      "label": "SlotMachine.UnitTest.GlobalUsings.g.cs",
+      "file_type": "code",
+      "source_file": "SlotMachine.UnitTest/obj/Debug/net9.0/SlotMachine.UnitTest.GlobalUsings.g.cs",
+      "source_location": "L1",
+      "community": 27,
+      "norm_label": "slotmachine.unittest.globalusings.g.cs",
+      "id": "slotmachine_unittest_obj_debug_net9_0_slotmachine_unittest_globalusings_g_cs"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontroller_slotmachine_api_controllers"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllerbase"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontroller_slotcontroller_runaudit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/DependencyInjection.cs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dependencyinjection_cs",
+      "target": "dtos_playerdto_slotmachine_application_dtos"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/DependencyInjection.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dependencyinjection_cs",
+      "target": "slotmachine_application_dependencyinjection_dependencyinjection_addapplication"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/DependencyInjection.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dependencyinjection_cs",
+      "target": "logging_fileauditlogger_slotmachine_infrastructure_logging"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/DependencyInjection.cs",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dependencyinjection_cs",
+      "target": "slotmachine_infrastructure_dependencyinjection_dependencyinjection_addinfrastructure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/DTOs/AuditResultDto.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_auditresultdto_cs",
+      "target": "dtos_playerdto_slotmachine_application_dtos"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/DTOs/CreatePlayerRequest.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_createplayerrequest_cs",
+      "target": "dtos_playerdto_slotmachine_application_dtos"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_createplayerrequest_cs",
+      "target": "dtos_playerdtotests_slotmachine_test_unittest_application_dtos"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_createplayerrequest_cs",
+      "target": "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_shouldinitializecorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_createplayerrequest_cs",
+      "target": "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_equality_shouldbebasedonvalue"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/CreatePlayerRequestTests.cs",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_createplayerrequest_cs",
+      "target": "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_shouldacceptanydata_leavingvalidationtodomain"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/DTOs/PlayerDto.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_playerdto_cs",
+      "target": "dtos_playerdto_slotmachine_application_dtos"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/DTOs/SpinResponseDto.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_application_dtos_spinresponsedto_cs",
+      "target": "dtos_playerdto_slotmachine_application_dtos"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "services_slotappservice_slotmachine_application_services"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "iplayerrepository"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "iplayerrepository"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "iplayerrepository"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IPlayerRepository.cs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "iplayerrepository",
+      "target": "interfaces_iauditlogger_slotmachine_domain_interfaces"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IPlayerRepository.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "iplayerrepository",
+      "target": "interfaces_iplayerrepository_iplayerrepository_getbyid"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IPlayerRepository.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "iplayerrepository",
+      "target": "interfaces_iplayerrepository_iplayerrepository_save"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "irandomgenerator"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Services/SystemRandomGenerator.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "systemrandomgenerator",
+      "target": "irandomgenerator"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "irandomgenerator"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "irandomgenerator"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L9",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "entities_slotmachinetests_slotmachinetests",
+      "target": "irandomgenerator"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L9",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "irandomgenerator"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IRandomGenerator.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "irandomgenerator",
+      "target": "interfaces_iauditlogger_slotmachine_domain_interfaces"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IRandomGenerator.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "irandomgenerator",
+      "target": "interfaces_irandomgenerator_irandomgenerator_next"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "iauditlogger"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Logging/FileAuditLogger.cs",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "logging_fileauditlogger_fileauditlogger",
+      "target": "iauditlogger"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "iauditlogger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IAuditLogger.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "iauditlogger",
+      "target": "interfaces_iauditlogger_slotmachine_domain_interfaces"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Interfaces/IAuditLogger.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "iauditlogger",
+      "target": "interfaces_iauditlogger_iauditlogger_logaction"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "slotmachine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L10",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "entities_slotmachinetests_slotmachinetests",
+      "target": "slotmachine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L10",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "slotmachine"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "entities_player_slotmachine_domain_entities"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L11",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "decimal"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "symbol"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "entities_slotmachine_slotmachine_spin"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "entities_slotmachine_slotmachine_generaterow"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "entities_slotmachine_slotmachine_calculaterowprize"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "entities_slotmachine_slotmachine_getrandomsymbol"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachine_test_specs_stepdefinitions"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "player"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "spinresult"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L19",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "exception"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoqueeusouumjogadorchamado"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoeupossuoumsaldoinicialde"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoqueamaquinaestaconfiguradapararetornarsempreosimbolo"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_quandoeucliconobotaodegirar"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoosistemadevedebitardomeusaldo"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L79",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoomeusaldoatualizadodeveser"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaooresultadodeveindicarqueeusouumvencedorcompremiode"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaooresultadodeveindicarqueeunaoganheipremios"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoosistemadeveimpedirogiro"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine",
+      "target": "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoexibiramensagemdeerro"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "services_slotappservice_slotappservice_createplayer"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "services_slotappservice_slotappservice_createplayer"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "services_slotappservice_slotappservice_playspin"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Application/Services/SlotAppService.cs",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotappservice",
+      "target": "services_slotappservice_slotappservice_runauditsimulation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_domain_entities_player_cs",
+      "target": "entities_player_slotmachine_domain_entities"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_domain_entities_player_cs",
+      "target": "player"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "player",
+      "target": "entities_player_player_debit"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/Player.cs",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "player",
+      "target": "entities_player_player_credit"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Api/Controllers/SlotController.cs",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "entities_slotmachine_slotmachine_spin"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachine_slotmachine_spin",
+      "target": "entities_slotmachine_slotmachine_generaterow"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachine_slotmachine_spin",
+      "target": "entities_slotmachine_slotmachine_calculaterowprize"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Entities/SlotMachine.cs",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachine_slotmachine_generaterow",
+      "target": "entities_slotmachine_slotmachine_getrandomsymbol"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Logging/FileAuditLogger.cs",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "logging_fileauditlogger_fileauditlogger",
+      "target": "interfaces_iauditlogger_iauditlogger_logaction"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "interfaces_iplayerrepository_iplayerrepository_getbyid"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "interfaces_iplayerrepository_iplayerrepository_save"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Services/SystemRandomGenerator.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "systemrandomgenerator",
+      "target": "interfaces_irandomgenerator_irandomgenerator_next"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotauditor",
+      "target": "services_slotauditor_slotmachine_domain_services"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotauditor",
+      "target": "services_slotauditor_slotauditor_runsimulation"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotauditor",
+      "target": "services_slotauditor_slotauditor_calculatertp"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotauditor_slotauditor_calculatehouseedge",
+      "target": "services_slotauditor_slotauditor_calculatertp"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotauditor",
+      "target": "services_slotauditor_slotauditor_calculatehouseedge"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/Services/SlotAuditor.cs",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotauditor",
+      "target": "services_slotauditor_slotauditor_reset"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/ValueObjects/Symbol.cs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_domain_valueobjects_symbol_cs",
+      "target": "valueobjects_symbol_slotmachine_domain_valueobjects"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Domain/ValueObjects/SpinResult.cs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "spinresult",
+      "target": "valueobjects_symbol_slotmachine_domain_valueobjects"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Logging/FileAuditLogger.cs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "logging_fileauditlogger_fileauditlogger",
+      "target": "logging_fileauditlogger_slotmachine_infrastructure_logging"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Services/SystemRandomGenerator.cs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "systemrandomgenerator",
+      "target": "logging_fileauditlogger_slotmachine_infrastructure_logging"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "repositories_inmemoryplayerrepository_slotmachine_infrastructure_repositories"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs",
+      "source_location": "L10",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "concurrentdictionary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_features_slotmachine_feature_cs",
+      "target": "hooks_hooks_slotmachine_test_specs_hooks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_features_slotmachine_feature_cs",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L215",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_features_slotmachine_feature_cs",
+      "target": "features_slotmachine_feature_fixturedata"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "itestrunner"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "string"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L31",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "itestoutputhelper"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featuresetup"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featureteardown"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_testinitialize"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_testteardown"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenarioinitialize"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariostart"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariocleanup"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featurebackground"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_fixturedata_dispose"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L98",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L138",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L178",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L227",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_fixturedata_dispose",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featureteardown"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_fixturedata_dispose",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_testteardown"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L107",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenarioinitialize"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L147",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenarioinitialize"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L187",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenarioinitialize"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L115",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariostart"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L155",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariostart"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L195",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariostart"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariocleanup"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L175",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariocleanup"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L212",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_scenariocleanup"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featurebackground"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L157",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featurebackground"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente",
+      "target": "features_slotmachine_feature_jogarnaslotmachinefeature_featurebackground"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Features/SlotMachine.feature.cs",
+      "source_location": "L225",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "features_slotmachine_feature_fixturedata",
+      "target": "features_slotmachine_feature_fixturedata_dispose"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "net9_0_xunit_assemblyhooks_slotmachine_test_specs_xunitassemblyfixture",
+      "target": "features_slotmachine_feature_fixturedata_dispose"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_hooks_hooks_cs",
+      "target": "hooks_hooks_slotmachine_test_specs_hooks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_hooks_hooks_cs",
+      "target": "hooks_hooks_hooks"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_hooks_hooks",
+      "target": "hooks_hooks_hooks_beforetestrun"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_hooks_hooks",
+      "target": "hooks_hooks_hooks_beforescenario"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_hooks_hooks",
+      "target": "hooks_hooks_hooks_afterscenario"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/Hooks/Hooks.cs",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_hooks_hooks",
+      "target": "hooks_hooks_hooks_aftertestrun"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_obj_debug_net9_0_xunit_assemblyhooks_cs",
+      "target": "net9_0_xunit_assemblyhooks_slotmachine_test_specs_xunitassemblyfixture"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_testspecs_obj_debug_net9_0_xunit_assemblyhooks_cs",
+      "target": "net9_0_xunit_assemblyhooks_slotmachine_test_specs_specflownonparallelizablefeaturescollectiondefinition"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.TestSpecs/obj/Release/net9.0/xUnit.AssemblyHooks.cs",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "net9_0_xunit_assemblyhooks_slotmachine_test_specs_xunitassemblyfixture",
+      "target": "assembly"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontrollertests_slotmachine_test_unittest_api_controllers"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "slotappservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontrollertests_slotcontrollertests_createplayer_whenrequestisvalid_shouldreturnok"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontrollertests_slotcontrollertests_createplayer_whenexceptionoccurs_shouldreturnbadrequest"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontrollertests_slotcontrollertests_spin_whenplayerexists_shouldreturnspinresult"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L72",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontrollertests_slotcontrollertests_spin_whenplayernotfound_shouldreturnbadrequest"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Api/Controllers/SlotControllerTests.cs",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotcontroller",
+      "target": "controllers_slotcontrollertests_slotcontrollertests_runaudit_shouldreturnauditdto"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_auditresultdtotests_auditresultdtotests",
+      "target": "dtos_playerdtotests_slotmachine_test_unittest_application_dtos"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_auditresultdtotests_auditresultdtotests",
+      "target": "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_shouldstorevaluescorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_auditresultdtotests_auditresultdtotests",
+      "target": "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_shouldbeimmutable"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/AuditResultDtoTests.cs",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_auditresultdtotests_auditresultdtotests",
+      "target": "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_equality_shouldbebasedonvalue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_playerdtotests_playerdtotests",
+      "target": "dtos_playerdtotests_slotmachine_test_unittest_application_dtos"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_spinresponsedtotests_spinresponsedtotests",
+      "target": "dtos_playerdtotests_slotmachine_test_unittest_application_dtos"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_playerdtotests_playerdtotests",
+      "target": "dtos_playerdtotests_playerdtotests_playerdto_shouldstorevaluescorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_playerdtotests_playerdtotests",
+      "target": "dtos_playerdtotests_playerdtotests_playerdto_equality_shouldbebasedonvalue"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/PlayerDtoTests.cs",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_playerdtotests_playerdtotests",
+      "target": "dtos_playerdtotests_playerdtotests_playerdto_shouldbeimmutable"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_spinresponsedtotests_spinresponsedtotests",
+      "target": "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_shouldstorevaluescorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_spinresponsedtotests_spinresponsedtotests",
+      "target": "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_shouldhandlelosscorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/DTOs/SpinResponseDtoTests.cs",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "dtos_spinresponsedtotests_spinresponsedtotests",
+      "target": "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_rows_shouldhavecorrectdimensions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "services_slotappservicetests_slotmachine_test_unittest_application_services"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "slotappservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "services_slotappservicetests_slotappservicetests_createplayer_shouldsaveinrepository_andlogaction"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "services_slotappservicetests_slotappservicetests_playspin_whenplayerexists_shouldupdatebalance_save_andlog"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "services_slotappservicetests_slotappservicetests_runauditsimulation_shouldreturnvalidauditresult_andlogsimulation"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Application/Services/SlotAppServiceTests.cs",
+      "source_location": "L92",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotappservicetests_slotappservicetests",
+      "target": "services_slotappservicetests_slotappservicetests_playspin_whenplayerdoesnotexist_shouldthrowexception"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_playertests_playertests",
+      "target": "entities_playertests_slotmachine_test_unittest_domain_entities"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachinetests_slotmachinetests",
+      "target": "entities_playertests_slotmachine_test_unittest_domain_entities"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_playertests_playertests",
+      "target": "entities_playertests_playertests_createplayer_withvaliddata_shouldinitializecorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_playertests_playertests",
+      "target": "entities_playertests_playertests_debit_withsufficientbalance_shouldreducebalance"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_playertests_playertests",
+      "target": "entities_playertests_playertests_debit_withinsufficientbalance_shouldthrowexception"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/PlayerTests.cs",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_playertests_playertests",
+      "target": "entities_playertests_playertests_credit_shouldincreasebalance"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachinetests_slotmachinetests",
+      "target": "entities_slotmachinetests_slotmachinetests_spin_shoulddebitbalance_regardlessofresult"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachinetests_slotmachinetests",
+      "target": "entities_slotmachinetests_slotmachinetests_spin_whenplayerwins_shouldcreditprizecorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Entities/SlotMachineTests.cs",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "entities_slotmachinetests_slotmachinetests",
+      "target": "entities_slotmachinetests_slotmachinetests_spin_withinsufficientbalance_shouldthrowexception"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "services_slotauditortests_slotmachine_test_unittest_domain_services"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L11",
+      "weight": 1.0,
+      "context": "field",
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "slotauditor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "services_slotauditortests_slotauditortests_calculatertp_shouldreturncorrectpercentage"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "services_slotauditortests_slotauditortests_calculatehouseedge_shouldbecomplementofrtp"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "services_slotauditortests_slotauditortests_reset_shouldclearallcounters"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+      "source_location": "L70",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_slotauditortests_slotauditortests",
+      "target": "services_slotauditortests_slotauditortests_runsimulation_withzerospins_shouldthrowargumentexception"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_spinresulttests_spinresulttests",
+      "target": "valueobjects_symboltests_slotmachine_test_unittest_domain_valueobjects"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_spinresulttests_spinresulttests",
+      "target": "valueobjects_spinresulttests_spinresulttests_iswinner_shouldbetrue_whenprizeisgreaterthanzero"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_spinresulttests_spinresulttests",
+      "target": "valueobjects_spinresulttests_spinresulttests_iswinner_shouldbefalse_whenprizeiszero"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_spinresulttests_spinresulttests",
+      "target": "valueobjects_spinresulttests_spinresulttests_spinresult_shouldhavedefaultbetamount_whennotprovided"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SpinResultTests.cs",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_spinresulttests_spinresulttests",
+      "target": "valueobjects_spinresulttests_spinresulttests_spinresult_shouldstorerowscorrectly"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_symboltests_symboltests",
+      "target": "valueobjects_symboltests_slotmachine_test_unittest_domain_valueobjects"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_symboltests_symboltests",
+      "target": "valueobjects_symboltests_symboltests_symbol_shouldinitializepropertiescorrectly"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_symboltests_symboltests",
+      "target": "valueobjects_symboltests_symboltests_symbols_withsamevalues_shouldbeequal"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_symboltests_symboltests",
+      "target": "valueobjects_symboltests_symboltests_symbols_withdifferentvalues_shouldnotbeequal"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Domain/ValueObjects/SymbolTests.cs",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "valueobjects_symboltests_symboltests",
+      "target": "valueobjects_symboltests_symboltests_symbol_shouldhandledifferentinputvalues"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/InfrastructureDependencyInjectionTests.cs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_unittest_infrastructure_infrastructuredependencyinjectiontests_cs",
+      "target": "services_systemrandomgeneratortests_slotmachine_test_unittest_infrastructure_services"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/InfrastructureDependencyInjectionTests.cs",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_unittest_infrastructure_infrastructuredependencyinjectiontests_cs",
+      "target": "infrastructure_infrastructuredependencyinjectiontests_infrastructuredependencyinjectiontests_addinfrastructure_shouldregisterrequiredservices"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/InfrastructureDependencyInjectionTests.cs",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slotmachine_unittest_infrastructure_infrastructuredependencyinjectiontests_cs",
+      "target": "infrastructure_infrastructuredependencyinjectiontests_infrastructuredependencyinjectiontests_services_shouldberegisteredassingleton"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "services_systemrandomgeneratortests_slotmachine_test_unittest_infrastructure_services"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_save_shouldaddplayertodictionary"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_getbyid_whenplayerdoesnotexist_shouldreturnnull"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "inmemoryplayerrepository",
+      "target": "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_save_shouldupdateexistingplayer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "systemrandomgenerator",
+      "target": "services_systemrandomgeneratortests_slotmachine_test_unittest_infrastructure_services"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "systemrandomgenerator",
+      "target": "services_systemrandomgeneratortests_systemrandomgeneratortests_next_shouldreturnvalueswithinrange"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "SlotMachine.UnitTest/Infrastructure/Services/SystemRandomGeneratorTests.cs",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "systemrandomgenerator",
+      "target": "services_systemrandomgeneratortests_systemrandomgeneratortests_next_shouldberandomenough"
+    }
+  ],
+  "hyperedges": []
+}

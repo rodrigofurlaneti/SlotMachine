@@ -1,0 +1,330 @@
+{
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\Program.cs": {
+    "mtime": 1778550343.1011,
+    "hash": "53be76eef2be8c64cbc3faac55731625"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\Controllers\\SlotController.cs": {
+    "mtime": 1778547030.7097034,
+    "hash": "7a5cf6eacb4a97d809f0b124b0000390"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Debug\\net9.0\\SlotMachine.Api.AssemblyInfo.cs": {
+    "mtime": 1778551526.5485785,
+    "hash": "da5e7c5799c88d3d890bd14da610ff6f"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Debug\\net9.0\\SlotMachine.Api.GlobalUsings.g.cs": {
+    "mtime": 1778545220.572185,
+    "hash": "27a3303725b3d7fb45be5fb2a2844928"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Debug\\net9.0\\SlotMachine.Api.MvcApplicationPartsAssemblyInfo.cs": {
+    "mtime": 1778551526.5885818,
+    "hash": "5ff0254e7c9d2d03f4305db519f117cc"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Release\\net9.0\\SlotMachine.Api.AssemblyInfo.cs": {
+    "mtime": 1778546497.8033912,
+    "hash": "ec47e4e2544da3810f2cf9a48a08a198"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Release\\net9.0\\SlotMachine.Api.GlobalUsings.g.cs": {
+    "mtime": 1778546497.7480583,
+    "hash": "27a3303725b3d7fb45be5fb2a2844928"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\DependencyInjection.cs": {
+    "mtime": 1778545534.240799,
+    "hash": "122950cb7b60a8b8f44879436d336ae4"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\DTOs\\AuditResultDto.cs": {
+    "mtime": 1778544926.4575794,
+    "hash": "85a6fcc5b098bd8df04d51b344d364e6"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\DTOs\\CreatePlayerRequest.cs": {
+    "mtime": 1778546997.982498,
+    "hash": "6dbf290f0dd8252de03fe27c3e95a917"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\DTOs\\PlayerDto.cs": {
+    "mtime": 1778544942.1486986,
+    "hash": "20a13f1b014f3d31d8648bef85f900ca"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\DTOs\\SpinResponseDto.cs": {
+    "mtime": 1778547486.1050808,
+    "hash": "f158209b764d6b7b61aff2d5c7845d12"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\obj\\Debug\\net9.0\\SlotMachine.Application.AssemblyInfo.cs": {
+    "mtime": 1778551525.7712617,
+    "hash": "9b55399c8b9ecd3e527472d02c9bfa8a"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\obj\\Debug\\net9.0\\SlotMachine.Application.GlobalUsings.g.cs": {
+    "mtime": 1778544842.0905879,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\obj\\Release\\net9.0\\SlotMachine.Application.AssemblyInfo.cs": {
+    "mtime": 1778546497.58915,
+    "hash": "fd32d6fc88e2edd8ff5b8128c88af2c9"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\obj\\Release\\net9.0\\SlotMachine.Application.GlobalUsings.g.cs": {
+    "mtime": 1778546497.5590265,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\Services\\ISlotAppService.cs": {
+    "mtime": 1778544974.2417662,
+    "hash": "d0ee8a41be4f18c394e51ee29048a619"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\Services\\SlotAppService.cs": {
+    "mtime": 1778549552.9024868,
+    "hash": "f52450fde0b61e67c7dbef504f100844"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\Entities\\Player.cs": {
+    "mtime": 1778547673.1242783,
+    "hash": "f4e2c6d35b80e7e3d845a2bf1be96ec1"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\Entities\\SlotMachine.cs": {
+    "mtime": 1778550410.1098082,
+    "hash": "fed19910296ef92926f48d469e026849"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\Interfaces\\IAuditLogger.cs": {
+    "mtime": 1778549446.022204,
+    "hash": "93bdcd88945641495b38526a03e6e1bf"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\Interfaces\\IPlayerRepository.cs": {
+    "mtime": 1778545946.5366476,
+    "hash": "a6961ae3856cfdd25fb3c063ed553388"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\Interfaces\\IRandomGenerator.cs": {
+    "mtime": 1778544505.6527276,
+    "hash": "85efe79e59965ebc3c3edf1d8429f048"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\obj\\Debug\\net9.0\\SlotMachine.Domain.AssemblyInfo.cs": {
+    "mtime": 1778551525.5567834,
+    "hash": "052ca454b7b6a1c18ec7ee0581053261"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\obj\\Debug\\net9.0\\SlotMachine.Domain.GlobalUsings.g.cs": {
+    "mtime": 1778544347.015068,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\obj\\Release\\net9.0\\SlotMachine.Domain.AssemblyInfo.cs": {
+    "mtime": 1778546497.4587495,
+    "hash": "8f82d18ad7aaebafd99bf238b72d16a9"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\obj\\Release\\net9.0\\SlotMachine.Domain.GlobalUsings.g.cs": {
+    "mtime": 1778546497.4269989,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\Services\\SlotAuditor.cs": {
+    "mtime": 1778545899.4540133,
+    "hash": "c3a415ca72d876ea563a0f978492f070"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\ValueObjects\\SpinResult.cs": {
+    "mtime": 1778548635.761561,
+    "hash": "ab8ebb8013eb192ceb9750083072b6f2"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\ValueObjects\\Symbol.cs": {
+    "mtime": 1778544447.440825,
+    "hash": "d9ef5328c45e8b0c7c5b782e102ec952"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\DependencyInjection.cs": {
+    "mtime": 1778549681.9124331,
+    "hash": "6a91638a8a0b29026f249e71c0d55de7"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\Logging\\FileAuditLogger.cs": {
+    "mtime": 1778549784.32461,
+    "hash": "7d525fae4ac896f7b3a2ead4d228eb41"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\obj\\Debug\\net9.0\\SlotMachine.Infrastructure.AssemblyInfo.cs": {
+    "mtime": 1778551525.9710653,
+    "hash": "75b9ca81a4c269d119bc4c3738f6b3e5"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\obj\\Debug\\net9.0\\SlotMachine.Infrastructure.GlobalUsings.g.cs": {
+    "mtime": 1778545098.191127,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\obj\\Release\\net9.0\\SlotMachine.Infrastructure.AssemblyInfo.cs": {
+    "mtime": 1778546497.569471,
+    "hash": "308e83f2b2fd6fe0b6a50bf10bd3a6fb"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\obj\\Release\\net9.0\\SlotMachine.Infrastructure.GlobalUsings.g.cs": {
+    "mtime": 1778546497.5533874,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\Repositories\\InMemoryPlayerRepository.cs": {
+    "mtime": 1778545151.891157,
+    "hash": "c774e4f22879840053468eb35035ab15"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\Services\\SystemRandomGenerator.cs": {
+    "mtime": 1778545191.3779376,
+    "hash": "888b527221cf181ef3be00f3caa597b5"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\Features\\SlotMachine.feature.cs": {
+    "mtime": 1778551310.9581785,
+    "hash": "17c11df5be0910b8dfbaa5bcfdb08a34"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\Hooks\\Hooks.cs": {
+    "mtime": 1778551283.5609677,
+    "hash": "e36483fe6f7808ea45def6bca3eb1f9f"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Debug\\net9.0\\SlotMachine.Test.Specs.AssemblyInfo.cs": {
+    "mtime": 1778551526.2731864,
+    "hash": "cace771d49e1cb5c7862428eaf70b1c6"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Debug\\net9.0\\SlotMachine.Test.Specs.GlobalUsings.g.cs": {
+    "mtime": 1778551021.4037902,
+    "hash": "2ece3e2974e80db62cc863b1fefbcc73"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Debug\\net9.0\\SlotMachine.TestSpecs.AssemblyInfo.cs": {
+    "mtime": 1778550921.8815048,
+    "hash": "8ba646ff21c2a2f719119eaa5c25fd1b"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Debug\\net9.0\\SlotMachine.TestSpecs.GlobalUsings.g.cs": {
+    "mtime": 1778550921.8495052,
+    "hash": "85ade9612eda34da064d8501bc008ac7"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Debug\\net9.0\\xUnit.AssemblyHooks.cs": {
+    "mtime": 1778551027.6805844,
+    "hash": "2c0d8a0c77b8a0d21c995c1e20a9a583"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Release\\net9.0\\SlotMachine.Test.Specs.AssemblyInfo.cs": {
+    "mtime": 1778550959.1130624,
+    "hash": "ea3ce5b460ee599faa9486a4c0625ac9"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Release\\net9.0\\SlotMachine.Test.Specs.GlobalUsings.g.cs": {
+    "mtime": 1778551021.6157882,
+    "hash": "2ece3e2974e80db62cc863b1fefbcc73"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Release\\net9.0\\SlotMachine.TestSpecs.AssemblyInfo.cs": {
+    "mtime": 1778550922.6508682,
+    "hash": "f3157fbf2eb8c9aef5820f462e7bead7"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Release\\net9.0\\SlotMachine.TestSpecs.GlobalUsings.g.cs": {
+    "mtime": 1778550922.611864,
+    "hash": "85ade9612eda34da064d8501bc008ac7"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Release\\net9.0\\xUnit.AssemblyHooks.cs": {
+    "mtime": 1778551076.6885264,
+    "hash": "2c0d8a0c77b8a0d21c995c1e20a9a583"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\StepDefinitions\\SlotMachineSteps.cs": {
+    "mtime": 1778551517.4914875,
+    "hash": "106afb70350a10a21050344e6e320011"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Api\\Controllers\\SlotControllerTests.cs": {
+    "mtime": 1778551002.2437854,
+    "hash": "fad1363fbc296ea08179a9fb686ce2e9"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Application\\DTOs\\AuditResultDtoTests.cs": {
+    "mtime": 1778551002.2697847,
+    "hash": "b00d12dfbd7b42a9879cbec52413867b"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Application\\DTOs\\CreatePlayerRequestTests.cs": {
+    "mtime": 1778551002.2547855,
+    "hash": "c991a3c5174211b8f73639f54ab0f90c"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Application\\DTOs\\PlayerDtoTests.cs": {
+    "mtime": 1778551002.2747865,
+    "hash": "a31c82005d2cccf5978cff3781967645"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Application\\DTOs\\SpinResponseDtoTests.cs": {
+    "mtime": 1778551002.175785,
+    "hash": "5b3399b471b1cbd37a82aec5acd9803d"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Application\\Services\\SlotAppServiceTests.cs": {
+    "mtime": 1778551002.2597885,
+    "hash": "e3218be0b76c2c254e40f0a004b5aa5c"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Domain\\Entities\\PlayerTests.cs": {
+    "mtime": 1778551002.249786,
+    "hash": "d988756d47d7a4e9406edb6a60174658"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Domain\\Entities\\SlotMachineTests.cs": {
+    "mtime": 1778551002.2787855,
+    "hash": "a1b63d64ab237b5f209857d254820606"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Domain\\Services\\SlotAuditorTests.cs": {
+    "mtime": 1778551002.2647872,
+    "hash": "c1e6a0ad86a8df89d04f845d969d5af1"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Domain\\ValueObjects\\SpinResultTests.cs": {
+    "mtime": 1778551002.2877874,
+    "hash": "1a8e2fb8d413de0d40b717ac58376f84"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Domain\\ValueObjects\\SymbolTests.cs": {
+    "mtime": 1778551002.292785,
+    "hash": "70cf0265746aaa930030ca856eddf32b"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Infrastructure\\InfrastructureDependencyInjectionTests.cs": {
+    "mtime": 1778551002.2837858,
+    "hash": "acc21c859fa65bd2230e193678a1b44d"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Infrastructure\\Repositories\\InMemoryPlayerRepositoryTests.cs": {
+    "mtime": 1778551002.238785,
+    "hash": "8bdac963f8ad0d673328f59283e7357b"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\Infrastructure\\Services\\SystemRandomGeneratorTests.cs": {
+    "mtime": 1778551002.2327857,
+    "hash": "bfcd324f675620e2ad323ecdd57c67a1"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Debug\\net9.0\\SlotMachine.Test.UnitTest.AssemblyInfo.cs": {
+    "mtime": 1778551526.920647,
+    "hash": "15445422def79d690d904b0d16aae124"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Debug\\net9.0\\SlotMachine.Test.UnitTest.GlobalUsings.g.cs": {
+    "mtime": 1778550970.0018263,
+    "hash": "2ece3e2974e80db62cc863b1fefbcc73"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Debug\\net9.0\\SlotMachine.UnitTest.AssemblyInfo.cs": {
+    "mtime": 1778550808.5069168,
+    "hash": "c91d045c549d2076f08f788a59772936"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Debug\\net9.0\\SlotMachine.UnitTest.GlobalUsings.g.cs": {
+    "mtime": 1778548318.2495987,
+    "hash": "2ece3e2974e80db62cc863b1fefbcc73"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Release\\net9.0\\SlotMachine.Test.UnitTest.AssemblyInfo.cs": {
+    "mtime": 1778550971.351077,
+    "hash": "e3a4b38f5f293d300ca12ba46a2e5547"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Release\\net9.0\\SlotMachine.Test.UnitTest.GlobalUsings.g.cs": {
+    "mtime": 1778550971.295076,
+    "hash": "2ece3e2974e80db62cc863b1fefbcc73"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Release\\net9.0\\SlotMachine.UnitTest.AssemblyInfo.cs": {
+    "mtime": 1778548240.0164244,
+    "hash": "a60b2ebabd7ced8eaddf5338efe70bde"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Release\\net9.0\\SlotMachine.UnitTest.GlobalUsings.g.cs": {
+    "mtime": 1778548318.5191576,
+    "hash": "2ece3e2974e80db62cc863b1fefbcc73"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Debug\\net9.0\\SlotMachine.Api.csproj.FileListAbsolute.txt": {
+    "mtime": 1778551526.774305,
+    "hash": "9259f7bcf047e2a680818ccf67039a76"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Debug\\net9.0\\staticwebassets.references.upToDateCheck.txt": {
+    "mtime": 1778545978.6838155,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Api\\obj\\Debug\\net9.0\\staticwebassets.removed.txt": {
+    "mtime": 1778545220.759894,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Application\\obj\\Debug\\net9.0\\SlotMachine.Application.csproj.FileListAbsolute.txt": {
+    "mtime": 1778551525.8593457,
+    "hash": "294383285b4c0d4251c760839ffbdb96"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Domain\\obj\\Debug\\net9.0\\SlotMachine.Domain.csproj.FileListAbsolute.txt": {
+    "mtime": 1778551525.664441,
+    "hash": "7a846d7d675a749c025988ed4b844373"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.Infrastructure\\obj\\Debug\\net9.0\\SlotMachine.Infrastructure.csproj.FileListAbsolute.txt": {
+    "mtime": 1778551526.082162,
+    "hash": "e7f6fb2ef94a54e65ba360346f43e97b"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.TestSpecs\\obj\\Debug\\net9.0\\SlotMachine.Test.Specs.csproj.FileListAbsolute.txt": {
+    "mtime": 1778551526.4865782,
+    "hash": "88ba2832aca6a29fc717c01a9287e6f0"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Debug\\net9.0\\SlotMachine.Test.UnitTest.csproj.FileListAbsolute.txt": {
+    "mtime": 1778551527.2901607,
+    "hash": "3eaa9506b6d48a9f3648f15753c35ae2"
+  },
+  "C:\\Users\\AMD\\source\\repos\\SlotMachine\\BackEnd\\SlotMachine\\SlotMachine.UnitTest\\obj\\Debug\\net9.0\\SlotMachine.UnitTest.csproj.FileListAbsolute.txt": {
+    "mtime": 1778550808.8459735,
+    "hash": "9f0e708851d2045bbeb6d89b4241ede5"
+  }
+}

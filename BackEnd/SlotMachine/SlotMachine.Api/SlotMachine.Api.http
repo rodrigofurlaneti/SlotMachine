@@ -1,0 +1,21 @@
+﻿@HostAddress = http://localhost:5232
+
+### 1. Criar um Jogador (POST)
+# Vamos criar um jogador com 10 reais de saldo
+POST {{HostAddress}}/api/slot/player?name=JogadorTeste&balance=10
+Accept: application/json
+
+###
+
+### 2. Girar a Máquina - Spin (POST)
+# IMPORTANTE: Copie o "id" que vai aparecer na resposta do passo 1 
+# e substitua no lugar de "COLOQUE-O-ID-AQUI"
+POST {{HostAddress}}/api/slot/spin/COLOQUE-O-ID-AQUI
+Accept: application/json
+
+###
+
+### 3. Rodar Auditoria Matemática (GET)
+# Roda 100 mil giros para provar o RTP
+GET {{HostAddress}}/api/slot/audit?spins=100000
+Accept: application/json

@@ -1,0 +1,376 @@
+{
+  "communities": {
+    "0": [
+      "decimal",
+      "entities_player_player_credit",
+      "entities_player_player_debit",
+      "entities_player_slotmachine_domain_entities",
+      "entities_slotmachine_slotmachine_calculaterowprize",
+      "entities_slotmachine_slotmachine_generaterow",
+      "entities_slotmachine_slotmachine_getrandomsymbol",
+      "entities_slotmachine_slotmachine_spin",
+      "exception",
+      "player",
+      "slotmachine",
+      "slotmachine_domain_entities_player_cs",
+      "slotmachine_domain_valueobjects_symbol_cs",
+      "spinresult",
+      "stepdefinitions_slotmachinesteps_slotmachine_test_specs_stepdefinitions",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoeupossuoumsaldoinicialde",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoqueamaquinaestaconfiguradapararetornarsempreosimbolo",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_dadoqueeusouumjogadorchamado",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoexibiramensagemdeerro",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoomeusaldoatualizadodeveser",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_entaooresultadodeveindicarqueeunaoganheipremios",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_entaooresultadodeveindicarqueeusouumvencedorcompremiode",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoosistemadevedebitardomeusaldo",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_entaoosistemadeveimpedirogiro",
+      "stepdefinitions_slotmachinesteps_slotmachinesteps_quandoeucliconobotaodegirar",
+      "symbol",
+      "valueobjects_symbol_slotmachine_domain_valueobjects"
+    ],
+    "1": [
+      "concurrentdictionary",
+      "iauditlogger",
+      "inmemoryplayerrepository",
+      "interfaces_iauditlogger_iauditlogger_logaction",
+      "interfaces_iauditlogger_slotmachine_domain_interfaces",
+      "interfaces_iplayerrepository_iplayerrepository_getbyid",
+      "interfaces_iplayerrepository_iplayerrepository_save",
+      "iplayerrepository",
+      "logging_fileauditlogger_fileauditlogger",
+      "repositories_inmemoryplayerrepository_slotmachine_infrastructure_repositories",
+      "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_getbyid_whenplayerdoesnotexist_shouldreturnnull",
+      "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_save_shouldaddplayertodictionary",
+      "repositories_inmemoryplayerrepositorytests_inmemoryplayerrepositorytests_save_shouldupdateexistingplayer",
+      "services_slotappservicetests_slotappservicetests",
+      "services_slotappservicetests_slotappservicetests_createplayer_shouldsaveinrepository_andlogaction",
+      "services_slotappservicetests_slotappservicetests_playspin_whenplayerdoesnotexist_shouldthrowexception",
+      "services_slotappservicetests_slotappservicetests_playspin_whenplayerexists_shouldupdatebalance_save_andlog",
+      "services_slotappservicetests_slotappservicetests_runauditsimulation_shouldreturnvalidauditresult_andlogsimulation",
+      "services_slotappservicetests_slotmachine_test_unittest_application_services"
+    ],
+    "2": [
+      "features_slotmachine_feature_fixturedata",
+      "features_slotmachine_feature_fixturedata_dispose",
+      "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_featurebackground",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_featuresetup",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_featureteardown",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroeganhaemtodasaslinhas",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_jogadorrealizaumgiroenaoganhanada",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_jogadortentagirarsemsaldosuficiente",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_scenariocleanup",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_scenarioinitialize",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_scenariostart",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_testinitialize",
+      "features_slotmachine_feature_jogarnaslotmachinefeature_testteardown",
+      "itestoutputhelper",
+      "itestrunner",
+      "slotmachine_testspecs_features_slotmachine_feature_cs",
+      "string"
+    ],
+    "3": [
+      "controllerbase",
+      "controllers_slotcontroller_slotcontroller_runaudit",
+      "controllers_slotcontroller_slotmachine_api_controllers",
+      "controllers_slotcontrollertests_slotcontrollertests_createplayer_whenexceptionoccurs_shouldreturnbadrequest",
+      "controllers_slotcontrollertests_slotcontrollertests_createplayer_whenrequestisvalid_shouldreturnok",
+      "controllers_slotcontrollertests_slotcontrollertests_runaudit_shouldreturnauditdto",
+      "controllers_slotcontrollertests_slotcontrollertests_spin_whenplayerexists_shouldreturnspinresult",
+      "controllers_slotcontrollertests_slotcontrollertests_spin_whenplayernotfound_shouldreturnbadrequest",
+      "controllers_slotcontrollertests_slotmachine_test_unittest_api_controllers",
+      "services_slotappservice_slotappservice_createplayer",
+      "services_slotappservice_slotappservice_playspin",
+      "services_slotappservice_slotappservice_runauditsimulation",
+      "services_slotappservice_slotmachine_application_services",
+      "slotappservice",
+      "slotcontroller"
+    ],
+    "4": [
+      "dtos_auditresultdtotests_auditresultdtotests",
+      "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_equality_shouldbebasedonvalue",
+      "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_shouldbeimmutable",
+      "dtos_auditresultdtotests_auditresultdtotests_auditresultdto_shouldstorevaluescorrectly",
+      "dtos_playerdtotests_playerdtotests",
+      "dtos_playerdtotests_playerdtotests_playerdto_equality_shouldbebasedonvalue",
+      "dtos_playerdtotests_playerdtotests_playerdto_shouldbeimmutable",
+      "dtos_playerdtotests_playerdtotests_playerdto_shouldstorevaluescorrectly",
+      "dtos_playerdtotests_slotmachine_test_unittest_application_dtos",
+      "dtos_spinresponsedtotests_spinresponsedtotests",
+      "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_rows_shouldhavecorrectdimensions",
+      "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_shouldhandlelosscorrectly",
+      "dtos_spinresponsedtotests_spinresponsedtotests_spinresponsedto_shouldstorevaluescorrectly"
+    ],
+    "5": [
+      "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_equality_shouldbebasedonvalue",
+      "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_shouldacceptanydata_leavingvalidationtodomain",
+      "dtos_createplayerrequesttests_createplayerrequesttests_createplayerrequest_shouldinitializecorrectly",
+      "dtos_playerdto_slotmachine_application_dtos",
+      "logging_fileauditlogger_slotmachine_infrastructure_logging",
+      "slotmachine_application_dependencyinjection_cs",
+      "slotmachine_application_dependencyinjection_dependencyinjection_addapplication",
+      "slotmachine_application_dtos_auditresultdto_cs",
+      "slotmachine_application_dtos_createplayerrequest_cs",
+      "slotmachine_application_dtos_playerdto_cs",
+      "slotmachine_application_dtos_spinresponsedto_cs",
+      "slotmachine_infrastructure_dependencyinjection_dependencyinjection_addinfrastructure"
+    ],
+    "6": [
+      "services_slotauditor_slotauditor_calculatehouseedge",
+      "services_slotauditor_slotauditor_calculatertp",
+      "services_slotauditor_slotauditor_reset",
+      "services_slotauditor_slotauditor_runsimulation",
+      "services_slotauditor_slotmachine_domain_services",
+      "services_slotauditortests_slotauditortests",
+      "services_slotauditortests_slotauditortests_calculatehouseedge_shouldbecomplementofrtp",
+      "services_slotauditortests_slotauditortests_calculatertp_shouldreturncorrectpercentage",
+      "services_slotauditortests_slotauditortests_reset_shouldclearallcounters",
+      "services_slotauditortests_slotauditortests_runsimulation_withzerospins_shouldthrowargumentexception",
+      "services_slotauditortests_slotmachine_test_unittest_domain_services",
+      "slotauditor"
+    ],
+    "7": [
+      "valueobjects_spinresulttests_spinresulttests",
+      "valueobjects_spinresulttests_spinresulttests_iswinner_shouldbefalse_whenprizeiszero",
+      "valueobjects_spinresulttests_spinresulttests_iswinner_shouldbetrue_whenprizeisgreaterthanzero",
+      "valueobjects_spinresulttests_spinresulttests_spinresult_shouldhavedefaultbetamount_whennotprovided",
+      "valueobjects_spinresulttests_spinresulttests_spinresult_shouldstorerowscorrectly",
+      "valueobjects_symboltests_slotmachine_test_unittest_domain_valueobjects",
+      "valueobjects_symboltests_symboltests",
+      "valueobjects_symboltests_symboltests_symbol_shouldhandledifferentinputvalues",
+      "valueobjects_symboltests_symboltests_symbol_shouldinitializepropertiescorrectly",
+      "valueobjects_symboltests_symboltests_symbols_withdifferentvalues_shouldnotbeequal",
+      "valueobjects_symboltests_symboltests_symbols_withsamevalues_shouldbeequal"
+    ],
+    "8": [
+      "entities_playertests_playertests",
+      "entities_playertests_playertests_createplayer_withvaliddata_shouldinitializecorrectly",
+      "entities_playertests_playertests_credit_shouldincreasebalance",
+      "entities_playertests_playertests_debit_withinsufficientbalance_shouldthrowexception",
+      "entities_playertests_playertests_debit_withsufficientbalance_shouldreducebalance",
+      "entities_playertests_slotmachine_test_unittest_domain_entities",
+      "entities_slotmachinetests_slotmachinetests",
+      "entities_slotmachinetests_slotmachinetests_spin_shoulddebitbalance_regardlessofresult",
+      "entities_slotmachinetests_slotmachinetests_spin_whenplayerwins_shouldcreditprizecorrectly",
+      "entities_slotmachinetests_slotmachinetests_spin_withinsufficientbalance_shouldthrowexception"
+    ],
+    "9": [
+      "infrastructure_infrastructuredependencyinjectiontests_infrastructuredependencyinjectiontests_addinfrastructure_shouldregisterrequiredservices",
+      "infrastructure_infrastructuredependencyinjectiontests_infrastructuredependencyinjectiontests_services_shouldberegisteredassingleton",
+      "interfaces_irandomgenerator_irandomgenerator_next",
+      "irandomgenerator",
+      "services_systemrandomgeneratortests_slotmachine_test_unittest_infrastructure_services",
+      "services_systemrandomgeneratortests_systemrandomgeneratortests_next_shouldberandomenough",
+      "services_systemrandomgeneratortests_systemrandomgeneratortests_next_shouldreturnvalueswithinrange",
+      "slotmachine_unittest_infrastructure_infrastructuredependencyinjectiontests_cs",
+      "systemrandomgenerator"
+    ],
+    "10": [
+      "hooks_hooks_hooks",
+      "hooks_hooks_hooks_afterscenario",
+      "hooks_hooks_hooks_aftertestrun",
+      "hooks_hooks_hooks_beforescenario",
+      "hooks_hooks_hooks_beforetestrun",
+      "hooks_hooks_slotmachine_test_specs_hooks",
+      "slotmachine_testspecs_hooks_hooks_cs"
+    ],
+    "11": [
+      "assembly",
+      "net9_0_xunit_assemblyhooks_slotmachine_test_specs_specflownonparallelizablefeaturescollectiondefinition",
+      "net9_0_xunit_assemblyhooks_slotmachine_test_specs_xunitassemblyfixture",
+      "slotmachine_testspecs_obj_debug_net9_0_xunit_assemblyhooks_cs"
+    ],
+    "12": [
+      "slotmachine_api_program_cs"
+    ],
+    "13": [
+      "slotmachine_api_obj_debug_net9_0_slotmachine_api_assemblyinfo_cs"
+    ],
+    "14": [
+      "slotmachine_api_obj_debug_net9_0_slotmachine_api_globalusings_g_cs"
+    ],
+    "15": [
+      "slotmachine_api_obj_debug_net9_0_slotmachine_api_mvcapplicationpartsassemblyinfo_cs"
+    ],
+    "16": [
+      "slotmachine_application_obj_debug_net9_0_slotmachine_application_assemblyinfo_cs"
+    ],
+    "17": [
+      "slotmachine_application_obj_debug_net9_0_slotmachine_application_globalusings_g_cs"
+    ],
+    "18": [
+      "slotmachine_domain_obj_debug_net9_0_slotmachine_domain_assemblyinfo_cs"
+    ],
+    "19": [
+      "slotmachine_domain_obj_debug_net9_0_slotmachine_domain_globalusings_g_cs"
+    ],
+    "20": [
+      "slotmachine_infrastructure_obj_debug_net9_0_slotmachine_infrastructure_assemblyinfo_cs"
+    ],
+    "21": [
+      "slotmachine_infrastructure_obj_debug_net9_0_slotmachine_infrastructure_globalusings_g_cs"
+    ],
+    "22": [
+      "slotmachine_testspecs_obj_debug_net9_0_slotmachine_testspecs_assemblyinfo_cs"
+    ],
+    "23": [
+      "slotmachine_testspecs_obj_debug_net9_0_slotmachine_testspecs_globalusings_g_cs"
+    ],
+    "24": [
+      "slotmachine_unittest_obj_debug_net9_0_slotmachine_test_unittest_assemblyinfo_cs"
+    ],
+    "25": [
+      "slotmachine_unittest_obj_debug_net9_0_slotmachine_test_unittest_globalusings_g_cs"
+    ],
+    "26": [
+      "slotmachine_unittest_obj_debug_net9_0_slotmachine_unittest_assemblyinfo_cs"
+    ],
+    "27": [
+      "slotmachine_unittest_obj_debug_net9_0_slotmachine_unittest_globalusings_g_cs"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09,
+    "1": 0.13,
+    "2": 0.21,
+    "3": 0.14,
+    "4": 0.15,
+    "5": 0.17,
+    "6": 0.18,
+    "7": 0.18,
+    "8": 0.2,
+    "9": 0.25,
+    "10": 0.29,
+    "11": 0.5,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0
+  },
+  "gods": [
+    {
+      "id": "slotmachine",
+      "label": "SlotMachine",
+      "degree": 25
+    },
+    {
+      "id": "features_slotmachine_feature_jogarnaslotmachinefeature",
+      "label": "JogarNaSlotMachineFeature",
+      "degree": 16
+    },
+    {
+      "id": "slotcontroller",
+      "label": "SlotController",
+      "degree": 12
+    },
+    {
+      "id": "slotappservice",
+      "label": "SlotAppService",
+      "degree": 10
+    },
+    {
+      "id": "services_slotappservicetests_slotappservicetests",
+      "label": "SlotAppServiceTests",
+      "degree": 9
+    },
+    {
+      "id": "inmemoryplayerrepository",
+      "label": "InMemoryPlayerRepository",
+      "degree": 9
+    },
+    {
+      "id": "irandomgenerator",
+      "label": "IRandomGenerator",
+      "degree": 8
+    },
+    {
+      "id": "services_slotauditortests_slotauditortests",
+      "label": "SlotAuditorTests",
+      "degree": 8
+    },
+    {
+      "id": "iplayerrepository",
+      "label": "IPlayerRepository",
+      "degree": 6
+    },
+    {
+      "id": "entities_slotmachinetests_slotmachinetests",
+      "label": "SlotMachineTests",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "SlotMachine",
+      "target": "decimal",
+      "source_files": [
+        "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+        "SlotMachine.Domain/Entities/SlotMachine.cs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `decimal` unexpectedly reaches hub `SlotMachine`"
+    },
+    {
+      "source": "SlotMachine",
+      "target": "Symbol",
+      "source_files": [
+        "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+        "SlotMachine.Domain/Entities/SlotMachine.cs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `Symbol` unexpectedly reaches hub `SlotMachine`"
+    },
+    {
+      "source": "SlotMachine",
+      "target": "SpinResult",
+      "source_files": [
+        "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+        "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `SpinResult` unexpectedly reaches hub `SlotMachine`"
+    },
+    {
+      "source": "SlotMachine",
+      "target": "Exception",
+      "source_files": [
+        "SlotMachine.UnitTest/Domain/Services/SlotAuditorTests.cs",
+        "SlotMachine.TestSpecs/StepDefinitions/SlotMachineSteps.cs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `Exception` unexpectedly reaches hub `SlotMachine`"
+    },
+    {
+      "source": "InMemoryPlayerRepository",
+      "target": "ConcurrentDictionary",
+      "source_files": [
+        "SlotMachine.UnitTest/Infrastructure/Repositories/InMemoryPlayerRepositoryTests.cs",
+        "SlotMachine.Infrastructure/Repositories/InMemoryPlayerRepository.cs"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `ConcurrentDictionary` unexpectedly reaches hub `InMemoryPlayerRepository`"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}
