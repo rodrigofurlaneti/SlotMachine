@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: theme("fontFamily.body");
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(245, 197, 24, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(255, 46, 136, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 90% 110%, rgba(42, 250, 209, 0.12), transparent 60%),
+    theme("colors.casino.bg");
+  color: #f5f5f5;
+  overflow-x: hidden;
+}
+
+.text-display {
+  font-family: theme("fontFamily.display");
+  letter-spacing: 0.04em;
+}
+
+.gold-text {
+  background: linear-gradient(180deg, #fff7c0 0%, #f5c518 45%, #a8860f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+.cabinet {
+  background:
+    radial-gradient(120% 80% at 50% 0%, #2a1f12 0%, #1a120a 60%, #0a0604 100%);
+  border: 2px solid rgba(245, 197, 24, 0.35);
+}
+
+.reel-window {
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  border: 2px solid rgba(245, 197, 24, 0.4);
+  box-shadow: theme("boxShadow.reel");
+}
+
+button:focus-visible {
+  outline: 2px solid theme("colors.casino.gold");
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 197, 24, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}

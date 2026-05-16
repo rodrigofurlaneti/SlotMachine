@@ -1,0 +1,40 @@
+{
+  "name": "slotmachine-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "canvas-confetti": "^1.9.3",
+    "framer-motion": "^11.11.17",
+    "howler": "^2.2.4",
+    "lottie-react": "^2.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-rewards": "^2.1.0",
+    "react-router-dom": "^6.27.0",
+    "recharts": "^2.13.0",
+    "sonner": "^1.5.0",
+    "use-sound": "^4.0.3",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.6.4",
+    "@types/howler": "^2.2.12",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
+}
