@@ -39,11 +39,11 @@ export function GamePage() {
     setOverlay(null);
     const res = await doSpin();
     if (res && res.kind !== "lose") {
-      // sincroniza com o término dos reels
+      // sincroniza com o término dos reels (~2.2s)
       window.setTimeout(() => {
         setOverlay({ show: true, prize: res.result.prizeWon, kind: res.kind });
         window.setTimeout(() => setOverlay((o) => (o ? { ...o, show: false } : null)), 2200);
-      }, 2000);
+      }, 2200);
     }
   }
 

@@ -11,16 +11,30 @@ export type SpinKind = "lose" | "win" | "bigWin" | "jackpot";
 
 /**
  * Classifica o prêmio. Espelha as regras visuais:
- * - jackpot = todas as 3 linhas com diamante (prize >= 900) — backend dá 100x * 3 linhas com aposta 3 = R$900
- * - bigWin = prêmio >= R$100
- * - win    = prêmio > 0
+ * - jackpot = grid inteiro com 💎 (todas 5 linhas pagantes: 3 horizontais + 2 diagonais)
+ *             prêmio máximo = 5 * 100 * 3 = R$1500
+ * - bigWin  = prêmio >= R$100
+ * - win     = prêmio > 0
  */
 export function classifyPrize(prize: number, rows: string[][]): SpinKind {
   if (prize === 0) return "lose";
-  const allDiamondLines = rows.every((r) => r[0] === "💎" && r[1] === "💎" && r[2] === "💎");
-  if (allDiamondLines) return "jackpot";
+  const allDiamond = rows.every((r) => r[0] === "💎" && r[1] === "💎" && r[2] === "💎");
+  if (allDiamond) return "jackpot";
   if (prize >= 100) return "bigWin";
   return "win";
+}
+
+/** Detecta se há alguma linha de 💎 vencedora (horizontal ou diagonal). */
+function hasDiamondLine(rows: string[][]): boolean {
+  // Horizontais
+  for (const r of rows) {
+    if (r[0] === "💎" && r[1] === "💎" && r[2] === "💎") return true;
+  }
+  // Diagonal principal
+  if (rows[0]?.[0] === "💎" && rows[1]?.[1] === "💎" && rows[2]?.[2] === "💎") return true;
+  // Diagonal secundária
+  if (rows[0]?.[2] === "💎" && rows[1]?.[1] === "💎" && rows[2]?.[0] === "💎") return true;
+  return false;
 }
 
 export function useSpin() {
@@ -28,6 +42,7 @@ export function useSpin() {
   const setBalance = usePlayerStore((s) => s.setBalance);
   const startSpin = useGameStore((s) => s.startSpin);
   const finishSpin = useGameStore((s) => s.finishSpin);
+  const stopSpin = useGameStore((s) => s.stopSpin);
   const isSpinning = useGameStore((s) => s.isSpinning);
 
   const { play } = useSounds();
@@ -55,8 +70,13 @@ export function useSpin() {
 
       const kind = classifyPrize(result.prizeWon, result.rows);
       // delay sincronizado com o fim da animação dos reels (~2s)
-      const delayMs = 2000;
+      // O reel da última linha/coluna tem duração de 1.2 + 0.9 = 2.1s,
+      // então 2.2s garante que todos os reels já pararam.
+      const delayMs = 2200;
       window.setTimeout(() => {
+        // Encerra o estado de giro (libera o botão GIRAR)
+        stopSpin();
+
         if (kind === "lose") {
           play("stop");
         } else {
@@ -80,8 +100,7 @@ export function useSpin() {
         if (spinsNow >= 10) unlocks.push("ten_spins");
         if (spinsNow >= 50) unlocks.push("fifty_spins");
         if (spinsNow >= 100) unlocks.push("hundred_spins");
-        if (result.rows.some((r) => r[0] === "💎" && r[1] === "💎" && r[2] === "💎"))
-          unlocks.push("diamond_line");
+        if (hasDiamondLine(result.rows)) unlocks.push("diamond_line");
         if (result.prizeWon >= 100) unlocks.push("big_win");
         if (kind === "jackpot") unlocks.push("jackpot");
 
@@ -108,16 +127,7 @@ export function useSpin() {
       const msg = err instanceof Error ? err.message : "Erro ao executar o giro.";
       toast.error(msg);
       // garante que sai do estado de spinning
-      finishSpin({
-        rows: useGameStore.getState().lastResult?.rows ?? [
-          ["❌", "❌", "❌"],
-          ["❌", "❌", "❌"],
-          ["❌", "❌", "❌"],
-        ],
-        prizeWon: 0,
-        currentBalance: player.balance,
-        isWinner: false,
-      });
+      stopSpin();
       return null;
     }
   }, [
@@ -125,6 +135,7 @@ export function useSpin() {
     isSpinning,
     startSpin,
     finishSpin,
+    stopSpin,
     setBalance,
     play,
     fire,

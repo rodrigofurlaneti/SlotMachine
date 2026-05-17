@@ -21,6 +21,7 @@ interface GameState {
 
   startSpin: () => void;
   finishSpin: (result: SpinResponseDto) => void;
+  stopSpin: () => void;
   resetHistory: () => void;
 }
 
@@ -36,8 +37,13 @@ export const useGameStore = create<GameState>()(
       totalWagered: 0,
       totalWon: 0,
 
-      startSpin: () => set({ isSpinning: true }),
+      // Marca início do giro. Limpa lastResult para que o Reel detecte o
+      // novo símbolo final quando ele chegar da API e dispare a animação.
+      startSpin: () => set({ isSpinning: true, lastResult: null }),
 
+      // Recebe o resultado da API. Atualiza lastResult, histórico e totais,
+      // mas mantém isSpinning=true para a animação dos reels rodar até o fim.
+      // Quem encerra o estado de giro (isSpinning=false) é o stopSpin abaixo.
       finishSpin: (result) =>
         set((state) => {
           const entry: SpinHistoryEntry = {
@@ -50,7 +56,6 @@ export const useGameStore = create<GameState>()(
           // mantém só os últimos 200 spins para não estourar o localStorage
           const history = [entry, ...state.history].slice(0, 200);
           return {
-            isSpinning: false,
             lastResult: result,
             history,
             totalSpins: state.totalSpins + 1,
@@ -58,6 +63,9 @@ export const useGameStore = create<GameState>()(
             totalWon: state.totalWon + result.prizeWon,
           };
         }),
+
+      // Encerra o estado de giro após a animação dos reels terminar.
+      stopSpin: () => set({ isSpinning: false }),
 
       resetHistory: () =>
         set({
