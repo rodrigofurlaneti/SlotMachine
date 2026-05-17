@@ -25,9 +25,26 @@ export function GamePage() {
     kind: "win" | "bigWin" | "jackpot";
   } | null>(null);
 
+  // HUD com saldo + último prêmio. Só é atualizado quando os reels param
+  // de animar (isSpinning vira false), para o "Último prêmio" não aparecer
+  // antes da linha dourada terminar de ser desenhada.
+  const [hud, setHud] = useState<{ balance: number; lastPrize: number | null }>(
+    () => ({ balance: player?.balance ?? 0, lastPrize: null })
+  );
+
   useEffect(() => {
-    if (!player) navigate("/", { replace: true });
-  }, [player, navigate]);
+    if (!player) {
+      navigate("/", { replace: true });
+      return;
+    }
+    // Snapshot do saldo + prêmio só quando os reels já terminaram.
+    if (!isSpinning) {
+      setHud({
+        balance: player.balance,
+        lastPrize: lastResult?.prizeWon ?? null,
+      });
+    }
+  }, [player, navigate, isSpinning, lastResult]);
 
   const kind = useMemo(() => {
     if (!lastResult) return "lose" as const;
