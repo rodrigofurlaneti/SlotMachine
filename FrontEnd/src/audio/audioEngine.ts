@@ -317,3 +317,93 @@ export function speakBet(value: number) {
 export async function unlockOnUserGesture() {
   await resumeIfSuspended();
 }
+
+/* ============================ MEGA WIN FANFARE =========================== */
+
+/**
+ * Fanfarra sintetizada: arpeggio ascendente em modo maior + camada de oitavas.
+ * Tocada quando o jogador vence 3+ linhas no mesmo giro.
+ */
+export async function playMegaFanfare(intensity: "mega" | "ultra" = "mega") {
+  await resumeIfSuspended();
+  const ctx = state.ctx;
+  if (!ctx || !state.sfxGain) return;
+
+  // C major arpeggio + escala ascendente
+  const notes =
+    intensity === "ultra"
+      ? [261.63, 329.63, 392.0, 523.25, 659.25, 783.99, 1046.5, 1318.5]
+      : [261.63, 329.63, 392.0, 523.25, 659.25, 783.99];
+
+  const stepDur = 0.12;
+  const start = ctx.currentTime;
+  notes.forEach((freq, i) => {
+    const at = start + i * stepDur;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, at);
+    g.gain.linearRampToValueAtTime(0.5, at + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, at + stepDur * 1.6);
+    g.connect(state.sfxGain!);
+
+    // Onda principal
+    const o1 = ctx.createOscillator();
+    o1.type = "triangle";
+    o1.frequency.value = freq;
+    o1.connect(g);
+    o1.start(at);
+    o1.stop(at + stepDur * 1.7);
+
+    // Oitava acima — brilho
+    const o2 = ctx.createOscillator();
+    o2.type = "sine";
+    o2.frequency.value = freq * 2;
+    const g2 = ctx.createGain();
+    g2.gain.value = 0.35;
+    o2.connect(g2).connect(g);
+    o2.start(at);
+    o2.stop(at + stepDur * 1.7);
+  });
+
+  // Sustained "gong" no final
+  const gongAt = start + notes.length * stepDur;
+  const gongGain = ctx.createGain();
+  gongGain.gain.setValueAtTime(0, gongAt);
+  gongGain.gain.linearRampToValueAtTime(0.5, gongAt + 0.04);
+  gongGain.gain.exponentialRampToValueAtTime(0.001, gongAt + 1.2);
+  gongGain.connect(state.sfxGain!);
+
+  [523.25, 659.25, 783.99].forEach((f) => {
+    const osc = ctx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.value = f;
+    osc.connect(gongGain);
+    osc.start(gongAt);
+    osc.stop(gongAt + 1.3);
+  });
+}
+
+/**
+ * Anuncia o numero de linhas vencedoras em ingles via speech synthesis.
+ * Usado quando 3+ linhas vencem no mesmo giro.
+ */
+export function speakMegaWin(lines: number, jackpot = false) {
+  if (state.muted) return;
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const text = jackpot
+      ? "Jackpot! All lines!"
+      : lines >= 6
+      ? "Ultra win! " + lines + " lines!"
+      : "Mega win! " + lines + " lines!";
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 1.0;
+    u.pitch = 1.1;
+    u.volume = 0.95;
+    if (state.voicePicked) u.voice = state.voicePicked;
+    window.speechSynthesis.speak(u);
+  } catch {
+    /* ignore */
+  }
+}

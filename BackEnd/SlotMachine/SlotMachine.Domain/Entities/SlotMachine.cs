@@ -14,6 +14,9 @@ namespace SlotMachine.Domain.Entities
         /// <summary>Valor máximo permitido por giro (R$).</summary>
         public const decimal MaxBetAmount = 30.00m;
 
+        /// <summary>Dimensão do grid (4x4).</summary>
+        public const int GridSize = 4;
+
         /// <summary>Valores pré-definidos que a UI deve oferecer (touch).</summary>
         public static readonly decimal[] PresetBetAmounts = new[]
         {
@@ -25,13 +28,12 @@ namespace SlotMachine.Domain.Entities
 
         public SlotMachine()
         {
-            // Tema "Fortune" oriental — mesmos multiplicadores e pesos do tema anterior
-            // para preservar RTP/House Edge auditado.
-            //   🐯 Tigre   → multiplicador  2x  (peso 40)
-            //   🪙 Moeda   → multiplicador  5x  (peso 20)
-            //   🏮 Lanterna→ multiplicador 10x  (peso 10)
-            //   🐉 Dragão  → multiplicador 100x (peso  2) — equivale ao antigo 💎
-            //   🎋 Bambu   → vazio          0x  (peso 60)
+            // Tema "Fortune" oriental — mantém multiplicadores e pesos.
+            //   🐯 Tigre    → multiplicador  2x  (peso 40)
+            //   🪙 Moeda    → multiplicador  5x  (peso 20)
+            //   🏮 Lanterna → multiplicador 10x  (peso 10)
+            //   🐉 Dragão   → multiplicador 100x (peso  2)
+            //   🎋 Bambu    → vazio          0x  (peso 60)
             _availableSymbols = new[]
             {
                 new Symbol("🐯", 2m,   40),
@@ -44,8 +46,13 @@ namespace SlotMachine.Domain.Entities
 
         /// <summary>
         /// Executa um giro com a aposta informada pelo jogador.
+        /// Grid 4x4 com 10 linhas pagantes:
+        ///   - 4 linhas horizontais
+        ///   - 4 colunas verticais
+        ///   - 2 diagonais (principal e secundária, ambas de 4 elementos)
+        /// Regra: paga quando os 4 símbolos da linha são iguais.
         /// O prêmio escala proporcionalmente à aposta:
-        /// prêmio_linha = betAmount * payoutMultiplier do símbolo.
+        ///   prêmio_linha = betAmount * payoutMultiplier do símbolo.
         /// </summary>
         public SpinResult Spin(Player player, IRandomGenerator rng, decimal betAmount)
         {
@@ -56,24 +63,47 @@ namespace SlotMachine.Domain.Entities
 
             player.Debit(betAmount);
 
-            // Sorteio das 3 linhas (grid 3x3)
-            var row1 = GenerateRow(rng);
-            var row2 = GenerateRow(rng);
-            var row3 = GenerateRow(rng);
+            // Sorteia matriz 4x4
+            var grid = new Symbol[GridSize][];
+            for (int r = 0; r < GridSize; r++)
+            {
+                grid[r] = GenerateRow(rng);
+            }
 
-            // Cálculo do prêmio: 3 linhas horizontais + 2 diagonais = 5 linhas pagantes
             decimal prize = 0;
 
-            // Horizontais
-            prize += CalculateLinePrize(row1[0], row1[1], row1[2], betAmount);
-            prize += CalculateLinePrize(row2[0], row2[1], row2[2], betAmount);
-            prize += CalculateLinePrize(row3[0], row3[1], row3[2], betAmount);
+            // Horizontais (4 linhas)
+            for (int r = 0; r < GridSize; r++)
+            {
+                prize += CalculateLinePrize(grid[r], betAmount);
+            }
 
-            // Diagonal principal (↘): [0][0], [1][1], [2][2]
-            prize += CalculateLinePrize(row1[0], row2[1], row3[2], betAmount);
+            // Verticais (4 colunas)
+            for (int c = 0; c < GridSize; c++)
+            {
+                var col = new Symbol[GridSize];
+                for (int r = 0; r < GridSize; r++)
+                {
+                    col[r] = grid[r][c];
+                }
+                prize += CalculateLinePrize(col, betAmount);
+            }
 
-            // Diagonal secundária (↙): [0][2], [1][1], [2][0]
-            prize += CalculateLinePrize(row1[2], row2[1], row3[0], betAmount);
+            // Diagonal principal ↘
+            var mainDiag = new Symbol[GridSize];
+            for (int i = 0; i < GridSize; i++)
+            {
+                mainDiag[i] = grid[i][i];
+            }
+            prize += CalculateLinePrize(mainDiag, betAmount);
+
+            // Diagonal secundária ↙
+            var antiDiag = new Symbol[GridSize];
+            for (int i = 0; i < GridSize; i++)
+            {
+                antiDiag[i] = grid[i][GridSize - 1 - i];
+            }
+            prize += CalculateLinePrize(antiDiag, betAmount);
 
             if (prize > 0)
             {
@@ -81,7 +111,7 @@ namespace SlotMachine.Domain.Entities
             }
 
             return new SpinResult(
-                Rows: new List<Symbol[]> { row1, row2, row3 },
+                Rows: new List<Symbol[]>(grid),
                 PrizeWon: prize,
                 BetAmount: betAmount
             );
@@ -101,7 +131,6 @@ namespace SlotMachine.Domain.Entities
                 );
             }
 
-            // Evita centavos quebrados (R$ 0,005 etc.)
             if (decimal.Round(betAmount, 2) != betAmount)
             {
                 throw new ArgumentException(
@@ -113,25 +142,28 @@ namespace SlotMachine.Domain.Entities
 
         private Symbol[] GenerateRow(IRandomGenerator rng)
         {
-            return new Symbol[] {
-                GetRandomSymbol(rng),
-                GetRandomSymbol(rng),
-                GetRandomSymbol(rng)
-            };
+            var row = new Symbol[GridSize];
+            for (int i = 0; i < GridSize; i++)
+            {
+                row[i] = GetRandomSymbol(rng);
+            }
+            return row;
         }
 
         /// <summary>
-        /// Calcula o prêmio de uma linha de 3 símbolos (horizontal ou diagonal).
-        /// Paga apenas quando os 3 são iguais; o símbolo 🎋 continua valendo 0
-        /// porque o PayoutMultiplier dele é zero. O prêmio escala com a aposta.
+        /// Calcula o prêmio de uma linha de 4 símbolos (horizontal, vertical ou diagonal).
+        /// Paga apenas quando os 4 são iguais. O símbolo 🎋 (bambu) tem multiplicador 0,
+        /// portanto também não gera prêmio mesmo se alinhar.
         /// </summary>
-        private decimal CalculateLinePrize(Symbol s1, Symbol s2, Symbol s3, decimal betAmount)
+        private decimal CalculateLinePrize(Symbol[] line, decimal betAmount)
         {
-            if (s1.Face == s2.Face && s2.Face == s3.Face)
+            if (line.Length != GridSize) return 0;
+            var first = line[0].Face;
+            for (int i = 1; i < line.Length; i++)
             {
-                return betAmount * s1.PayoutMultiplier;
+                if (line[i].Face != first) return 0;
             }
-            return 0;
+            return betAmount * line[0].PayoutMultiplier;
         }
 
         private Symbol GetRandomSymbol(IRandomGenerator rng)

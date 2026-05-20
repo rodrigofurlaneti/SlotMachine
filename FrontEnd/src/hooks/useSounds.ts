@@ -9,13 +9,10 @@ import {
   stopMusic,
   unlockOnUserGesture,
   primeVoices,
+  playMegaFanfare,
+  speakMegaWin,
 } from "../audio/audioEngine";
 
-/**
- * SFX legados sintetizados como WAV em base64 e tocados via Howler.
- * Mantemos para nao quebrar as chamadas existentes (spin, win, jackpot...).
- * Sons novos (chip de aposta, voz, musica de fundo) vivem no audioEngine.
- */
 function makeBeepWav(opts: {
   freqStart: number;
   freqEnd?: number;
@@ -111,7 +108,6 @@ export function useSounds() {
   const mutedRef = useRef(muted);
   mutedRef.current = muted;
 
-  // Sincroniza com o audioEngine na primeira montagem e quando mudar.
   useEffect(() => {
     engineSetMuted(muted);
   }, [muted]);
@@ -123,7 +119,6 @@ export function useSounds() {
     }
   }, []);
 
-  /** SFX classicos (compativel com chamadas existentes). */
   const play = useCallback((name: SoundName) => {
     if (mutedRef.current) return;
     try {
@@ -133,7 +128,6 @@ export function useSounds() {
     }
   }, []);
 
-  /** SFX do chip + voz em ingles ao selecionar aposta. */
   const playChip = useCallback((value: number) => {
     if (mutedRef.current) return;
     void unlockOnUserGesture().then(() => {
@@ -142,7 +136,6 @@ export function useSounds() {
     });
   }, []);
 
-  /** Inicia/garante a trilha de fundo. Idempotente. */
   const ensureMusic = useCallback(() => {
     if (mutedRef.current) return;
     void unlockOnUserGesture().then(() => {
@@ -150,10 +143,24 @@ export function useSounds() {
     });
   }, []);
 
-  /** Para a trilha de fundo. */
   const stopBgMusic = useCallback(() => {
     stopMusic();
   }, []);
+
+  /** Dispara fanfarra + voz para wins com 3+ linhas. */
+  const announceMegaWin = useCallback(
+    (lines: number, kind: "win" | "bigWin" | "jackpot") => {
+      if (mutedRef.current) return;
+      void unlockOnUserGesture().then(() => {
+        void playMegaFanfare(lines >= 6 || kind === "jackpot" ? "ultra" : "mega");
+        // Pequeno delay pra voz sair depois da fanfarra
+        window.setTimeout(() => {
+          speakMegaWin(lines, kind === "jackpot");
+        }, 500);
+      });
+    },
+    []
+  );
 
   const toggleMute = useCallback(() => {
     setMuted((m) => {
@@ -168,6 +175,7 @@ export function useSounds() {
     playChip,
     ensureMusic,
     stopBgMusic,
+    announceMegaWin,
     muted,
     toggleMute,
   };

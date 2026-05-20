@@ -10,12 +10,42 @@ import { formatBRL } from "../utils/format";
 
 export type SpinKind = "lose" | "win" | "bigWin" | "jackpot";
 
+const DRAGON = "\u{1F409}";
+const GRID_SIZE = 4;
+
+/** Conta quantas linhas pagantes venceram no grid 4x4 (4H + 4V + 2D = max 10). */
+function countWinningLines(rows: string[][]): number {
+  if (!rows || rows.length < GRID_SIZE) return 0;
+  let count = 0;
+
+  const isLine = (arr: (string | undefined)[]) => {
+    const f = arr[0];
+    if (!f || f === "\u{1F38B}") return false;
+    for (let i = 1; i < arr.length; i++) if (arr[i] !== f) return false;
+    return true;
+  };
+
+  // Horizontais
+  for (let r = 0; r < GRID_SIZE; r++) {
+    if (rows[r] && isLine(rows[r])) count += 1;
+  }
+  // Verticais
+  for (let c = 0; c < GRID_SIZE; c++) {
+    const col = [0, 1, 2, 3].map((r) => rows[r]?.[c]);
+    if (isLine(col)) count += 1;
+  }
+  // Diagonais
+  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[i]))) count += 1;
+  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[GRID_SIZE - 1 - i]))) count += 1;
+
+  return count;
+}
+
 /**
- * Classifica o prêmio. Espelha as regras visuais:
- * - jackpot = grid inteiro com 💎 (todas 5 linhas pagantes: 3 horizontais + 2 diagonais)
- *             prêmio máximo escala com a aposta: 5 * 100 * bet
- * - bigWin  = prêmio >= 30x a aposta (equivalente ao antigo >= R$100 com aposta R$3)
- * - win     = prêmio > 0
+ * Classifica o premio considerando o grid 4x4:
+ *   - jackpot = TODAS as 16 celulas com dragao (todas 10 linhas vencem)
+ *   - bigWin  = 3 ou mais linhas vencedoras OU premio >= 50x a aposta
+ *   - win     = qualquer premio > 0
  */
 export function classifyPrize(
   prize: number,
@@ -23,25 +53,26 @@ export function classifyPrize(
   betAmount: number
 ): SpinKind {
   if (prize === 0) return "lose";
-  const allDiamond = rows.every(
-    (r) => r[0] === "🐉" && r[1] === "🐉" && r[2] === "🐉"
-  );
-  if (allDiamond) return "jackpot";
-  // "bigWin" agora é proporcional: prêmio >= ~33x a aposta
-  if (prize >= betAmount * 33) return "bigWin";
+
+  // Jackpot real: grid inteiro de dragoes
+  const allDragon = rows.every((r) => r.every((c) => c === DRAGON));
+  if (allDragon) return "jackpot";
+
+  const lines = countWinningLines(rows);
+  if (lines >= 3 || prize >= betAmount * 50) return "bigWin";
   return "win";
 }
 
-/** Detecta se há alguma linha de 💎 vencedora (horizontal ou diagonal). */
-function hasDiamondLine(rows: string[][]): boolean {
-  // Horizontais
-  for (const r of rows) {
-    if (r[0] === "🐉" && r[1] === "🐉" && r[2] === "🐉") return true;
+function hasDragonLine(rows: string[][]): boolean {
+  if (!rows || rows.length < GRID_SIZE) return false;
+  const isLine = (arr: (string | undefined)[]) =>
+    arr.every((v) => v === DRAGON);
+  for (const r of rows) if (isLine(r)) return true;
+  for (let c = 0; c < GRID_SIZE; c++) {
+    if (isLine([0, 1, 2, 3].map((r) => rows[r]?.[c]))) return true;
   }
-  // Diagonal principal
-  if (rows[0]?.[0] === "🐉" && rows[1]?.[1] === "🐉" && rows[2]?.[2] === "🐉") return true;
-  // Diagonal secundária
-  if (rows[0]?.[2] === "🐉" && rows[1]?.[1] === "🐉" && rows[2]?.[0] === "🐉") return true;
+  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[i]))) return true;
+  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[GRID_SIZE - 1 - i]))) return true;
   return false;
 }
 
@@ -54,7 +85,7 @@ export function useSpin() {
   const isSpinning = useGameStore((s) => s.isSpinning);
   const selectedBet = useGameStore((s) => s.selectedBet);
 
-  const { play } = useSounds();
+  const { play, announceMegaWin } = useSounds();
   const { fire } = useCelebration();
 
   const addXp = useAchievementsStore((s) => s.addXp);
@@ -66,7 +97,7 @@ export function useSpin() {
     if (!player || isSpinning) return null;
     if (player.balance < selectedBet) {
       toast.error(
-        `Saldo insuficiente para girar (necessário ${formatBRL(selectedBet)}).`
+        `Saldo insuficiente para girar (necessario ${formatBRL(selectedBet)}).`
       );
       return null;
     }
@@ -80,12 +111,12 @@ export function useSpin() {
       setBalance(result.currentBalance);
 
       const kind = classifyPrize(result.prizeWon, result.rows, result.betAmount);
-      // delay sincronizado com o fim da animação dos reels (~2s)
-      // O reel da última linha/coluna tem duração de 1.2 + 0.9 = 2.1s,
-      // então 2.2s garante que todos os reels já pararam.
+      const lines = countWinningLines(result.rows);
+
+      // Tempo de animacao: ultimo reel (linha 3, col 3) tem delay 3*200 + 3*160 = 1080ms
+      // + duracao base 1.0s = ~2.1s. Aguardamos 2.2s para a fanfarra.
       const delayMs = 2200;
       window.setTimeout(() => {
-        // Encerra o estado de giro (libera o botão GIRAR)
         stopSpin();
 
         if (kind === "lose") {
@@ -95,14 +126,19 @@ export function useSpin() {
           if (kind === "bigWin") play("bigWin");
           if (kind === "jackpot") play("jackpot");
           fire(kind);
+
+          // Voz de fanfarra para >=3 linhas
+          if (lines >= 3) {
+            announceMegaWin(lines, kind);
+          }
         }
 
-        // Gameficação: XP, conquistas, missões
-        const xpGain = 5 + Math.floor(result.prizeWon / 5);
+        // Gameficacao
+        const xpGain = 5 + Math.floor(result.prizeWon / 5) + lines * 2;
         const { leveledUp, newLevel } = addXp(xpGain);
         if (leveledUp) {
           play("levelUp");
-          toast.success(`🆙 Subiu para o nível ${newLevel}!`);
+          toast.success(`Subiu para o nivel ${newLevel}!`);
         }
 
         const spinsNow = totalSpins + 1;
@@ -111,9 +147,8 @@ export function useSpin() {
         if (spinsNow >= 10) unlocks.push("ten_spins");
         if (spinsNow >= 50) unlocks.push("fifty_spins");
         if (spinsNow >= 100) unlocks.push("hundred_spins");
-        if (hasDiamondLine(result.rows)) unlocks.push("diamond_line");
-        // "big_win" agora é proporcional à aposta também
-        if (result.prizeWon >= result.betAmount * 33) unlocks.push("big_win");
+        if (hasDragonLine(result.rows)) unlocks.push("diamond_line");
+        if (result.prizeWon >= result.betAmount * 50 || lines >= 3) unlocks.push("big_win");
         if (kind === "jackpot") unlocks.push("jackpot");
 
         for (const id of unlocks) {
@@ -121,24 +156,22 @@ export function useSpin() {
           if (a) toast(`${a.icon} ${a.title}`, { description: a.description });
         }
 
-        // Missões diárias
         const completeMission = (id: string, amount: number) => {
           const mission = progressMission(id, amount);
           if (mission) {
-            toast.success(`Missão completa: ${mission.title} (+${mission.reward} XP)`);
+            toast.success(`Missao completa: ${mission.title} (+${mission.reward} XP)`);
             addXp(mission.reward);
           }
         };
         completeMission("daily_spins_10", 1);
         if (result.isWinner) completeMission("daily_win_3", 1);
-        if (result.rows.some((r) => r.includes("🐉"))) completeMission("daily_diamond", 1);
+        if (result.rows.some((r) => r.includes(DRAGON))) completeMission("daily_diamond", 1);
       }, delayMs);
 
-      return { result, kind };
+      return { result, kind, lines };
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Erro ao executar o giro.";
       toast.error(msg);
-      // garante que sai do estado de spinning
       stopSpin();
       return null;
     }
@@ -151,6 +184,7 @@ export function useSpin() {
     stopSpin,
     setBalance,
     play,
+    announceMegaWin,
     fire,
     addXp,
     unlock,
