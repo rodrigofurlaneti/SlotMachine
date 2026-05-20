@@ -58,11 +58,12 @@ namespace SlotMachine.Test.UnitTest.Api.Controllers
         {
             // Arrange
             var playerId = Guid.NewGuid();
-            var expectedSpin = new SpinResponseDto(new string[3][], 0, 100, false);
-            _appServiceMock.PlaySpin(playerId).Returns(expectedSpin);
+            var request = new SpinRequestDto(3.00m);
+            var expectedSpin = new SpinResponseDto(new string[3][], 0, 100, false, 3.00m);
+            _appServiceMock.PlaySpin(playerId, request.BetAmount).Returns(expectedSpin);
 
             // Act
-            var result = _controller.Spin(playerId);
+            var result = _controller.Spin(playerId, request);
 
             // Assert
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
@@ -74,14 +75,44 @@ namespace SlotMachine.Test.UnitTest.Api.Controllers
         {
             // Arrange
             var playerId = Guid.NewGuid();
-            _appServiceMock.PlaySpin(playerId).Throws(new Exception("Jogador não encontrado."));
+            var request = new SpinRequestDto(3.00m);
+            _appServiceMock.PlaySpin(playerId, request.BetAmount)
+                           .Throws(new Exception("Jogador não encontrado."));
 
             // Act
-            var result = _controller.Spin(playerId);
+            var result = _controller.Spin(playerId, request);
 
             // Assert
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequest.Value.ToString().Should().Contain("Jogador não encontrado.");
+        }
+
+        [Fact]
+        public void Spin_WhenBetIsOutOfRange_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var playerId = Guid.NewGuid();
+            var request = new SpinRequestDto(0.10m); // abaixo do mínimo
+            _appServiceMock.PlaySpin(playerId, request.BetAmount)
+                           .Throws(new ArgumentOutOfRangeException(
+                               "betAmount",
+                               "Aposta inválida. Permitido entre R$ 0,50 e R$ 30,00."));
+
+            // Act
+            var result = _controller.Spin(playerId, request);
+
+            // Assert
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+        [Fact]
+        public void GetBetConfig_ShouldReturnPresetsAndRange()
+        {
+            // Act
+            var result = _controller.GetBetConfig();
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
         }
 
         [Fact]

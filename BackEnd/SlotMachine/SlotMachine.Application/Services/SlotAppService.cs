@@ -42,7 +42,7 @@ namespace SlotMachine.Application.Services
             return new PlayerDto(player.Id, player.Name, player.Balance);
         }
 
-        public SpinResponseDto PlaySpin(Guid playerId)
+        public SpinResponseDto PlaySpin(Guid playerId, decimal betAmount)
         {
             var player = _playerRepository.GetById(playerId);
             if (player == null)
@@ -50,8 +50,9 @@ namespace SlotMachine.Application.Services
 
             var balanceBefore = player.Balance;
 
-            // Realiza o giro
-            var spinResult = _slotMachine.Spin(player, _randomGenerator);
+            // Realiza o giro com a aposta informada pelo cliente.
+            // A validação de range (R$ 0,50 ≤ bet ≤ R$ 30,00) acontece dentro do Domain.
+            var spinResult = _slotMachine.Spin(player, _randomGenerator, betAmount);
 
             // Persiste a mudança de saldo
             _playerRepository.Save(player);
@@ -73,7 +74,8 @@ namespace SlotMachine.Application.Services
                 Rows: spinResult.Rows.Select(row => row.Select(s => s.Face).ToArray()).ToArray(),
                 PrizeWon: spinResult.PrizeWon,
                 CurrentBalance: player.Balance,
-                IsWinner: spinResult.IsWinner
+                IsWinner: spinResult.IsWinner,
+                BetAmount: spinResult.BetAmount
             );
         }
 

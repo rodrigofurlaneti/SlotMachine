@@ -6,21 +6,29 @@ import { useGameStore } from "../store/gameStore";
 import { useAchievementsStore } from "../store/achievementsStore";
 import { useSounds } from "./useSounds";
 import { useCelebration } from "./useCelebration";
+import { formatBRL } from "../utils/format";
 
 export type SpinKind = "lose" | "win" | "bigWin" | "jackpot";
 
 /**
  * Classifica o prêmio. Espelha as regras visuais:
  * - jackpot = grid inteiro com 💎 (todas 5 linhas pagantes: 3 horizontais + 2 diagonais)
- *             prêmio máximo = 5 * 100 * 3 = R$1500
- * - bigWin  = prêmio >= R$100
+ *             prêmio máximo escala com a aposta: 5 * 100 * bet
+ * - bigWin  = prêmio >= 30x a aposta (equivalente ao antigo >= R$100 com aposta R$3)
  * - win     = prêmio > 0
  */
-export function classifyPrize(prize: number, rows: string[][]): SpinKind {
+export function classifyPrize(
+  prize: number,
+  rows: string[][],
+  betAmount: number
+): SpinKind {
   if (prize === 0) return "lose";
-  const allDiamond = rows.every((r) => r[0] === "💎" && r[1] === "💎" && r[2] === "💎");
+  const allDiamond = rows.every(
+    (r) => r[0] === "🐉" && r[1] === "🐉" && r[2] === "🐉"
+  );
   if (allDiamond) return "jackpot";
-  if (prize >= 100) return "bigWin";
+  // "bigWin" agora é proporcional: prêmio >= ~33x a aposta
+  if (prize >= betAmount * 33) return "bigWin";
   return "win";
 }
 
@@ -28,12 +36,12 @@ export function classifyPrize(prize: number, rows: string[][]): SpinKind {
 function hasDiamondLine(rows: string[][]): boolean {
   // Horizontais
   for (const r of rows) {
-    if (r[0] === "💎" && r[1] === "💎" && r[2] === "💎") return true;
+    if (r[0] === "🐉" && r[1] === "🐉" && r[2] === "🐉") return true;
   }
   // Diagonal principal
-  if (rows[0]?.[0] === "💎" && rows[1]?.[1] === "💎" && rows[2]?.[2] === "💎") return true;
+  if (rows[0]?.[0] === "🐉" && rows[1]?.[1] === "🐉" && rows[2]?.[2] === "🐉") return true;
   // Diagonal secundária
-  if (rows[0]?.[2] === "💎" && rows[1]?.[1] === "💎" && rows[2]?.[0] === "💎") return true;
+  if (rows[0]?.[2] === "🐉" && rows[1]?.[1] === "🐉" && rows[2]?.[0] === "🐉") return true;
   return false;
 }
 
@@ -44,6 +52,7 @@ export function useSpin() {
   const finishSpin = useGameStore((s) => s.finishSpin);
   const stopSpin = useGameStore((s) => s.stopSpin);
   const isSpinning = useGameStore((s) => s.isSpinning);
+  const selectedBet = useGameStore((s) => s.selectedBet);
 
   const { play } = useSounds();
   const { fire } = useCelebration();
@@ -55,8 +64,10 @@ export function useSpin() {
 
   const doSpin = useCallback(async () => {
     if (!player || isSpinning) return null;
-    if (player.balance < 3) {
-      toast.error("Saldo insuficiente para girar (mín. R$ 3,00).");
+    if (player.balance < selectedBet) {
+      toast.error(
+        `Saldo insuficiente para girar (necessário ${formatBRL(selectedBet)}).`
+      );
       return null;
     }
 
@@ -64,11 +75,11 @@ export function useSpin() {
     play("spin");
 
     try {
-      const result = await apiSpin(player.id);
+      const result = await apiSpin(player.id, selectedBet);
       finishSpin(result);
       setBalance(result.currentBalance);
 
-      const kind = classifyPrize(result.prizeWon, result.rows);
+      const kind = classifyPrize(result.prizeWon, result.rows, result.betAmount);
       // delay sincronizado com o fim da animação dos reels (~2s)
       // O reel da última linha/coluna tem duração de 1.2 + 0.9 = 2.1s,
       // então 2.2s garante que todos os reels já pararam.
@@ -101,7 +112,8 @@ export function useSpin() {
         if (spinsNow >= 50) unlocks.push("fifty_spins");
         if (spinsNow >= 100) unlocks.push("hundred_spins");
         if (hasDiamondLine(result.rows)) unlocks.push("diamond_line");
-        if (result.prizeWon >= 100) unlocks.push("big_win");
+        // "big_win" agora é proporcional à aposta também
+        if (result.prizeWon >= result.betAmount * 33) unlocks.push("big_win");
         if (kind === "jackpot") unlocks.push("jackpot");
 
         for (const id of unlocks) {
@@ -119,7 +131,7 @@ export function useSpin() {
         };
         completeMission("daily_spins_10", 1);
         if (result.isWinner) completeMission("daily_win_3", 1);
-        if (result.rows.some((r) => r.includes("💎"))) completeMission("daily_diamond", 1);
+        if (result.rows.some((r) => r.includes("🐉"))) completeMission("daily_diamond", 1);
       }, delayMs);
 
       return { result, kind };
@@ -133,6 +145,7 @@ export function useSpin() {
   }, [
     player,
     isSpinning,
+    selectedBet,
     startSpin,
     finishSpin,
     stopSpin,

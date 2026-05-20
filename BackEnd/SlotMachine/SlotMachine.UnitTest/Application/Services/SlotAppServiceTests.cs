@@ -59,7 +59,7 @@ namespace SlotMachine.Test.UnitTest.Application.Services
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
             // Act
-            var response = _service.PlaySpin(playerId);
+            var response = _service.PlaySpin(playerId, 3.00m);
 
             // Assert
             player.Balance.Should().NotBe(100m); // Saldo alterado
@@ -97,7 +97,7 @@ namespace SlotMachine.Test.UnitTest.Application.Services
             _repositoryMock.GetById(invalidId).Returns((Player)null);
 
             // Act
-            Action action = () => _service.PlaySpin(invalidId);
+            Action action = () => _service.PlaySpin(invalidId, 3.00m);
 
             // Assert
             action.Should().Throw<Exception>().WithMessage("Jogador não encontrado.");

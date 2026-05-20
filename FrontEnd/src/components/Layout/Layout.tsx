@@ -21,7 +21,7 @@ export function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-30 backdrop-blur-md bg-casino-bg/80 border-b border-casino-gold/30">
+      <header className="sticky top-0 z-30 backdrop-blur-md bg-fortune-ink/85 border-b-2 border-fortune-gold/50 shadow-[0_2px_18px_rgba(245,197,24,0.25)]">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <NavLink to="/" className="flex items-center gap-2">
             <motion.span
@@ -29,16 +29,16 @@ export function Layout() {
               animate={{ rotate: [0, -10, 10, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             >
-              🎰
+              {"\u{1F42F}"}
             </motion.span>
-            <span className="text-display text-xl gold-text">LUCKY SPIN</span>
+            <span className="text-imperial text-xl imperial-text">FORTUNE SPIN</span>
           </NavLink>
 
           <nav className="hidden sm:flex gap-1">
             {[
-              { to: "/", label: "Início" },
+              { to: "/", label: "Inicio" },
               { to: "/game", label: "Jogar" },
-              { to: "/history", label: "Histórico" },
+              { to: "/history", label: "Historico" },
               { to: "/achievements", label: "Conquistas" },
             ].map((item) => (
               <NavLink
@@ -48,8 +48,8 @@ export function Layout() {
                 className={({ isActive }) =>
                   `px-3 py-1.5 rounded-md text-sm transition ${
                     isActive
-                      ? "bg-casino-gold/20 text-casino-gold"
-                      : "text-neutral-300 hover:text-white hover:bg-white/5"
+                      ? "bg-fortune-gold/20 text-fortune-gold"
+                      : "text-neutral-300 hover:text-white hover:bg-fortune-red/20"
                   }`
                 }
               >
@@ -62,19 +62,19 @@ export function Layout() {
             {player && (
               <div className="hidden md:flex flex-col items-end">
                 <span className="text-xs text-neutral-400">{player.name}</span>
-                <span className="text-casino-gold font-semibold tabular-nums">
+                <span className="text-fortune-gold font-semibold tabular-nums">
                   {formatBRL(player.balance)}
                 </span>
               </div>
             )}
             <div className="flex flex-col items-end min-w-[120px]">
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-casino-neon font-bold">Lv {progress.level}</span>
+                <span className="text-fortune-redLight font-bold">Lv {progress.level}</span>
                 <span className="text-neutral-500">{progress.current}/{progress.needed} XP</span>
               </div>
               <div className="h-1.5 w-28 bg-neutral-800 rounded-full overflow-hidden mt-1">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-casino-neonCyan to-casino-neon"
+                  className="h-full bg-gradient-to-r from-fortune-jade to-fortune-gold"
                   initial={false}
                   animate={{ width: `${progress.pct}%` }}
                   transition={{ type: "spring", stiffness: 120, damping: 18 }}
@@ -84,12 +84,11 @@ export function Layout() {
           </div>
         </div>
 
-        {/* Mobile nav */}
-        <nav className="sm:hidden flex justify-around border-t border-casino-gold/20 py-1">
+        <nav className="sm:hidden flex justify-around border-t border-fortune-gold/30 py-1">
           {[
-            { to: "/", label: "Início" },
+            { to: "/", label: "Inicio" },
             { to: "/game", label: "Jogar" },
-            { to: "/history", label: "Histórico" },
+            { to: "/history", label: "Historico" },
             { to: "/achievements", label: "Trofeus" },
           ].map((item) => (
             <NavLink
@@ -98,7 +97,7 @@ export function Layout() {
               end={item.to === "/"}
               className={({ isActive }) =>
                 `text-xs px-2 py-1 rounded ${
-                  isActive ? "text-casino-gold" : "text-neutral-400"
+                  isActive ? "text-fortune-gold" : "text-neutral-400"
                 }`
               }
             >
@@ -108,7 +107,7 @@ export function Layout() {
         </nav>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 relative">
         <motion.div
           key={location.pathname}
           initial={{ opacity: 0, y: 8 }}
@@ -119,8 +118,8 @@ export function Layout() {
         </motion.div>
       </main>
 
-      <footer className="py-4 text-center text-xs text-neutral-500 border-t border-white/5">
-        Lucky Spin · Apenas demonstração · 18+
+      <footer className="py-4 text-center text-xs text-neutral-500 border-t border-fortune-gold/20">
+        Fortune Spin - Apenas demonstracao - 18+
       </footer>
     </div>
   );

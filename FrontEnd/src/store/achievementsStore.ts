@@ -15,7 +15,7 @@ interface DailyMission {
   title: string;
   goal: number;
   progress: number;
-  reward: number; // XP reward
+  reward: number;
   completed: boolean;
 }
 
@@ -35,29 +35,37 @@ interface AchievementsState {
   resetDailyIfNeeded: () => void;
 }
 
+const TIGER = "\u{1F42F}";
+const COIN = "\u{1FA99}";
+const LANTERN = "\u{1F3EE}";
+const DRAGON = "\u{1F409}";
+const BAMBOO = "\u{1F38B}";
+
 const baseAchievements: Achievement[] = [
-  { id: "first_spin", title: "Primeira tentativa", description: "Dê seu primeiro giro", icon: "🎰", unlocked: false },
-  { id: "first_win", title: "Sorte de iniciante", description: "Ganhe pela primeira vez", icon: "🍀", unlocked: false },
-  { id: "ten_spins", title: "Aquecendo", description: "Complete 10 giros", icon: "🔥", unlocked: false },
-  { id: "fifty_spins", title: "Veterano", description: "Complete 50 giros", icon: "🎯", unlocked: false },
-  { id: "hundred_spins", title: "Centurião", description: "Complete 100 giros", icon: "💯", unlocked: false },
-  { id: "diamond_line", title: "Caçador de diamantes", description: "Faça uma linha de 💎", icon: "💎", unlocked: false },
-  { id: "big_win", title: "Big Win!", description: "Ganhe R$ 100 ou mais em um giro", icon: "💰", unlocked: false },
-  { id: "jackpot", title: "JACKPOT", description: "Ganhe três linhas de diamante", icon: "👑", unlocked: false },
-  { id: "streak_3", title: "Consistente", description: "3 dias seguidos jogando", icon: "📅", unlocked: false },
-  { id: "streak_7", title: "Lendário", description: "7 dias seguidos jogando", icon: "🏆", unlocked: false },
+  { id: "first_spin", title: "Primeira tentativa", description: "De seu primeiro giro", icon: "\u{1F3B0}", unlocked: false },
+  { id: "first_win", title: "Sorte de iniciante", description: "Ganhe pela primeira vez", icon: "\u{1F340}", unlocked: false },
+  { id: "ten_spins", title: "Aquecendo", description: "Complete 10 giros", icon: "\u{1F525}", unlocked: false },
+  { id: "fifty_spins", title: "Veterano", description: "Complete 50 giros", icon: "\u{1F3AF}", unlocked: false },
+  { id: "hundred_spins", title: "Centuriao", description: "Complete 100 giros", icon: "\u{1F4AF}", unlocked: false },
+  { id: "diamond_line", title: "Despertar do Dragao", description: `Faca uma linha de ${DRAGON}`, icon: DRAGON, unlocked: false },
+  { id: "big_win", title: "Grande Fortuna", description: "Ganhe um premio expressivo em um giro", icon: "\u{1F4B0}", unlocked: false },
+  { id: "jackpot", title: "JACKPOT IMPERIAL", description: "Encha o grid com dragoes dourados", icon: "\u{1F451}", unlocked: false },
+  { id: "streak_3", title: "Consistente", description: "3 dias seguidos jogando", icon: "\u{1F4C5}", unlocked: false },
+  { id: "streak_7", title: "Lendario", description: "7 dias seguidos jogando", icon: "\u{1F3C6}", unlocked: false },
 ];
+
+void TIGER; void COIN; void LANTERN; void BAMBOO;
 
 function buildDailyMissions(): DailyMission[] {
   return [
     { id: "daily_spins_10", title: "Gire 10 vezes hoje", goal: 10, progress: 0, reward: 50, completed: false },
-    { id: "daily_win_3", title: "Vença 3 vezes hoje", goal: 3, progress: 0, reward: 80, completed: false },
-    { id: "daily_diamond", title: "Tire um 💎 hoje", goal: 1, progress: 0, reward: 120, completed: false },
+    { id: "daily_win_3", title: "Venca 3 vezes hoje", goal: 3, progress: 0, reward: 80, completed: false },
+    { id: "daily_diamond", title: `Invoque um ${DRAGON} hoje`, goal: 1, progress: 0, reward: 120, completed: false },
   ];
 }
 
 function xpForLevel(level: number): number {
-  return 100 * level + 50 * (level - 1) * level; // crescente: 100, 250, 450, 700...
+  return 100 * level + 50 * (level - 1) * level;
 }
 
 export function levelFromXp(xp: number): number {

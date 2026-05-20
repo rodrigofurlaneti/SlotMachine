@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using SlotMachine.Domain.Entities;
 using SlotMachine.Domain.Interfaces;
 
@@ -23,10 +23,9 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
             // Act
-            _slotMachine.Spin(player, _rngMock);
+            _slotMachine.Spin(player, _rngMock, 3.00m);
 
             // Assert
-            // Aposta é 1.00, mas houve prêmio. O saldo não deve ser mais 100.
             player.Balance.Should().NotBe(100m);
         }
 
@@ -38,26 +37,36 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0); // Cai na Cereja 🍒 em todas as 9 posições
 
             // Act
-            var result = _slotMachine.Spin(player, _rngMock);
+            var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
             // Assert
-            // Aposta fixa: 3.00
-            // Cereja multiplicador: 2.0x → 3.00 * 2.0 = 6.00 por linha pagante
+            // Aposta: 3.00 · Cereja x2.0 → 6.00 por linha pagante
             // 5 linhas pagantes (3 horizontais + 2 diagonais) com 🍒🍒🍒 = 5 * 6.00 = 30.00
             result.PrizeWon.Should().Be(30m);
+            result.BetAmount.Should().Be(3.00m);
             player.Balance.Should().Be(77m); // 50 - 3 (aposta) + 30 (prêmio) = 77
+        }
+
+        [Fact]
+        public void Spin_WhenPlayerWins_WithDifferentBet_ShouldScalePrizeProportionally()
+        {
+            // Arrange
+            var player = new Player("Vencedor", 100m);
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
+
+            // Act – aposta agora R$ 5,00
+            var result = _slotMachine.Spin(player, _rngMock, 5.00m);
+
+            // Assert – prêmio escala: 5.00 * 2.0 = 10.00 por linha · 5 linhas = 50.00
+            result.PrizeWon.Should().Be(50m);
+            result.BetAmount.Should().Be(5.00m);
+            player.Balance.Should().Be(145m); // 100 - 5 + 50
         }
 
         [Fact]
         public void Spin_WhenOnlyMainDiagonalMatches_ShouldPayOnlyThatLine()
         {
             // Arrange
-            // Vamos forçar o RNG a alternar entre Cereja (0) e Vazio (132 - 60 = 72) para
-            // garantir que só a diagonal principal (posições [0,0], [1,1], [2,2]) seja 🍒.
-            // Posições no grid sorteadas em ordem: row1=[0,1,2], row2=[0,1,2], row3=[0,1,2]
-            // Diagonal principal: row1[0], row2[1], row3[2] → posições 0, 4, 8
-            // Resto deve ser ❌ pra não fechar outras linhas.
-
             var player = new Player("Sortudo", 50m);
             var sequence = new[]
             {
@@ -76,7 +85,7 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
                 .Returns(_ => sequence[callCount++]);
 
             // Act
-            var result = _slotMachine.Spin(player, _rngMock);
+            var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
             // Assert
             // Apenas a diagonal principal venceu → 1 linha pagante de Cereja = 6.00
@@ -88,14 +97,54 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         public void Spin_WithInsufficientBalance_ShouldThrowException()
         {
             // Arrange
-            var player = new Player("Pobre", 0.5m);
+            var player = new Player("Pobre", 0.50m);
 
             // Act
-            Action action = () => _slotMachine.Spin(player, _rngMock);
+            Action action = () => _slotMachine.Spin(player, _rngMock, 3.00m);
 
             // Assert
             action.Should().Throw<Exception>()
                   .WithMessage("Saldo insuficiente para girar.");
+        }
+
+        [Theory]
+        [InlineData(0.49)]
+        [InlineData(30.01)]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Spin_WithBetOutOfRange_ShouldThrowArgumentOutOfRange(decimal bet)
+        {
+            // Arrange
+            var player = new Player("Teste", 1000m);
+
+            // Act
+            Action action = () => _slotMachine.Spin(player, _rngMock, bet);
+
+            // Assert
+            action.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void Spin_WithFractionalCents_ShouldThrow()
+        {
+            // Arrange
+            var player = new Player("Teste", 1000m);
+
+            // Act
+            Action action = () => _slotMachine.Spin(player, _rngMock, 1.005m);
+
+            // Assert
+            action.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
+        public void ValidateBet_ShouldAcceptBoundaryValues()
+        {
+            // 0.50 e 30.00 são os extremos válidos
+            FluentActions.Invoking(() => SlotMachine.Domain.Entities.SlotMachine.ValidateBet(0.50m))
+                .Should().NotThrow();
+            FluentActions.Invoking(() => SlotMachine.Domain.Entities.SlotMachine.ValidateBet(30.00m))
+                .Should().NotThrow();
         }
     }
 }

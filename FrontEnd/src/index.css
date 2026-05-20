@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Cinzel:wght@600;800&family=Inter:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
   color-scheme: dark;
@@ -17,10 +17,10 @@ body,
 body {
   font-family: theme("fontFamily.body");
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(245, 197, 24, 0.18), transparent 60%),
-    radial-gradient(900px 600px at 10% 110%, rgba(255, 46, 136, 0.16), transparent 60%),
-    radial-gradient(900px 600px at 90% 110%, rgba(42, 250, 209, 0.12), transparent 60%),
-    theme("colors.casino.bg");
+    radial-gradient(1200px 700px at 50% -10%, rgba(245, 197, 24, 0.28), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(255, 80, 50, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 90% 110%, rgba(200, 16, 46, 0.25), transparent 60%),
+    linear-gradient(180deg, #2a0808 0%, #1a0606 60%, #0d0303 100%);
   color: #f5f5f5;
   overflow-x: hidden;
 }
@@ -28,6 +28,12 @@ body {
 .text-display {
   font-family: theme("fontFamily.display");
   letter-spacing: 0.04em;
+}
+
+.text-imperial {
+  font-family: "Cinzel", "Bungee", serif;
+  letter-spacing: 0.08em;
+  font-weight: 800;
 }
 
 .gold-text {
@@ -38,26 +44,78 @@ body {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
 }
 
+.imperial-text {
+  background: linear-gradient(180deg, #fff2a8 0%, #f5c518 40%, #c8102e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
 .shimmer {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 247, 192, 0.45) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 200% 100%;
 }
 
 .cabinet {
+  position: relative;
   background:
-    radial-gradient(120% 80% at 50% 0%, #2a1f12 0%, #1a120a 60%, #0a0604 100%);
-  border: 2px solid rgba(245, 197, 24, 0.35);
+    radial-gradient(120% 80% at 50% 0%, #4a0e1a 0%, #2a0808 55%, #160404 100%);
+  border: 2px solid #f5c518;
+  box-shadow:
+    0 0 0 4px #7a0a1c,
+    0 0 0 6px #f5c518,
+    0 0 40px rgba(245, 197, 24, 0.45),
+    inset 0 0 22px rgba(122, 10, 28, 0.7);
+}
+
+.cabinet::before,
+.cabinet::after {
+  content: "";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  border: 3px solid #f5c518;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(245, 197, 24, 0.55);
+}
+.cabinet::before {
+  top: -10px;
+  left: -10px;
+  border-right: none;
+  border-bottom: none;
+}
+.cabinet::after {
+  bottom: -10px;
+  right: -10px;
+  border-left: none;
+  border-top: none;
+}
+
+.cabinet-roof {
+  background:
+    linear-gradient(180deg, #8a0d20 0%, #c8102e 50%, #7a0a1c 100%);
+  border-top: 2px solid #f5c518;
+  border-bottom: 2px solid #f5c518;
+  box-shadow:
+    inset 0 0 18px rgba(0, 0, 0, 0.55),
+    0 4px 12px rgba(0, 0, 0, 0.45);
 }
 
 .reel-window {
-  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-  border: 2px solid rgba(245, 197, 24, 0.4);
-  box-shadow: theme("boxShadow.reel");
+  background:
+    linear-gradient(180deg, #2a0808 0%, #4a0e1a 50%, #2a0808 100%);
+  border: 2px solid #f5c518;
+  box-shadow:
+    inset 0 8px 16px rgba(0, 0, 0, 0.7),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.7),
+    0 0 10px rgba(245, 197, 24, 0.35);
 }
 
 button:focus-visible {
@@ -65,15 +123,55 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(245, 197, 24, 0.3);
+  background: rgba(245, 197, 24, 0.4);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
+}
+
+.fortune-rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.fortune-rain .petal,
+.fortune-rain .coin {
+  position: absolute;
+  top: -10vh;
+  font-size: 18px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.fortune-rain .petal {
+  animation-name: petalFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.fortune-rain .coin {
+  font-size: 22px;
+  filter: drop-shadow(0 0 6px rgba(245, 197, 24, 0.8));
+  animation-name: coinFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.lantern {
+  display: inline-block;
+  transform-origin: 50% 0%;
+  animation: lanternSway 3.2s ease-in-out infinite, lanternGlow 2.2s ease-in-out infinite;
+}
+.lantern.delay-1 {
+  animation-delay: -0.7s, -0.3s;
+}
+
+.pulse-gold {
+  animation: goldPulse 2.6s ease-in-out infinite;
 }

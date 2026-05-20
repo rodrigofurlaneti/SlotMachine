@@ -11,18 +11,31 @@ export interface PlayerDto {
   balance: number;
 }
 
+export interface SpinRequestDto {
+  /** Valor da aposta em reais (R$ 0,50 a R$ 30,00). */
+  betAmount: number;
+}
+
 export interface SpinResponseDto {
   /** Matriz 3x3 com a face dos símbolos retornada pela API */
   rows: string[][];
   prizeWon: number;
   currentBalance: number;
   isWinner: boolean;
+  /** Aposta usada neste giro (eco do request) */
+  betAmount: number;
 }
 
 export interface AuditResultDto {
   totalSpins: number;
   expectedRTP: number;
   houseEdge: number;
+}
+
+export interface BetConfigDto {
+  minBetAmount: number;
+  maxBetAmount: number;
+  presets: number[];
 }
 
 export interface ApiError {

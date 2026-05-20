@@ -58,7 +58,8 @@ namespace SlotMachine.Test.Specs.StepDefinitions
         {
             try
             {
-                _lastResult = _slotMachine.Spin(_player, _rngMock);
+                // Specs originais foram escritas para a aposta fixa de R$ 3,00.
+                _lastResult = _slotMachine.Spin(_player, _rngMock, 3.00m);
                 _lastException = null;
             }
             catch (Exception ex)

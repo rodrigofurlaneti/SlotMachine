@@ -5,20 +5,33 @@ export default {
     extend: {
       colors: {
         casino: {
-          bg: "#0a0a0a",
-          panel: "#161616",
+          bg: "#1a0606",
+          panel: "#2a0a0a",
           felt: "#0f3d2e",
           gold: "#f5c518",
           goldDark: "#a8860f",
           neon: "#ff2e88",
           neonCyan: "#2afad1",
-          rim: "#2a1f12",
+          rim: "#4a1010",
+        },
+        // Nova paleta "Fortune" oriental
+        fortune: {
+          red: "#c8102e",       // vermelho imperial
+          redDeep: "#7a0a1c",   // vermelho de sombra
+          redLight: "#ff3651",  // vermelho de destaque
+          gold: "#f5c518",      // dourado base
+          goldLight: "#fff2a8", // dourado claro de highlight
+          goldDeep: "#7a5e08",  // sombra dourada
+          jade: "#3ddc97",      // verde jade
+          ink: "#1a0606",       // fundo escuro avermelhado
         },
       },
       boxShadow: {
         gold: "0 0 24px rgba(245,197,24,0.55), inset 0 0 12px rgba(245,197,24,0.4)",
         neon: "0 0 18px rgba(255,46,136,0.7), 0 0 36px rgba(255,46,136,0.4)",
         reel: "inset 0 8px 16px rgba(0,0,0,0.7), inset 0 -8px 16px rgba(0,0,0,0.7)",
+        lantern: "0 0 24px rgba(255,90,90,0.6), 0 0 60px rgba(255,90,90,0.3)",
+        imperial: "0 0 40px rgba(245,197,24,0.45), inset 0 0 22px rgba(122,10,28,0.7)",
       },
       fontFamily: {
         display: ["'Bungee'", "'Impact'", "sans-serif"],
@@ -38,11 +51,51 @@ export default {
           "50%": { transform: "scale(1.2)", opacity: "1" },
           "100%": { transform: "scale(1)", opacity: "1" },
         },
+        goldPulse: {
+          "0%, 100%": {
+            boxShadow:
+              "0 0 16px rgba(245,197,24,0.35), inset 0 0 14px rgba(245,197,24,0.25)",
+          },
+          "50%": {
+            boxShadow:
+              "0 0 32px rgba(245,197,24,0.7), inset 0 0 22px rgba(245,197,24,0.5)",
+          },
+        },
+        lanternSway: {
+          "0%, 100%": { transform: "rotate(-4deg)" },
+          "50%": { transform: "rotate(4deg)" },
+        },
+        lanternGlow: {
+          "0%, 100%": {
+            filter: "drop-shadow(0 0 8px rgba(255,90,90,0.6))",
+            opacity: "0.9",
+          },
+          "50%": {
+            filter: "drop-shadow(0 0 18px rgba(255,140,90,0.9))",
+            opacity: "1",
+          },
+        },
+        petalFall: {
+          "0%": { transform: "translateY(-10vh) translateX(0) rotate(0deg)", opacity: "0" },
+          "10%": { opacity: "0.9" },
+          "100%": {
+            transform: "translateY(110vh) translateX(40px) rotate(360deg)",
+            opacity: "0",
+          },
+        },
+        coinFall: {
+          "0%": { transform: "translateY(-10vh) rotate(0deg)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "100%": { transform: "translateY(110vh) rotate(720deg)", opacity: "0" },
+        },
       },
       animation: {
         marquee: "marquee 1.2s ease-in-out infinite",
         shimmer: "shimmer 2.5s linear infinite",
         bigwin: "bigwin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
+        goldPulse: "goldPulse 2.6s ease-in-out infinite",
+        lanternSway: "lanternSway 3.2s ease-in-out infinite",
+        lanternGlow: "lanternGlow 2.2s ease-in-out infinite",
       },
     },
   },

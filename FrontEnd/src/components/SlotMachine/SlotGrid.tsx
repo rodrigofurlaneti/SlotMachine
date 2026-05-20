@@ -31,7 +31,7 @@ function analyzeWins(result: string[][] | null): WinAnalysis {
   // Linhas horizontais
   for (let r = 0; r < 3; r += 1) {
     const row = result[r];
-    if (row && row[0] === row[1] && row[1] === row[2] && row[0] !== "❌") {
+    if (row && row[0] === row[1] && row[1] === row[2] && row[0] !== "🎋") {
       horizontalLines.push(r);
       cells.add(`${r}-0`);
       cells.add(`${r}-1`);
@@ -43,7 +43,7 @@ function analyzeWins(result: string[][] | null): WinAnalysis {
   const a = result[0]?.[0];
   const b = result[1]?.[1];
   const c = result[2]?.[2];
-  if (a && a !== "❌" && a === b && b === c) {
+  if (a && a !== "🎋" && a === b && b === c) {
     mainDiagonal = true;
     cells.add("0-0");
     cells.add("1-1");
@@ -54,7 +54,7 @@ function analyzeWins(result: string[][] | null): WinAnalysis {
   const d = result[0]?.[2];
   const e = result[1]?.[1];
   const f = result[2]?.[0];
-  if (d && d !== "❌" && d === e && e === f) {
+  if (d && d !== "🎋" && d === e && e === f) {
     antiDiagonal = true;
     cells.add("0-2");
     cells.add("1-1");
@@ -326,4 +326,4 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
       </svg>
     </div>
   );
-}
+}

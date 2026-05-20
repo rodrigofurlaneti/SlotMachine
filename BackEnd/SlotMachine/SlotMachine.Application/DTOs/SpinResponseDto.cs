@@ -1,9 +1,10 @@
-﻿namespace SlotMachine.Application.DTOs
+namespace SlotMachine.Application.DTOs
 {
     public record SpinResponseDto(
-        string[][] Rows, 
+        string[][] Rows,
         decimal PrizeWon,
         decimal CurrentBalance,
-        bool IsWinner
+        bool IsWinner,
+        decimal BetAmount
     );
 }

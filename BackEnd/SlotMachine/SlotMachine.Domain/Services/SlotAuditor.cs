@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SlotMachine.Domain.Entities;
 using SlotMachine.Domain.Interfaces;
 
@@ -6,6 +6,9 @@ namespace SlotMachine.Domain.Services
 {
     public sealed class SlotAuditor
     {
+        /// <summary>Aposta usada na simulação de auditoria.</summary>
+        private const decimal AuditBetAmount = 1.00m;
+
         public long TotalSpins { get; private set; }
         public decimal TotalWagered { get; private set; }
         public decimal TotalPaidOut { get; private set; }
@@ -17,12 +20,12 @@ namespace SlotMachine.Domain.Services
                 throw new ArgumentException("O número de giros deve ser maior que zero.");
 
             // Criamos um jogador "fantasma" com saldo infinito para a auditoria
-            decimal totalNeededBalance = numberOfSpins * 1.00m; // Considerando que a aposta fixa é 1.00
+            decimal totalNeededBalance = numberOfSpins * AuditBetAmount;
             var botPlayer = new Player("AuditorBot", totalNeededBalance);
 
             for (int i = 0; i < numberOfSpins; i++)
             {
-                var result = machine.Spin(botPlayer, rng);
+                var result = machine.Spin(botPlayer, rng, AuditBetAmount);
 
                 TotalSpins++;
                 TotalWagered += result.BetAmount;

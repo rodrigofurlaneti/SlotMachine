@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using SlotMachine.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using SlotMachine.Application.Services;
+using DomainSlotMachine = SlotMachine.Domain.Entities.SlotMachine;
 
 namespace SlotMachine.Api.Controllers
 {
@@ -30,18 +31,47 @@ namespace SlotMachine.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Executa um giro para o jogador informado, aceitando aposta variável
+        /// (R$ 0,50 a R$ 30,00). O body é opcional para compatibilidade com
+        /// clientes antigos — quando não informado, usamos R$ 3,00 como antes.
+        /// </summary>
         [HttpPost("spin/{playerId}")]
-        public IActionResult Spin(Guid playerId)
+        public IActionResult Spin(Guid playerId, [FromBody] SpinRequestDto? request)
         {
             try
             {
-                var result = _appService.PlaySpin(playerId);
+                // Compatibilidade: se o cliente não enviar body, mantém o comportamento legado (R$ 3,00).
+                var betAmount = request?.BetAmount ?? 3.00m;
+                var result = _appService.PlaySpin(playerId, betAmount);
                 return Ok(result);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Error = ex.Message });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { Error = ex.Message });
             }
+        }
+
+        /// <summary>
+        /// Retorna a configuração da aposta (limites e presets sugeridos para a UI).
+        /// </summary>
+        [HttpGet("bet-config")]
+        public IActionResult GetBetConfig()
+        {
+            return Ok(new
+            {
+                MinBetAmount = DomainSlotMachine.MinBetAmount,
+                MaxBetAmount = DomainSlotMachine.MaxBetAmount,
+                Presets = DomainSlotMachine.PresetBetAmounts
+            });
         }
 
         [HttpGet("audit")]

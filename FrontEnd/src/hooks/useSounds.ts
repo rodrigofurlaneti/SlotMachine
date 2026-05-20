@@ -1,9 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Howl } from "howler";
+import {
+  isMuted as engineIsMuted,
+  setMuted as engineSetMuted,
+  playChipSound,
+  speakBet,
+  startMusic,
+  stopMusic,
+  unlockOnUserGesture,
+  primeVoices,
+} from "../audio/audioEngine";
 
 /**
- * Sons sintetizados via Data URI (WAV) — não precisamos baixar arquivos.
- * Geramos cada efeito programaticamente para evitar dependências de assets.
+ * SFX legados sintetizados como WAV em base64 e tocados via Howler.
+ * Mantemos para nao quebrar as chamadas existentes (spin, win, jackpot...).
+ * Sons novos (chip de aposta, voz, musica de fundo) vivem no audioEngine.
  */
 function makeBeepWav(opts: {
   freqStart: number;
@@ -47,7 +58,6 @@ function makeBeepWav(opts: {
     else if (type === "saw") sample = 2 * (t * freq - Math.floor(t * freq + 0.5));
     else sample = 2 * Math.abs(2 * (t * freq - Math.floor(t * freq + 0.5))) - 1;
 
-    // envelope simples (fade in/out)
     const env =
       progress < 0.1 ? progress / 0.1 : progress > 0.85 ? (1 - progress) / 0.15 : 1;
     sample *= env * volume;
@@ -56,7 +66,6 @@ function makeBeepWav(opts: {
     view.setInt16(44 + i * 2, value * 0x7fff, true);
   }
 
-  // base64
   let binary = "";
   const bytes = new Uint8Array(buffer);
   for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
@@ -95,17 +104,26 @@ function getSounds(): Record<SoundName, Howl> {
   return cache as Record<SoundName, Howl>;
 }
 
+let voicesPrimed = false;
+
 export function useSounds() {
-  const [muted, setMuted] = useState<boolean>(() => {
-    return localStorage.getItem("lucky-spin:muted") === "1";
-  });
+  const [muted, setMuted] = useState<boolean>(() => engineIsMuted());
   const mutedRef = useRef(muted);
   mutedRef.current = muted;
 
+  // Sincroniza com o audioEngine na primeira montagem e quando mudar.
   useEffect(() => {
-    localStorage.setItem("lucky-spin:muted", muted ? "1" : "0");
+    engineSetMuted(muted);
   }, [muted]);
 
+  useEffect(() => {
+    if (!voicesPrimed) {
+      voicesPrimed = true;
+      primeVoices();
+    }
+  }, []);
+
+  /** SFX classicos (compativel com chamadas existentes). */
   const play = useCallback((name: SoundName) => {
     if (mutedRef.current) return;
     try {
@@ -115,5 +133,42 @@ export function useSounds() {
     }
   }, []);
 
-  return { play, muted, toggleMute: () => setMuted((m) => !m) };
+  /** SFX do chip + voz em ingles ao selecionar aposta. */
+  const playChip = useCallback((value: number) => {
+    if (mutedRef.current) return;
+    void unlockOnUserGesture().then(() => {
+      void playChipSound(value);
+      speakBet(value);
+    });
+  }, []);
+
+  /** Inicia/garante a trilha de fundo. Idempotente. */
+  const ensureMusic = useCallback(() => {
+    if (mutedRef.current) return;
+    void unlockOnUserGesture().then(() => {
+      void startMusic();
+    });
+  }, []);
+
+  /** Para a trilha de fundo. */
+  const stopBgMusic = useCallback(() => {
+    stopMusic();
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    setMuted((m) => {
+      const next = !m;
+      if (next) stopMusic();
+      return next;
+    });
+  }, []);
+
+  return {
+    play,
+    playChip,
+    ensureMusic,
+    stopBgMusic,
+    muted,
+    toggleMute,
+  };
 }

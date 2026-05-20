@@ -1,9 +1,5 @@
-﻿using SlotMachine.Domain.ValueObjects;
-using System;
+using SlotMachine.Domain.ValueObjects;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlotMachine.Test.UnitTest.Domain.ValueObjects
 {
@@ -17,7 +13,7 @@ namespace SlotMachine.Test.UnitTest.Domain.ValueObjects
             var prize = 0.50m;
 
             // Act
-            var result = new SpinResult(rows, prize);
+            var result = new SpinResult(rows, prize, 3.00m);
 
             // Assert
             result.IsWinner.Should().BeTrue();
@@ -31,25 +27,23 @@ namespace SlotMachine.Test.UnitTest.Domain.ValueObjects
             var prize = 0m;
 
             // Act
-            var result = new SpinResult(rows, prize);
+            var result = new SpinResult(rows, prize, 3.00m);
 
             // Assert
             result.IsWinner.Should().BeFalse();
         }
 
         [Fact]
-        public void SpinResult_ShouldHaveDefaultBetAmount_WhenNotProvided()
+        public void SpinResult_ShouldStoreBetAmountCorrectly()
         {
             // Arrange
             var rows = new List<Symbol[]>();
-            var prize = 10m;
 
             // Act
-            var result = new SpinResult(rows, prize);
+            var result = new SpinResult(rows, 10m, 5.00m);
 
             // Assert
-            // Verifica se o ajuste que fizemos de 3.00m está funcionando como padrão
-            result.BetAmount.Should().Be(3.00m);
+            result.BetAmount.Should().Be(5.00m);
         }
 
         [Fact]
@@ -61,7 +55,7 @@ namespace SlotMachine.Test.UnitTest.Domain.ValueObjects
             var rows = new List<Symbol[]> { row, row, row };
 
             // Act
-            var result = new SpinResult(rows, 0m);
+            var result = new SpinResult(rows, 0m, 3.00m);
 
             // Assert
             result.Rows.Should().HaveCount(3);

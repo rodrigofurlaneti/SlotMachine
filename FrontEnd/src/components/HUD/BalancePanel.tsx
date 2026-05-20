@@ -9,8 +9,10 @@ interface BalancePanelProps {
 export function BalancePanel({ balance, lastPrize }: BalancePanelProps) {
   return (
     <div className="grid grid-cols-2 gap-3 w-full max-w-md">
-      <div className="bg-casino-panel rounded-xl border border-casino-gold/30 p-3">
-        <div className="text-xs uppercase tracking-widest text-neutral-400">Saldo</div>
+      <div className="relative bg-gradient-to-b from-fortune-redDeep to-fortune-ink rounded-xl border-2 border-fortune-gold/60 p-3 shadow-imperial">
+        <div className="text-xs uppercase tracking-widest text-fortune-goldLight/80">
+          Saldo
+        </div>
         <motion.div
           key={balance}
           initial={{ scale: 1 }}
@@ -21,14 +23,16 @@ export function BalancePanel({ balance, lastPrize }: BalancePanelProps) {
           {formatBRL(balance)}
         </motion.div>
       </div>
-      <div className="bg-casino-panel rounded-xl border border-casino-neon/30 p-3">
-        <div className="text-xs uppercase tracking-widest text-neutral-400">Último prêmio</div>
+      <div className="relative bg-gradient-to-b from-fortune-redDeep to-fortune-ink rounded-xl border-2 border-fortune-jade/40 p-3">
+        <div className="text-xs uppercase tracking-widest text-fortune-goldLight/80">
+          Ultimo premio
+        </div>
         <div
           className={`text-2xl font-bold tabular-nums ${
-            lastPrize && lastPrize > 0 ? "text-casino-neonCyan" : "text-neutral-500"
+            lastPrize && lastPrize > 0 ? "text-fortune-jade" : "text-neutral-400"
           }`}
         >
-          {lastPrize !== null ? formatBRL(lastPrize) : "—"}
+          {lastPrize !== null ? formatBRL(lastPrize) : "-"}
         </div>
       </div>
     </div>
