@@ -15,10 +15,12 @@ import { useGameStore } from "../store/gameStore";
 import { classifyPrize, useSpin } from "../hooks/useSpin";
 import { useSounds } from "../hooks/useSounds";
 import { formatBRL } from "../utils/format";
+import { getJackpot } from "../api/slot";
 
 export function GamePage() {
   const navigate = useNavigate();
   const player = usePlayerStore((s) => s.player);
+  const setJackpotPot = usePlayerStore((s) => s.setJackpotPot);
   const lastResult = useGameStore((s) => s.lastResult);
   const isSpinning = useGameStore((s) => s.isSpinning);
   const selectedBet = useGameStore((s) => s.selectedBet);
@@ -46,6 +48,25 @@ export function GamePage() {
       navigate("/", { replace: true });
     }
   }, [player, navigate]);
+
+  // Hidrata o pote GLOBAL do jackpot ao carregar a pagina de jogo.
+  // Esse valor cresce com os giros de todos os jogadores e nao deve
+  // vir zerado para um jogador que acabou de logar.
+  useEffect(() => {
+    if (!player) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const pot = await getJackpot();
+        if (!cancelled) setJackpotPot(pot);
+      } catch {
+        // silencioso — o pote sera atualizado no primeiro spin
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [player, setJackpotPot]);
 
   // Para a musica e o auto-spin quando sair da pagina de jogo.
   useEffect(() => {
@@ -98,7 +119,6 @@ export function GamePage() {
 
   function handleBetSelect(bet: number) {
     if (autoSpin) {
-      // Nao trocar aposta com auto rodando — desliga primeiro
       setAutoSpin(false);
       toast("Auto-spin desligado para trocar a aposta.");
     }
@@ -129,9 +149,6 @@ export function GamePage() {
     toast(turboMode ? "Turbo OFF" : "Turbo ON · giros mais rapidos");
   }
 
-  // Loop do auto-spin: dispara um novo giro quando o anterior termina
-  // e o auto continua ligado. Para automaticamente quando o saldo nao
-  // cobre a aposta. Usa ref para evitar re-execucao duplicada.
   const autoLoopBusy = useRef(false);
   useEffect(() => {
     if (!autoSpin || isSpinning || !player) return;
@@ -146,7 +163,7 @@ export function GamePage() {
       autoLoopBusy.current = false;
       incAutoSpinCount();
       void triggerSpin();
-    }, 350); // pequena pausa entre giros para legibilidade
+    }, 350);
     return () => {
       window.clearTimeout(t);
       autoLoopBusy.current = false;

@@ -11,17 +11,20 @@ namespace SlotMachine.Application.Services
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IRandomGenerator _randomGenerator;
-        private readonly IAuditLogger _auditLogger; // Adicionado para conformidade
+        private readonly IAuditLogger _auditLogger;
+        private readonly IJackpotPotRepository _jackpotPotRepository;
         private readonly Domain.Entities.SlotMachine _slotMachine;
 
         public SlotAppService(
             IPlayerRepository playerRepository,
             IRandomGenerator randomGenerator,
-            IAuditLogger auditLogger) // Injeção do novo serviço de Log
+            IAuditLogger auditLogger,
+            IJackpotPotRepository jackpotPotRepository)
         {
             _playerRepository = playerRepository;
             _randomGenerator = randomGenerator;
             _auditLogger = auditLogger;
+            _jackpotPotRepository = jackpotPotRepository;
             _slotMachine = new Domain.Entities.SlotMachine();
         }
 
@@ -39,7 +42,14 @@ namespace SlotMachine.Application.Services
                 Timestamp = DateTime.UtcNow
             });
 
-            return new PlayerDto(player.Id, player.Name, player.Balance, player.JackpotPot);
+            // Retorna o pote GLOBAL atual (nao zero — ja vem acumulado)
+            var currentJackpot = _jackpotPotRepository.GetCurrentPot();
+            return new PlayerDto(player.Id, player.Name, player.Balance, currentJackpot);
+        }
+
+        public decimal GetCurrentJackpot()
+        {
+            return _jackpotPotRepository.GetCurrentPot();
         }
 
         public SpinResponseDto PlaySpin(Guid playerId, decimal betAmount)
@@ -52,7 +62,8 @@ namespace SlotMachine.Application.Services
 
             // Realiza o giro com a aposta informada pelo cliente.
             // A validação de range (R$ 0,50 ≤ bet ≤ R$ 30,00) acontece dentro do Domain.
-            var spinResult = _slotMachine.Spin(player, _randomGenerator, betAmount);
+            // Passa o pote GLOBAL para que a contribuicao/claim ocorra no pote compartilhado.
+            var spinResult = _slotMachine.Spin(player, _randomGenerator, betAmount, _jackpotPotRepository);
 
             // Persiste a mudança de saldo
             _playerRepository.Save(player);

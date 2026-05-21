@@ -72,13 +72,29 @@ namespace SlotMachine.Domain.Entities
         /// Executa um giro com a aposta informada pelo jogador.
         /// Grid 4x4 com 10 linhas pagantes (4 horizontais + 4 verticais + 2 diagonais).
         ///
-        /// Mecânica do JACKPOT PROGRESSIVO:
-        ///   - 1% da aposta vai para o pote pessoal do jogador.
-        ///   - Quando QUALQUER linha de 4 dragões 🐉 venceu, o jogador
-        ///     ganha o pote inteiro (alem do premio normal da linha).
-        ///   - O pote zera apos o pagamento.
+        /// Mecânica do JACKPOT PROGRESSIVO GLOBAL:
+        ///   - 1% da aposta de QUALQUER jogador vai para o pote global compartilhado.
+        ///   - Quando algum jogador alinha 4 envelopes 🧧 em uma linha, ele leva
+        ///     o pote inteiro (alem do premio normal das linhas, se houver).
+        ///   - Apos pago, o pote global zera e comeca a acumular novamente.
+        ///
+        /// Sobrecarga sem repositorio: mantida para compatibilidade com testes
+        /// antigos — usa o pote pessoal do Player (legado).
         /// </summary>
         public SpinResult Spin(Player player, IRandomGenerator rng, decimal betAmount)
+        {
+            return Spin(player, rng, betAmount, jackpotPotRepository: null);
+        }
+
+        /// <summary>
+        /// Versao com pote global injetado. Quando jackpotPotRepository != null,
+        /// usa o pote compartilhado entre todos os jogadores (comportamento real).
+        /// </summary>
+        public SpinResult Spin(
+            Player player,
+            IRandomGenerator rng,
+            decimal betAmount,
+            IJackpotPotRepository? jackpotPotRepository)
         {
             ValidateBet(betAmount);
 
@@ -87,9 +103,17 @@ namespace SlotMachine.Domain.Entities
 
             player.Debit(betAmount);
 
-            // 1% da aposta vai para o pote progressivo
+            // 1% da aposta contribui para o pote progressivo
             var contribution = decimal.Round(betAmount * JackpotContributionRate, 2);
-            player.ContributeJackpot(contribution);
+            if (jackpotPotRepository != null)
+            {
+                jackpotPotRepository.Contribute(contribution);
+            }
+            else
+            {
+                // Fallback legado (pote pessoal)
+                player.ContributeJackpot(contribution);
+            }
 
             // Sorteia matriz 4x4
             var grid = new Symbol[GridSize][];
@@ -153,19 +177,26 @@ namespace SlotMachine.Domain.Entities
             decimal jackpotWon = 0m;
             if (jackpotLineWon)
             {
-                jackpotWon = player.ClaimJackpot();
+                jackpotWon = jackpotPotRepository != null
+                    ? jackpotPotRepository.Claim()
+                    : player.ClaimJackpot();
                 if (jackpotWon > 0)
                 {
                     player.Credit(jackpotWon);
                 }
             }
 
+            // Pote final exposto ao cliente
+            decimal currentPot = jackpotPotRepository != null
+                ? jackpotPotRepository.GetCurrentPot()
+                : player.JackpotPot;
+
             return new SpinResult(
                 Rows: new List<Symbol[]>(grid),
                 PrizeWon: prize,
                 BetAmount: betAmount,
                 JackpotWon: jackpotWon,
-                JackpotPot: player.JackpotPot
+                JackpotPot: currentPot
             );
         }
 

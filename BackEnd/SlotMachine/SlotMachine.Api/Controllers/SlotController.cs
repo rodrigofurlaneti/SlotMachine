@@ -61,6 +61,25 @@ namespace SlotMachine.Api.Controllers
         }
 
         /// <summary>
+        /// Retorna o valor atual do pote progressivo GLOBAL.
+        /// O frontend chama isto no carregamento da pagina de jogo
+        /// para mostrar o jackpot ja acumulado.
+        /// </summary>
+        [HttpGet("jackpot")]
+        public IActionResult GetJackpot()
+        {
+            try
+            {
+                var pot = _appService.GetCurrentJackpot();
+                return Ok(new { JackpotPot = pot });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
+        /// <summary>
         /// Retorna a configuração da aposta (limites e presets sugeridos para a UI).
         /// </summary>
         [HttpGet("bet-config")]

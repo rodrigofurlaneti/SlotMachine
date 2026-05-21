@@ -34,7 +34,16 @@ export async function spin(
 }
 
 /**
- * Lê configuração de aposta (presets e limites) direto do backend.
+ * Le o valor atual do pote progressivo GLOBAL.
+ * GET /api/slot/jackpot
+ */
+export async function getJackpot(): Promise<number> {
+  const { data } = await apiClient.get<{ jackpotPot: number }>("/slot/jackpot");
+  return data.jackpotPot;
+}
+
+/**
+ * Le configuracao de aposta (presets e limites) direto do backend.
  * GET /api/slot/bet-config
  */
 export async function getBetConfig(): Promise<BetConfigDto> {
@@ -43,7 +52,7 @@ export async function getBetConfig(): Promise<BetConfigDto> {
 }
 
 /**
- * Roda uma simulação de auditoria (RTP / House Edge).
+ * Roda uma simulacao de auditoria (RTP / House Edge).
  * GET /api/slot/audit?spins=...
  */
 export async function runAudit(spins = 100_000): Promise<AuditResultDto> {
