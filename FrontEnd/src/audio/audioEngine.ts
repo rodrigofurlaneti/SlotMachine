@@ -53,7 +53,7 @@ function ensureContext(): AudioContext | null {
   master.connect(ctx.destination);
 
   const musicGain = ctx.createGain();
-  musicGain.gain.value = 0.12; // trilha discreta
+  musicGain.gain.value = 0.24; // trilha mais presente (foi 0.12)
   musicGain.connect(master);
 
   const sfxGain = ctx.createGain();
@@ -119,7 +119,7 @@ function playMelodyNote(freq: number, durationMs: number) {
 
   const noteGain = ctx.createGain();
   noteGain.gain.setValueAtTime(0, now);
-  noteGain.gain.linearRampToValueAtTime(0.18, now + 0.04);
+  noteGain.gain.linearRampToValueAtTime(0.28, now + 0.04);
   noteGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
   noteGain.connect(state.musicGain);
 
@@ -148,7 +148,7 @@ function startDrone() {
   drone.type = "sine";
   drone.frequency.value = 130.81; // C3
   const droneGain = ctx.createGain();
-  droneGain.gain.value = 0.08;
+  droneGain.gain.value = 0.16;
   drone.connect(droneGain).connect(state.musicGain);
   drone.start();
   return { drone, droneGain };
@@ -166,7 +166,7 @@ export async function startMusic() {
     const now = state.ctx.currentTime;
     state.musicGain.gain.cancelScheduledValues(now);
     state.musicGain.gain.setValueAtTime(0, now);
-    state.musicGain.gain.linearRampToValueAtTime(0.12, now + 1.5);
+    state.musicGain.gain.linearRampToValueAtTime(0.24, now + 1.5);
   }
 
   const STEP_MS = 360;
@@ -401,6 +401,167 @@ export function speakMegaWin(lines: number, jackpot = false) {
     u.rate = 1.0;
     u.pitch = 1.1;
     u.volume = 0.95;
+    if (state.voicePicked) u.voice = state.voicePicked;
+    window.speechSynthesis.speak(u);
+  } catch {
+    /* ignore */
+  }
+}
+
+/* ======================== SOM POR SIMBOLO VENCEDOR ======================== */
+
+const TIGER  = "\u{1F42F}";
+const COIN   = "\u{1FA99}";
+const LANT   = "\u{1F3EE}";
+const DRAGON = "\u{1F409}";
+
+/**
+ * Cada simbolo tem um "tema" sonoro distinto:
+ *  - Tigre    -> rugido grave + sino agudo (potencia bruta)
+ *  - Moeda    -> cha-ching, varias moedinhas caindo (alegre)
+ *  - Lanterna -> sino oriental + ressonancia metalica
+ *  - Dragao   -> gongo grandioso + zumbido ressonante (epico)
+ */
+export async function playSymbolWinSound(symbol: string) {
+  await resumeIfSuspended();
+  const ctx = state.ctx;
+  if (!ctx || !state.sfxGain) return;
+  const now = ctx.currentTime;
+
+  switch (symbol) {
+    case TIGER: {
+      // Rugido grave (sawtooth descendente) + ataque metalico agudo
+      const roar = ctx.createOscillator();
+      const roarGain = ctx.createGain();
+      roar.type = "sawtooth";
+      roar.frequency.setValueAtTime(160, now);
+      roar.frequency.exponentialRampToValueAtTime(70, now + 0.6);
+      roarGain.gain.setValueAtTime(0, now);
+      roarGain.gain.linearRampToValueAtTime(0.55, now + 0.05);
+      roarGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+      roar.connect(roarGain).connect(state.sfxGain);
+      roar.start(now);
+      roar.stop(now + 0.75);
+
+      const bell = ctx.createOscillator();
+      const bellGain = ctx.createGain();
+      bell.type = "triangle";
+      bell.frequency.value = 1320;
+      bellGain.gain.setValueAtTime(0, now + 0.1);
+      bellGain.gain.linearRampToValueAtTime(0.4, now + 0.12);
+      bellGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+      bell.connect(bellGain).connect(state.sfxGain);
+      bell.start(now + 0.1);
+      bell.stop(now + 0.65);
+      break;
+    }
+
+    case COIN: {
+      // Sequencia rapida de "tilins" (cha-ching) com altura crescente
+      const seq = [880, 1100, 1320, 1560, 1760];
+      seq.forEach((f, i) => {
+        const at = now + i * 0.07;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0, at);
+        g.gain.linearRampToValueAtTime(0.45, at + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, at + 0.22);
+        g.connect(state.sfxGain!);
+        const osc = ctx.createOscillator();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(f, at);
+        osc.frequency.exponentialRampToValueAtTime(f * 0.92, at + 0.22);
+        osc.connect(g);
+        osc.start(at);
+        osc.stop(at + 0.25);
+      });
+      break;
+    }
+
+    case LANT: {
+      // Sino oriental — frequencias multiplas em harmonia, com decaimento longo
+      const fundamentals = [523.25, 659.25, 783.99, 1046.5];
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(0.55, now + 0.04);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+      g.connect(state.sfxGain);
+      fundamentals.forEach((f, i) => {
+        const osc = ctx.createOscillator();
+        osc.type = i === 0 ? "triangle" : "sine";
+        osc.frequency.value = f;
+        const og = ctx.createGain();
+        og.gain.value = i === 0 ? 0.6 : 0.3;
+        osc.connect(og).connect(g);
+        osc.start(now);
+        osc.stop(now + 1.5);
+      });
+      break;
+    }
+
+    case DRAGON: {
+      // Gongo epico: cluster de baixas + agudas, mais "boom" inicial
+      const boom = ctx.createOscillator();
+      const boomGain = ctx.createGain();
+      boom.type = "sine";
+      boom.frequency.setValueAtTime(80, now);
+      boom.frequency.exponentialRampToValueAtTime(45, now + 1.0);
+      boomGain.gain.setValueAtTime(0, now);
+      boomGain.gain.linearRampToValueAtTime(0.6, now + 0.02);
+      boomGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+      boom.connect(boomGain).connect(state.sfxGain);
+      boom.start(now);
+      boom.stop(now + 1.3);
+
+      // Cluster de notas que ressoa
+      const gongFreqs = [196.0, 261.63, 392.0, 523.25, 783.99];
+      const gongGain = ctx.createGain();
+      gongGain.gain.setValueAtTime(0, now + 0.05);
+      gongGain.gain.linearRampToValueAtTime(0.5, now + 0.1);
+      gongGain.gain.exponentialRampToValueAtTime(0.001, now + 2.0);
+      gongGain.connect(state.sfxGain);
+      gongFreqs.forEach((f) => {
+        const osc = ctx.createOscillator();
+        osc.type = "triangle";
+        osc.frequency.value = f;
+        const og = ctx.createGain();
+        og.gain.value = 0.25;
+        osc.connect(og).connect(gongGain);
+        osc.start(now + 0.05);
+        osc.stop(now + 2.0);
+      });
+      break;
+    }
+
+    default: {
+      // Fallback generico — som curto para qualquer simbolo desconhecido
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(0.4, now + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      g.connect(state.sfxGain);
+      const osc = ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.value = 660;
+      osc.connect(g);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    }
+  }
+}
+
+/* ============================ JACKPOT VOICE ============================ */
+
+export function speakJackpotWin(amount: number) {
+  if (state.muted) return;
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const text = `Jackpot! You won ${amount.toFixed(0)} reais!`;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 0.95;
+    u.pitch = 1.15;
+    u.volume = 1.0;
     if (state.voicePicked) u.voice = state.voicePicked;
     window.speechSynthesis.speak(u);
   } catch {

@@ -1,17 +1,20 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { SlotGrid } from "../components/SlotMachine/SlotGrid";
 import { SpinButton } from "../components/SlotMachine/SpinButton";
 import { BetSelector } from "../components/SlotMachine/BetSelector";
 import { Lantern } from "../components/SlotMachine/Lantern";
 import { BalancePanel } from "../components/HUD/BalancePanel";
+import { JackpotPanel } from "../components/HUD/JackpotPanel";
 import { WinOverlay } from "../components/Rewards/WinOverlay";
 import { FortuneRain } from "../components/Background/FortuneRain";
 import { usePlayerStore } from "../store/playerStore";
 import { useGameStore } from "../store/gameStore";
 import { classifyPrize, useSpin } from "../hooks/useSpin";
 import { useSounds } from "../hooks/useSounds";
+import { formatBRL } from "../utils/format";
 
 export function GamePage() {
   const navigate = useNavigate();
@@ -20,6 +23,12 @@ export function GamePage() {
   const isSpinning = useGameStore((s) => s.isSpinning);
   const selectedBet = useGameStore((s) => s.selectedBet);
   const setSelectedBet = useGameStore((s) => s.setSelectedBet);
+  const turboMode = useGameStore((s) => s.turboMode);
+  const toggleTurbo = useGameStore((s) => s.toggleTurbo);
+  const autoSpin = useGameStore((s) => s.autoSpin);
+  const setAutoSpin = useGameStore((s) => s.setAutoSpin);
+  const autoSpinCount = useGameStore((s) => s.autoSpinCount);
+  const incAutoSpinCount = useGameStore((s) => s.incAutoSpinCount);
 
   const { doSpin } = useSpin();
   const { muted, toggleMute, play, playChip, ensureMusic, stopBgMusic } = useSounds();
@@ -30,18 +39,21 @@ export function GamePage() {
     kind: "win" | "bigWin" | "jackpot";
   } | null>(null);
 
+  const [jackpotFlash, setJackpotFlash] = useState(false);
+
   useEffect(() => {
     if (!player) {
       navigate("/", { replace: true });
     }
   }, [player, navigate]);
 
-  // Para a musica quando sair da pagina de jogo.
+  // Para a musica e o auto-spin quando sair da pagina de jogo.
   useEffect(() => {
     return () => {
       stopBgMusic();
+      setAutoSpin(false);
     };
-  }, [stopBgMusic]);
+  }, [stopBgMusic, setAutoSpin]);
 
   const kind = useMemo(() => {
     if (!lastResult) return "lose" as const;
@@ -52,11 +64,19 @@ export function GamePage() {
     );
   }, [lastResult]);
 
-  async function handleSpin() {
-    play("click");
-    ensureMusic(); // garante musica rodando apos primeira interacao
+  async function triggerSpin() {
+    ensureMusic();
     setOverlay(null);
     const res = await doSpin();
+    if (res && res.jackpotWon > 0) {
+      window.setTimeout(() => {
+        setJackpotFlash(true);
+        toast.success(`JACKPOT! Voce ganhou ${formatBRL(res.jackpotWon)} do pote!`, {
+          duration: 6000,
+        });
+        window.setTimeout(() => setJackpotFlash(false), 5000);
+      }, turboMode ? 900 : 2200);
+    }
     if (res && res.kind !== "lose") {
       const winKind: "win" | "bigWin" | "jackpot" = res.kind;
       const winPrize = res.result.prizeWon;
@@ -64,17 +84,75 @@ export function GamePage() {
         setOverlay({ show: true, prize: winPrize, kind: winKind });
         window.setTimeout(
           () => setOverlay((o) => (o ? { ...o, show: false } : null)),
-          2200
+          turboMode ? 1400 : 2200
         );
-      }, 2200);
+      }, turboMode ? 900 : 2200);
     }
+    return res;
+  }
+
+  function handleManualSpin() {
+    play("click");
+    void triggerSpin();
   }
 
   function handleBetSelect(bet: number) {
+    if (autoSpin) {
+      // Nao trocar aposta com auto rodando — desliga primeiro
+      setAutoSpin(false);
+      toast("Auto-spin desligado para trocar a aposta.");
+    }
     ensureMusic();
     playChip(bet);
     setSelectedBet(bet);
   }
+
+  function handleToggleAuto() {
+    play("click");
+    if (autoSpin) {
+      setAutoSpin(false);
+      toast(`Auto-spin desligado apos ${autoSpinCount} giros.`);
+      return;
+    }
+    if (!player || player.balance < selectedBet) {
+      toast.error("Saldo insuficiente para iniciar auto-spin.");
+      return;
+    }
+    setAutoSpin(true);
+    ensureMusic();
+    toast.success(`Auto-spin ON · aposta ${formatBRL(selectedBet)} por giro`);
+  }
+
+  function handleToggleTurbo() {
+    play("click");
+    toggleTurbo();
+    toast(turboMode ? "Turbo OFF" : "Turbo ON · giros mais rapidos");
+  }
+
+  // Loop do auto-spin: dispara um novo giro quando o anterior termina
+  // e o auto continua ligado. Para automaticamente quando o saldo nao
+  // cobre a aposta. Usa ref para evitar re-execucao duplicada.
+  const autoLoopBusy = useRef(false);
+  useEffect(() => {
+    if (!autoSpin || isSpinning || !player) return;
+    if (player.balance < selectedBet) {
+      setAutoSpin(false);
+      toast.error(`Auto-spin parou: saldo insuficiente apos ${autoSpinCount} giros.`);
+      return;
+    }
+    if (autoLoopBusy.current) return;
+    autoLoopBusy.current = true;
+    const t = window.setTimeout(() => {
+      autoLoopBusy.current = false;
+      incAutoSpinCount();
+      void triggerSpin();
+    }, 350); // pequena pausa entre giros para legibilidade
+    return () => {
+      window.clearTimeout(t);
+      autoLoopBusy.current = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoSpin, isSpinning, player?.balance, selectedBet]);
 
   if (!player) return null;
 
@@ -84,6 +162,7 @@ export function GamePage() {
     <>
       <FortuneRain />
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-6">
+        <JackpotPanel pot={player.jackpotPot ?? 0} justWon={jackpotFlash} />
         <div className="flex items-center justify-between mb-4">
           <BalancePanel
             balance={player.balance}
@@ -92,7 +171,6 @@ export function GamePage() {
           <button
             onClick={() => {
               toggleMute();
-              // Quando desmuta, retoma musica
               if (muted) ensureMusic();
             }}
             className="ml-2 p-2 rounded-lg border border-fortune-gold/40 hover:bg-fortune-red/20"
@@ -123,24 +201,64 @@ export function GamePage() {
             <BetSelector
               value={selectedBet}
               onChange={handleBetSelect}
-              disabled={isSpinning}
+              disabled={isSpinning || autoSpin}
               balance={player.balance}
             />
           </div>
 
-          <div className="flex flex-col items-center mt-6 gap-2">
-            <SpinButton
-              onClick={handleSpin}
-              disabled={isSpinning || insufficientBalance}
-              loading={isSpinning}
-              bet={selectedBet}
-            />
+          <div className="flex flex-col items-center mt-6 gap-3">
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <button
+                type="button"
+                onClick={handleToggleTurbo}
+                className={[
+                  "px-3 py-2 rounded-xl text-xs font-display tracking-widest border-2 transition",
+                  turboMode
+                    ? "bg-fortune-jade text-black border-fortune-jade shadow-[0_0_18px_rgba(61,220,151,0.6)]"
+                    : "border-fortune-gold/40 text-fortune-goldLight hover:bg-fortune-red/20",
+                ].join(" ")}
+                aria-pressed={turboMode}
+                title="Acelera a animacao dos reels"
+              >
+                {turboMode ? "TURBO ON" : "TURBO"}
+              </button>
+
+              <SpinButton
+                onClick={handleManualSpin}
+                disabled={isSpinning || insufficientBalance || autoSpin}
+                loading={isSpinning}
+                bet={selectedBet}
+              />
+
+              <button
+                type="button"
+                onClick={handleToggleAuto}
+                disabled={!autoSpin && insufficientBalance}
+                className={[
+                  "px-3 py-2 rounded-xl text-xs font-display tracking-widest border-2 transition",
+                  autoSpin
+                    ? "bg-fortune-redLight text-white border-fortune-redLight animate-pulse shadow-[0_0_18px_rgba(255,54,81,0.6)]"
+                    : "border-fortune-gold/40 text-fortune-goldLight hover:bg-fortune-red/20",
+                  "disabled:opacity-40 disabled:cursor-not-allowed",
+                ].join(" ")}
+                aria-pressed={autoSpin}
+                title="Auto-spin: gira automaticamente ate acabar o saldo"
+              >
+                {autoSpin ? `AUTO (${autoSpinCount})` : "AUTO"}
+              </button>
+            </div>
+
             {insufficientBalance && (
               <p className="text-xs text-fortune-redLight">
                 Saldo insuficiente para essa aposta. Escolha um valor menor ou recarregue.
               </p>
             )}
-            {lastResult && !isSpinning && (
+            {autoSpin && (
+              <p className="text-[11px] text-fortune-jade/90 tracking-wider uppercase">
+                Auto rodando · clique em AUTO para parar
+              </p>
+            )}
+            {lastResult && !isSpinning && !autoSpin && (
               <div
                 className={`text-sm mt-1 ${
                   lastResult.isWinner ? "text-fortune-gold" : "text-neutral-400"

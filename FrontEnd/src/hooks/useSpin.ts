@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { toast } from "sonner";
 import { spin as apiSpin } from "../api/slot";
 import { usePlayerStore } from "../store/playerStore";
-import { useGameStore } from "../store/gameStore";
+import { useGameStore, REEL_ANIM_NORMAL_MS, REEL_ANIM_TURBO_MS } from "../store/gameStore";
 import { useAchievementsStore } from "../store/achievementsStore";
 import { useSounds } from "./useSounds";
 import { useCelebration } from "./useCelebration";
@@ -63,6 +63,34 @@ export function classifyPrize(
   return "win";
 }
 
+/**
+ * Identifica o simbolo predominante das linhas vencedoras.
+ * Prioridade: dragao > lanterna > moeda > tigre.
+ */
+function findWinningSymbol(rows: string[][]): string | null {
+  if (!rows || rows.length < GRID_SIZE) return null;
+  const PRIORITY = ["\u{1F409}", "\u{1F3EE}", "\u{1FA99}", "\u{1F42F}"];
+  const winners = new Set<string>();
+  const checkLine = (arr: (string | undefined)[]) => {
+    const f = arr[0];
+    if (!f || f === "\u{1F38B}") return;
+    for (let i = 1; i < arr.length; i++) if (arr[i] !== f) return;
+    winners.add(f);
+  };
+  for (let r = 0; r < GRID_SIZE; r++) {
+    if (rows[r]) checkLine(rows[r]);
+  }
+  for (let c = 0; c < GRID_SIZE; c++) {
+    checkLine([0, 1, 2, 3].map((r) => rows[r]?.[c]));
+  }
+  checkLine([0, 1, 2, 3].map((i) => rows[i]?.[i]));
+  checkLine([0, 1, 2, 3].map((i) => rows[i]?.[GRID_SIZE - 1 - i]));
+  for (const sym of PRIORITY) {
+    if (winners.has(sym)) return sym;
+  }
+  return null;
+}
+
 function hasDragonLine(rows: string[][]): boolean {
   if (!rows || rows.length < GRID_SIZE) return false;
   const isLine = (arr: (string | undefined)[]) =>
@@ -79,13 +107,15 @@ function hasDragonLine(rows: string[][]): boolean {
 export function useSpin() {
   const player = usePlayerStore((s) => s.player);
   const setBalance = usePlayerStore((s) => s.setBalance);
+  const setJackpotPot = usePlayerStore((s) => s.setJackpotPot);
   const startSpin = useGameStore((s) => s.startSpin);
   const finishSpin = useGameStore((s) => s.finishSpin);
   const stopSpin = useGameStore((s) => s.stopSpin);
   const isSpinning = useGameStore((s) => s.isSpinning);
   const selectedBet = useGameStore((s) => s.selectedBet);
+  const turboMode = useGameStore((s) => s.turboMode);
 
-  const { play, announceMegaWin } = useSounds();
+  const { play, announceMegaWin, announceJackpot, playSymbolWin } = useSounds();
   const { fire } = useCelebration();
 
   const addXp = useAchievementsStore((s) => s.addXp);
@@ -109,27 +139,39 @@ export function useSpin() {
       const result = await apiSpin(player.id, selectedBet);
       finishSpin(result);
       setBalance(result.currentBalance);
+      setJackpotPot(result.jackpotPot);
 
       const kind = classifyPrize(result.prizeWon, result.rows, result.betAmount);
       const lines = countWinningLines(result.rows);
 
-      // Tempo de animacao: ultimo reel (linha 3, col 3) tem delay 3*200 + 3*160 = 1080ms
-      // + duracao base 1.0s = ~2.1s. Aguardamos 2.2s para a fanfarra.
-      const delayMs = 2200;
+      // Tempo de animacao depende do turbo. ~2.2s normal, ~0.9s turbo.
+      const delayMs = turboMode ? REEL_ANIM_TURBO_MS : REEL_ANIM_NORMAL_MS;
       window.setTimeout(() => {
         stopSpin();
 
         if (kind === "lose") {
           play("stop");
         } else {
-          if (kind === "win") play("win");
-          if (kind === "bigWin") play("bigWin");
+          // Som distintivo do simbolo vencedor (tigre/moeda/lanterna/dragao)
+          const winSym = findWinningSymbol(result.rows);
+          if (winSym) {
+            playSymbolWin(winSym);
+          } else {
+            if (kind === "win") play("win");
+            if (kind === "bigWin") play("bigWin");
+            if (kind === "jackpot") play("jackpot");
+          }
+
           if (kind === "jackpot") play("jackpot");
           fire(kind);
 
-          // Voz de fanfarra para >=3 linhas
           if (lines >= 3) {
             announceMegaWin(lines, kind);
+          }
+
+          // JACKPOT WIN: alem da fanfarra normal, anuncio epico do pote
+          if (result.jackpotWon > 0) {
+            announceJackpot(result.jackpotWon);
           }
         }
 
@@ -168,7 +210,7 @@ export function useSpin() {
         if (result.rows.some((r) => r.includes(DRAGON))) completeMission("daily_diamond", 1);
       }, delayMs);
 
-      return { result, kind, lines };
+      return { result, kind, lines, jackpotWon: result.jackpotWon };
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Erro ao executar o giro.";
       toast.error(msg);
@@ -179,12 +221,16 @@ export function useSpin() {
     player,
     isSpinning,
     selectedBet,
+    turboMode,
     startSpin,
     finishSpin,
     stopSpin,
     setBalance,
+    setJackpotPot,
     play,
     announceMegaWin,
+    announceJackpot,
+    playSymbolWin,
     fire,
     addXp,
     unlock,

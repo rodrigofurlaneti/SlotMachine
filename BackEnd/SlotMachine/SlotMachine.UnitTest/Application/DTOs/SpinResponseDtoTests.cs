@@ -10,17 +10,20 @@ namespace SlotMachine.Test.UnitTest.Application.DTOs
             // Arrange
             string[][] rows = new[]
             {
-                new[] { "🍒", "🍒", "🍒" },
-                new[] { "❌", "💎", "❌" },
-                new[] { "🍋", "🔔", "🍋" }
+                new[] { "🐯", "🐯", "🐯", "🐯" },
+                new[] { "🎋", "🐉", "🎋", "🎋" },
+                new[] { "🪙", "🏮", "🪙", "🎋" },
+                new[] { "🎋", "🎋", "🎋", "🎋" }
             };
             decimal prize = 6.00m;
             decimal balance = 105.00m;
             bool isWinner = true;
             decimal bet = 3.00m;
+            decimal jackpotWon = 0m;
+            decimal jackpotPot = 0.03m;
 
             // Act
-            var dto = new SpinResponseDto(rows, prize, balance, isWinner, bet);
+            var dto = new SpinResponseDto(rows, prize, balance, isWinner, bet, jackpotWon, jackpotPot);
 
             // Assert
             dto.Rows.Should().BeEquivalentTo(rows);
@@ -28,6 +31,8 @@ namespace SlotMachine.Test.UnitTest.Application.DTOs
             dto.CurrentBalance.Should().Be(balance);
             dto.IsWinner.Should().BeTrue();
             dto.BetAmount.Should().Be(bet);
+            dto.JackpotWon.Should().Be(jackpotWon);
+            dto.JackpotPot.Should().Be(jackpotPot);
         }
 
         [Fact]
@@ -36,13 +41,14 @@ namespace SlotMachine.Test.UnitTest.Application.DTOs
             // Arrange
             string[][] rows = new[]
             {
-                new[] { "❌", "🍋", "🍒" },
-                new[] { "🔔", "❌", "💎" },
-                new[] { "🍒", "🍒", "❌" }
+                new[] { "🎋", "🪙", "🐯", "🎋" },
+                new[] { "🏮", "🎋", "🐉", "🎋" },
+                new[] { "🐯", "🐯", "🎋", "🎋" },
+                new[] { "🎋", "🎋", "🎋", "🎋" }
             };
 
             // Act
-            var dto = new SpinResponseDto(rows, 0m, 97.00m, false, 3.00m);
+            var dto = new SpinResponseDto(rows, 0m, 97.00m, false, 3.00m, 0m, 0m);
 
             // Assert
             dto.IsWinner.Should().BeFalse();
@@ -50,23 +56,23 @@ namespace SlotMachine.Test.UnitTest.Application.DTOs
         }
 
         [Fact]
-        public void SpinResponseDto_Rows_ShouldHaveCorrectDimensions()
+        public void SpinResponseDto_ShouldExposeJackpotData()
         {
             // Arrange
             string[][] rows = new[]
             {
-                new[] { "A", "B", "C" },
-                new[] { "D", "E", "F" },
-                new[] { "G", "H", "I" }
+                new[] { "🐉", "🐉", "🐉", "🐉" },
+                new[] { "🎋", "🎋", "🎋", "🎋" },
+                new[] { "🎋", "🎋", "🎋", "🎋" },
+                new[] { "🎋", "🎋", "🎋", "🎋" }
             };
 
             // Act
-            var dto = new SpinResponseDto(rows, 10m, 100m, true, 5.00m);
+            var dto = new SpinResponseDto(rows, 300m, 450m, true, 3.00m, 250.55m, 0m);
 
             // Assert
-            dto.Rows.Should().HaveCount(3); // 3 linhas
-            dto.Rows[0].Should().HaveCount(3); // 3 colunas
-            dto.BetAmount.Should().Be(5.00m);
+            dto.JackpotWon.Should().Be(250.55m);
+            dto.JackpotPot.Should().Be(0m); // zerou apos ganhar
         }
     }
 }

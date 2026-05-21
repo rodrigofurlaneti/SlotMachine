@@ -6,6 +6,18 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 {
     public class SlotMachineTests
     {
+        // Indices dos simbolos baseados no array do Domain (pesos cumulativos):
+        //   Tigre   [0-39]   (peso 40, mult 2)
+        //   Moeda   [40-59]  (peso 20, mult 5)
+        //   Lanterna[60-69]  (peso 10, mult 10)
+        //   Dragao  [70-71]  (peso 2,  mult 100)
+        //   Envelope[72-75]  (peso 4,  mult 0  - JACKPOT TRIGGER)
+        //   Bambu   [76-135] (peso 60, mult 0)
+        private const int TIGER = 0;
+        private const int DRAGON = 70;
+        private const int ENVELOPE = 72;
+        private const int BAMBOO = 80;
+
         private readonly IRandomGenerator _rngMock;
         private readonly SlotMachine.Domain.Entities.SlotMachine _slotMachine;
 
@@ -18,145 +30,112 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         [Fact]
         public void Spin_ShouldDebitBalance_RegardlessOfResult()
         {
-            // Arrange
             var player = new Player("Teste", 100m);
-            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(TIGER);
 
-            // Act
             _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // Assert
             player.Balance.Should().NotBe(100m);
         }
 
         [Fact]
         public void Spin_WhenAllSymbolsAreTiger_ShouldPayAll10Lines()
         {
-            // Arrange — peso 0 cai no primeiro símbolo (🐯, multiplicador 2x).
-            // Em um grid 4x4 totalmente preenchido com 🐯, todas as 10 linhas pagantes
-            // (4 horizontais + 4 verticais + 2 diagonais) vencem.
             var player = new Player("Vencedor", 50m);
-            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(TIGER);
 
-            // Act
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // Assert
-            // Aposta: 3.00 · 🐯 x2.0 → 6.00 por linha pagante
-            // 10 linhas pagantes (4H + 4V + 2 diagonais) = 60.00
+            // 10 linhas pagantes (4H + 4V + 2D) com tigre (mult 2): 10 * 3 * 2 = 60
             result.PrizeWon.Should().Be(60m);
             result.BetAmount.Should().Be(3.00m);
-            player.Balance.Should().Be(107m); // 50 - 3 + 60
+            player.Balance.Should().Be(107m);
             result.Rows.Should().HaveCount(4);
             result.Rows[0].Should().HaveCount(4);
+            // Tigre nao dispara jackpot
+            result.JackpotWon.Should().Be(0m);
         }
 
         [Fact]
         public void Spin_WhenAllTiger_WithDifferentBet_ShouldScalePrizeProportionally()
         {
-            // Arrange
             var player = new Player("Vencedor", 200m);
-            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(TIGER);
 
-            // Act – aposta R$ 5,00
             var result = _slotMachine.Spin(player, _rngMock, 5.00m);
 
-            // Assert – prêmio escala: 5.00 * 2.0 = 10.00 por linha · 10 linhas = 100.00
             result.PrizeWon.Should().Be(100m);
             result.BetAmount.Should().Be(5.00m);
-            player.Balance.Should().Be(295m); // 200 - 5 + 100
+            player.Balance.Should().Be(295m);
         }
 
         [Fact]
         public void Spin_WhenOnlyMainDiagonalMatches_ShouldPayOnlyThatLine()
         {
-            // Arrange — 16 sorteios para um grid 4x4.
-            // Diagonal principal: (0,0), (1,1), (2,2), (3,3) → índices lineares 0, 5, 10, 15.
-            // Demais posições devem retornar 🎋 (peso >= 72 cai no bambu).
-            // Importante: as colunas 0 e 3 NÃO podem ter 4 símbolos iguais; usando 🎋 nas
-            // outras posições garante que apenas a diagonal vence (🎋 não paga porque mult=0,
-            // mesmo se alinhasse, e aqui ele nem alinha sozinho na coluna 0 por ex.).
-            //
-            // Posições no array sorteado em ordem:
-            //   row0: 0,1,2,3   row1: 4,5,6,7   row2: 8,9,10,11   row3: 12,13,14,15
-            // Diagonal principal ocupa: 0, 5, 10, 15
             var player = new Player("Sortudo", 50m);
             var sequence = new int[16];
-            for (int i = 0; i < 16; i++) sequence[i] = 72; // bambu por default
-            sequence[0] = 0;
-            sequence[5] = 0;
-            sequence[10] = 0;
-            sequence[15] = 0;
+            for (int i = 0; i < 16; i++) sequence[i] = BAMBOO;
+            // Diagonal principal: indices 0, 5, 10, 15 no array linear
+            sequence[0] = TIGER;
+            sequence[5] = TIGER;
+            sequence[10] = TIGER;
+            sequence[15] = TIGER;
 
             var callCount = 0;
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>())
                 .Returns(_ => sequence[callCount++]);
 
-            // Act
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // Assert
-            // Apenas a diagonal principal de tigres venceu → 1 linha pagante = 6.00
             result.PrizeWon.Should().Be(6m);
-            player.Balance.Should().Be(53m); // 50 - 3 + 6
+            player.Balance.Should().Be(53m);
         }
 
         [Fact]
         public void Spin_WhenSingleHorizontalRowMatches_ShouldPayOnlyThatRow()
         {
-            // Arrange — só a linha 0 com tigres, restante 🎋
             var player = new Player("Sortudo", 50m);
             var sequence = new int[16];
-            for (int i = 0; i < 16; i++) sequence[i] = 72;
-            sequence[0] = 0;
-            sequence[1] = 0;
-            sequence[2] = 0;
-            sequence[3] = 0;
+            for (int i = 0; i < 16; i++) sequence[i] = BAMBOO;
+            sequence[0] = TIGER;
+            sequence[1] = TIGER;
+            sequence[2] = TIGER;
+            sequence[3] = TIGER;
 
             var callCount = 0;
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>())
                 .Returns(_ => sequence[callCount++]);
 
-            // Act
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // Assert — apenas 1 linha horizontal venceu
             result.PrizeWon.Should().Be(6m);
         }
 
         [Fact]
         public void Spin_WhenSingleVerticalColumnMatches_ShouldPayOnlyThatColumn()
         {
-            // Arrange — só a coluna 0 com tigres
             var player = new Player("Sortudo", 50m);
             var sequence = new int[16];
-            for (int i = 0; i < 16; i++) sequence[i] = 72;
-            sequence[0] = 0;
-            sequence[4] = 0;
-            sequence[8] = 0;
-            sequence[12] = 0;
+            for (int i = 0; i < 16; i++) sequence[i] = BAMBOO;
+            sequence[0] = TIGER;
+            sequence[4] = TIGER;
+            sequence[8] = TIGER;
+            sequence[12] = TIGER;
 
             var callCount = 0;
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>())
                 .Returns(_ => sequence[callCount++]);
 
-            // Act
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // Assert — apenas 1 coluna venceu
             result.PrizeWon.Should().Be(6m);
         }
 
         [Fact]
         public void Spin_WithInsufficientBalance_ShouldThrowException()
         {
-            // Arrange
             var player = new Player("Pobre", 0.50m);
-
-            // Act
             Action action = () => _slotMachine.Spin(player, _rngMock, 3.00m);
-
-            // Assert
             action.Should().Throw<Exception>()
                   .WithMessage("Saldo insuficiente para girar.");
         }
@@ -194,6 +173,61 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         public void GridSize_ShouldBe4()
         {
             SlotMachine.Domain.Entities.SlotMachine.GridSize.Should().Be(4);
+        }
+
+        [Fact]
+        public void Spin_ShouldContribute1PercentOfBetToJackpot()
+        {
+            var player = new Player("Teste", 100m);
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(BAMBOO);
+
+            var result = _slotMachine.Spin(player, _rngMock, 5.00m);
+
+            player.JackpotPot.Should().Be(0.05m);
+            result.JackpotPot.Should().Be(0.05m);
+            result.JackpotWon.Should().Be(0m);
+        }
+
+        [Fact]
+        public void Spin_WithDragonLine_ShouldPayPrizeButNotJackpot()
+        {
+            // Dragao NAO dispara mais o jackpot (so envelope dispara).
+            var player = new Player("DragonOnly", 50m);
+            player.ContributeJackpot(100m);
+
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(DRAGON);
+
+            var result = _slotMachine.Spin(player, _rngMock, 3.00m);
+
+            // 10 linhas de dragao (mult 100): 10 * 3 * 100 = 3000
+            result.PrizeWon.Should().Be(3000m);
+            // Jackpot NAO disparado por dragao
+            result.JackpotWon.Should().Be(0m);
+            // Pote permanece intacto + 1% deste giro
+            player.JackpotPot.Should().Be(100.03m);
+            // Saldo: 50 - 3 + 3000 = 3047
+            player.Balance.Should().Be(3047m);
+        }
+
+        [Fact]
+        public void Spin_WithEnvelopeLine_ShouldPayJackpotAndZeroPot()
+        {
+            // Envelope tem multiplicador 0 (nao paga premio normal) e dispara jackpot.
+            var player = new Player("LuckyEnvelope", 50m);
+            player.ContributeJackpot(500m);
+
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(ENVELOPE);
+
+            var result = _slotMachine.Spin(player, _rngMock, 3.00m);
+
+            // Grid todo de envelope: linhas alinham mas mult=0 -> sem premio normal
+            result.PrizeWon.Should().Be(0m);
+            // Jackpot disparado (10 linhas de envelope, mas ja triggou em qualquer uma)
+            result.JackpotWon.Should().Be(500m);
+            result.JackpotPot.Should().Be(0m);
+            player.JackpotPot.Should().Be(0m);
+            // Saldo: 50 - 3 + 0 + 500 = 547
+            player.Balance.Should().Be(547m);
         }
     }
 }

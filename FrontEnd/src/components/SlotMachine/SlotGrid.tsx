@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reel } from "./Reel";
+import { useGameStore } from "../../store/gameStore";
 
 interface SlotGridProps {
   result: string[][] | null;
@@ -77,6 +78,7 @@ type LineCoords = readonly [number, number, number, number];
 
 export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
   const [stoppedCount, setStoppedCount] = useState(0);
+  const turbo = useGameStore((s) => s.turboMode);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cellRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [lineCoords, setLineCoords] = useState<{
@@ -97,7 +99,25 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
     if (stoppedCount === GRID_SIZE && !spinning) onAllStopped?.();
   }, [stoppedCount, spinning, onAllStopped]);
 
-  const wins = useMemo(() => analyzeWins(result), [result]);
+  const EMPTY_WINS: WinAnalysis = {
+    cells: new Set<string>(),
+    horizontalLines: [],
+    verticalLines: [],
+    mainDiagonal: false,
+    antiDiagonal: false,
+  };
+  const wins = useMemo(
+    () => (spinning || !result ? EMPTY_WINS : analyzeWins(result)),
+    [result, spinning]
+  );
+
+  // Chave que muda a cada novo resultado/giro — forca o AnimatePresence das
+  // linhas SVG a desmontar tudo entre rodadas, eliminando o bug visual
+  // onde a linha dourada anterior persistia ao iniciar o proximo giro.
+  const winKey = useMemo(() => {
+    if (spinning || !result) return "spinning";
+    return result.flat().join("|");
+  }, [result, spinning]);
 
   useEffect(() => {
     if (spinning || !containerRef.current) {
@@ -192,7 +212,7 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
                   <Reel
                     finalSymbol={row?.[colIdx] ?? null}
                     spinning={spinning}
-                    stopDelayMs={rowIdx * 200 + colIdx * 160}
+                    stopDelayMs={turbo ? rowIdx * 60 + colIdx * 50 : rowIdx * 200 + colIdx * 160}
                     onStop={() => {
                       // Conta o ultimo reel de cada linha para saber quando todos pararam
                       if (rowIdx === GRID_SIZE - 1) {
@@ -227,7 +247,7 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
             <stop offset="100%" stopColor="#fff7c0" />
           </linearGradient>
         </defs>
-        <AnimatePresence>
+        <AnimatePresence key={winKey}>
           {wins.horizontalLines.map((rowIdx) => {
             const coords = lineCoords.rows[rowIdx];
             if (!coords || spinning) return null;

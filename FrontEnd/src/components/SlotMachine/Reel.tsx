@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { REEL_STRIP } from "../../utils/symbols";
+import { useGameStore } from "../../store/gameStore";
 
 interface ReelProps {
   finalSymbol: string | null;
@@ -14,6 +15,7 @@ const SYMBOL_HEIGHT = 60; // px — mais compacto pra caber 4 colunas
 
 export function Reel({ finalSymbol, spinning, stopDelayMs, onStop, isWinning }: ReelProps) {
   const controls = useAnimation();
+  const turbo = useGameStore((s) => s.turboMode);
   const stripRef = useRef<HTMLDivElement | null>(null);
 
   const strip = useMemo(() => {
@@ -28,7 +30,10 @@ export function Reel({ finalSymbol, spinning, stopDelayMs, onStop, isWinning }: 
 
     controls.set({ y: 0 });
     const targetY = -(strip.length - 1) * SYMBOL_HEIGHT;
-    const duration = 1.0 + stopDelayMs / 1000;
+    // Turbo encurta a animacao drasticamente para o auto-spin fluir.
+    const duration = turbo
+      ? 0.35 + (stopDelayMs / 1000) * 0.35
+      : 1.0 + stopDelayMs / 1000;
 
     controls
       .start({

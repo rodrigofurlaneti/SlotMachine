@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BET_PRESETS } from "../../store/gameStore";
+import { BET_PRESETS, MAX_BET_AMOUNT, clampBet } from "../../store/gameStore";
 import { formatBRL } from "../../utils/format";
 import { betLabelEn } from "../../audio/audioEngine";
 
@@ -16,18 +16,41 @@ export function BetSelector({
   disabled = false,
   balance,
 }: BetSelectorProps) {
+  const setMax = () => onChange(MAX_BET_AMOUNT);
+  const doubleBet = () => onChange(clampBet(value * 2));
+
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between mb-2 px-1">
+      <div className="flex items-center justify-between mb-2 px-1 gap-2">
         <span className="text-xs uppercase tracking-widest text-fortune-goldLight/80">
           Aposta por giro
         </span>
-        <span className="text-sm font-display gold-text">
-          {formatBRL(value)}
-          <span className="ml-2 text-fortune-jade/80 normal-case font-body text-xs">
-            ({betLabelEn(value)})
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={disabled || value * 2 > MAX_BET_AMOUNT && value >= MAX_BET_AMOUNT}
+            onClick={doubleBet}
+            className="text-[10px] font-display tracking-widest px-2 py-1 rounded border border-fortune-gold/60 text-fortune-gold hover:bg-fortune-gold/15 disabled:opacity-40 disabled:cursor-not-allowed"
+            title="Dobrar aposta"
+          >
+            2X
+          </button>
+          <button
+            type="button"
+            disabled={disabled || Math.abs(value - MAX_BET_AMOUNT) < 0.001}
+            onClick={setMax}
+            className="text-[10px] font-display tracking-widest px-2 py-1 rounded border border-fortune-jade/60 text-fortune-jade hover:bg-fortune-jade/15 disabled:opacity-40 disabled:cursor-not-allowed"
+            title="Aposta maxima R$ 30,00"
+          >
+            MAX
+          </button>
+          <span className="text-sm font-display gold-text">
+            {formatBRL(value)}
+            <span className="ml-1 text-fortune-jade/80 normal-case font-body text-xs">
+              ({betLabelEn(value)})
+            </span>
           </span>
-        </span>
+        </div>
       </div>
 
       <div

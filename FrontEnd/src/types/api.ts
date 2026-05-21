@@ -9,6 +9,7 @@ export interface PlayerDto {
   id: string;
   name: string;
   balance: number;
+  jackpotPot?: number;
 }
 
 export interface SpinRequestDto {
@@ -17,13 +18,17 @@ export interface SpinRequestDto {
 }
 
 export interface SpinResponseDto {
-  /** Matriz 3x3 com a face dos símbolos retornada pela API */
+  /** Matriz 4x4 com a face dos simbolos retornada pela API */
   rows: string[][];
   prizeWon: number;
   currentBalance: number;
   isWinner: boolean;
   /** Aposta usada neste giro (eco do request) */
   betAmount: number;
+  /** Valor pago do jackpot neste giro (0 se nao venceu). */
+  jackpotWon: number;
+  /** Pote progressivo apos o giro. */
+  jackpotPot: number;
 }
 
 export interface AuditResultDto {

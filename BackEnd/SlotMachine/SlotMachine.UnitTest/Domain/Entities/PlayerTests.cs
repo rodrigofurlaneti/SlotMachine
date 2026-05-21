@@ -65,5 +65,41 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
             // Assert
             player.Balance.Should().Be(150m);
         }
+
+        [Fact]
+        public void NewPlayer_ShouldHaveZeroJackpotPot()
+        {
+            var player = new Player("Danilo", 100m);
+            player.JackpotPot.Should().Be(0m);
+        }
+
+        [Fact]
+        public void ContributeJackpot_ShouldAccumulate()
+        {
+            var player = new Player("Danilo", 100m);
+            player.ContributeJackpot(0.03m);
+            player.ContributeJackpot(0.05m);
+            player.JackpotPot.Should().Be(0.08m);
+        }
+
+        [Fact]
+        public void ContributeJackpot_WithNegative_ShouldThrow()
+        {
+            var player = new Player("Danilo", 100m);
+            Action action = () => player.ContributeJackpot(-1m);
+            action.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void ClaimJackpot_ShouldReturnPotAndZeroIt()
+        {
+            var player = new Player("Danilo", 100m);
+            player.ContributeJackpot(50m);
+
+            var won = player.ClaimJackpot();
+
+            won.Should().Be(50m);
+            player.JackpotPot.Should().Be(0m);
+        }
     }
 }

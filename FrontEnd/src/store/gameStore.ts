@@ -9,7 +9,6 @@ export interface SpinHistoryEntry {
   prizeWon: number;
   balanceAfter: number;
   isWinner: boolean;
-  /** Aposta efetiva daquele giro */
   betAmount: number;
 }
 
@@ -20,30 +19,39 @@ interface GameState {
   totalSpins: number;
   totalWagered: number;
   totalWon: number;
-
-  /** Aposta atual escolhida pelo jogador (R$). */
   selectedBet: number;
+
+  /** Modo turbo: animacao mais rapida. Persistido (preferencia do usuario). */
+  turboMode: boolean;
+  /** Auto-spin ativo: enquanto true, dispara giros automaticos. Transient. */
+  autoSpin: boolean;
+  /** Contador de giros do auto-spin atual (zera ao desligar). */
+  autoSpinCount: number;
 
   startSpin: () => void;
   finishSpin: (result: SpinResponseDto) => void;
   stopSpin: () => void;
   resetHistory: () => void;
   setSelectedBet: (bet: number) => void;
+
+  toggleTurbo: () => void;
+  setAutoSpin: (active: boolean) => void;
+  incAutoSpinCount: () => void;
 }
 
-/** Limites espelhados do backend (Domain.SlotMachine). */
 export const MIN_BET_AMOUNT = 0.5;
 export const MAX_BET_AMOUNT = 30;
 
-/** Valores fixos exibidos como chips touch-friendly. */
 export const BET_PRESETS: number[] = [
   0.5, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30,
 ];
 
-/** Aposta padrão ao abrir o jogo (mantém R$ 3,00 como antes). */
 export const DEFAULT_BET = 3;
 
-/** Normaliza pra 2 casas decimais sem ruído de ponto flutuante. */
+/** Duracoes da animacao do reel (ms). Usadas tambem para o timer da fanfarra. */
+export const REEL_ANIM_NORMAL_MS = 2200;
+export const REEL_ANIM_TURBO_MS = 900;
+
 export function clampBet(value: number): number {
   if (!Number.isFinite(value)) return DEFAULT_BET;
   const clamped = Math.min(MAX_BET_AMOUNT, Math.max(MIN_BET_AMOUNT, value));
@@ -60,14 +68,12 @@ export const useGameStore = create<GameState>()(
       totalWagered: 0,
       totalWon: 0,
       selectedBet: DEFAULT_BET,
+      turboMode: false,
+      autoSpin: false,
+      autoSpinCount: 0,
 
-      // Marca início do giro. Limpa lastResult para que o Reel detecte o
-      // novo símbolo final quando ele chegar da API e dispare a animação.
       startSpin: () => set({ isSpinning: true, lastResult: null }),
 
-      // Recebe o resultado da API. Atualiza lastResult, histórico e totais,
-      // mas mantém isSpinning=true para a animação dos reels rodar até o fim.
-      // Quem encerra o estado de giro (isSpinning=false) é o stopSpin abaixo.
       finishSpin: (result) =>
         set((state) => {
           const entry: SpinHistoryEntry = {
@@ -78,7 +84,6 @@ export const useGameStore = create<GameState>()(
             isWinner: result.isWinner,
             betAmount: result.betAmount,
           };
-          // mantém só os últimos 200 spins para não estourar o localStorage
           const history = [entry, ...state.history].slice(0, 200);
           return {
             lastResult: result,
@@ -89,7 +94,6 @@ export const useGameStore = create<GameState>()(
           };
         }),
 
-      // Encerra o estado de giro após a animação dos reels terminar.
       stopSpin: () => set({ isSpinning: false }),
 
       resetHistory: () =>
@@ -105,9 +109,29 @@ export const useGameStore = create<GameState>()(
         set({
           selectedBet: clampBet(bet),
         }),
+
+      toggleTurbo: () => set((s) => ({ turboMode: !s.turboMode })),
+
+      setAutoSpin: (active) =>
+        set({
+          autoSpin: active,
+          autoSpinCount: active ? 0 : 0,
+        }),
+
+      incAutoSpinCount: () =>
+        set((s) => ({ autoSpinCount: s.autoSpinCount + 1 })),
     }),
     {
       name: "lucky-spin:game",
+      // Nao persistir autoSpin nem autoSpinCount — sempre comecam zerados
+      partialize: (state) => ({
+        history: state.history,
+        totalSpins: state.totalSpins,
+        totalWagered: state.totalWagered,
+        totalWon: state.totalWon,
+        selectedBet: state.selectedBet,
+        turboMode: state.turboMode,
+      }),
     }
   )
 );

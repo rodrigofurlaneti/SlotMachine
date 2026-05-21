@@ -6,6 +6,7 @@ interface PlayerState {
   player: PlayerDto | null;
   setPlayer: (player: PlayerDto | null) => void;
   setBalance: (balance: number) => void;
+  setJackpotPot: (pot: number) => void;
   reset: () => void;
 }
 
@@ -17,6 +18,10 @@ export const usePlayerStore = create<PlayerState>()(
       setBalance: (balance) =>
         set((state) =>
           state.player ? { player: { ...state.player, balance } } : state
+        ),
+      setJackpotPot: (pot) =>
+        set((state) =>
+          state.player ? { player: { ...state.player, jackpotPot: pot } } : state
         ),
       reset: () => set({ player: null }),
     }),

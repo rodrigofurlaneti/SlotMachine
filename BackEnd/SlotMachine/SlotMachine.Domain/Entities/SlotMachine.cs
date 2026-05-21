@@ -17,6 +17,19 @@ namespace SlotMachine.Domain.Entities
         /// <summary>Dimensão do grid (4x4).</summary>
         public const int GridSize = 4;
 
+        /// <summary>Símbolo top normal (dragão) — apenas paga 100x quando alinhado.</summary>
+        public const string TopSymbol = "🐉";
+
+        /// <summary>
+        /// Símbolo exclusivo do JACKPOT — envelope vermelho (hongbao).
+        /// Multiplicador 0 (não paga prêmio normal). Quando 4 alinhados em qualquer
+        /// linha de 4 pagantes, paga o pote progressivo inteiro.
+        /// </summary>
+        public const string JackpotSymbol = "🧧";
+
+        /// <summary>Fração de cada aposta que entra no pote progressivo (1%).</summary>
+        public const decimal JackpotContributionRate = 0.01m;
+
         /// <summary>Valores pré-definidos que a UI deve oferecer (touch).</summary>
         public static readonly decimal[] PresetBetAmounts = new[]
         {
@@ -28,31 +41,26 @@ namespace SlotMachine.Domain.Entities
 
         public SlotMachine()
         {
-            // Tema "Fortune" oriental — mantém multiplicadores e pesos.
-            //   🐯 Tigre    → multiplicador  2x  (peso 40)
-            //   🪙 Moeda    → multiplicador  5x  (peso 20)
-            //   🏮 Lanterna → multiplicador 10x  (peso 10)
-            //   🐉 Dragão   → multiplicador 100x (peso  2)
-            //   🎋 Bambu    → vazio          0x  (peso 60)
             _availableSymbols = new[]
             {
                 new Symbol("🐯", 2m,   40),
                 new Symbol("🪙", 5m,   20),
                 new Symbol("🏮", 10m,  10),
                 new Symbol("🐉", 100m, 2),
+                new Symbol("🧧", 0m,   4),   // jackpot trigger — raro, sem premio direto
                 new Symbol("🎋", 0m,   60)
             };
         }
 
         /// <summary>
         /// Executa um giro com a aposta informada pelo jogador.
-        /// Grid 4x4 com 10 linhas pagantes:
-        ///   - 4 linhas horizontais
-        ///   - 4 colunas verticais
-        ///   - 2 diagonais (principal e secundária, ambas de 4 elementos)
-        /// Regra: paga quando os 4 símbolos da linha são iguais.
-        /// O prêmio escala proporcionalmente à aposta:
-        ///   prêmio_linha = betAmount * payoutMultiplier do símbolo.
+        /// Grid 4x4 com 10 linhas pagantes (4 horizontais + 4 verticais + 2 diagonais).
+        ///
+        /// Mecânica do JACKPOT PROGRESSIVO:
+        ///   - 1% da aposta vai para o pote pessoal do jogador.
+        ///   - Quando QUALQUER linha de 4 dragões 🐉 venceu, o jogador
+        ///     ganha o pote inteiro (alem do premio normal da linha).
+        ///   - O pote zera apos o pagamento.
         /// </summary>
         public SpinResult Spin(Player player, IRandomGenerator rng, decimal betAmount)
         {
@@ -63,6 +71,10 @@ namespace SlotMachine.Domain.Entities
 
             player.Debit(betAmount);
 
+            // 1% da aposta vai para o pote progressivo
+            var contribution = decimal.Round(betAmount * JackpotContributionRate, 2);
+            player.ContributeJackpot(contribution);
+
             // Sorteia matriz 4x4
             var grid = new Symbol[GridSize][];
             for (int r = 0; r < GridSize; r++)
@@ -71,11 +83,25 @@ namespace SlotMachine.Domain.Entities
             }
 
             decimal prize = 0;
+            bool jackpotLineWon = false;
+
+            // Helper: detecta se a linha eh inteiramente do simbolo do jackpot.
+            // (O multiplicador eh 0, portanto a linha nao paga premio normal,
+            // mas dispara o jackpot.)
+            bool IsJackpotLine(Symbol[] line)
+            {
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (line[i].Face != JackpotSymbol) return false;
+                }
+                return true;
+            }
 
             // Horizontais (4 linhas)
             for (int r = 0; r < GridSize; r++)
             {
                 prize += CalculateLinePrize(grid[r], betAmount);
+                if (IsJackpotLine(grid[r])) jackpotLineWon = true;
             }
 
             // Verticais (4 colunas)
@@ -87,40 +113,46 @@ namespace SlotMachine.Domain.Entities
                     col[r] = grid[r][c];
                 }
                 prize += CalculateLinePrize(col, betAmount);
+                if (IsJackpotLine(col)) jackpotLineWon = true;
             }
 
             // Diagonal principal ↘
             var mainDiag = new Symbol[GridSize];
-            for (int i = 0; i < GridSize; i++)
-            {
-                mainDiag[i] = grid[i][i];
-            }
+            for (int i = 0; i < GridSize; i++) mainDiag[i] = grid[i][i];
             prize += CalculateLinePrize(mainDiag, betAmount);
+            if (IsJackpotLine(mainDiag)) jackpotLineWon = true;
 
             // Diagonal secundária ↙
             var antiDiag = new Symbol[GridSize];
-            for (int i = 0; i < GridSize; i++)
-            {
-                antiDiag[i] = grid[i][GridSize - 1 - i];
-            }
+            for (int i = 0; i < GridSize; i++) antiDiag[i] = grid[i][GridSize - 1 - i];
             prize += CalculateLinePrize(antiDiag, betAmount);
+            if (IsJackpotLine(antiDiag)) jackpotLineWon = true;
 
             if (prize > 0)
             {
                 player.Credit(prize);
             }
 
+            // JACKPOT: se alguma linha de 4 envelopes 🧧 alinhou, paga o pote inteiro.
+            decimal jackpotWon = 0m;
+            if (jackpotLineWon)
+            {
+                jackpotWon = player.ClaimJackpot();
+                if (jackpotWon > 0)
+                {
+                    player.Credit(jackpotWon);
+                }
+            }
+
             return new SpinResult(
                 Rows: new List<Symbol[]>(grid),
                 PrizeWon: prize,
-                BetAmount: betAmount
+                BetAmount: betAmount,
+                JackpotWon: jackpotWon,
+                JackpotPot: player.JackpotPot
             );
         }
 
-        /// <summary>
-        /// Garante que o valor da aposta está dentro do range permitido
-        /// (R$ 0,50 ≤ bet ≤ R$ 30,00) e em múltiplos de 0,01 (centavos).
-        /// </summary>
         public static void ValidateBet(decimal betAmount)
         {
             if (betAmount < MinBetAmount || betAmount > MaxBetAmount)
@@ -143,18 +175,10 @@ namespace SlotMachine.Domain.Entities
         private Symbol[] GenerateRow(IRandomGenerator rng)
         {
             var row = new Symbol[GridSize];
-            for (int i = 0; i < GridSize; i++)
-            {
-                row[i] = GetRandomSymbol(rng);
-            }
+            for (int i = 0; i < GridSize; i++) row[i] = GetRandomSymbol(rng);
             return row;
         }
 
-        /// <summary>
-        /// Calcula o prêmio de uma linha de 4 símbolos (horizontal, vertical ou diagonal).
-        /// Paga apenas quando os 4 são iguais. O símbolo 🎋 (bambu) tem multiplicador 0,
-        /// portanto também não gera prêmio mesmo se alinhar.
-        /// </summary>
         private decimal CalculateLinePrize(Symbol[] line, decimal betAmount)
         {
             if (line.Length != GridSize) return 0;

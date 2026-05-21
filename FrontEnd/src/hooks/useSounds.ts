@@ -11,6 +11,8 @@ import {
   primeVoices,
   playMegaFanfare,
   speakMegaWin,
+  playSymbolWinSound,
+  speakJackpotWin,
 } from "../audio/audioEngine";
 
 function makeBeepWav(opts: {
@@ -162,6 +164,23 @@ export function useSounds() {
     []
   );
 
+  /** Toca o som distintivo do simbolo predominante da vitoria. */
+  const playSymbolWin = useCallback((symbol: string) => {
+    if (mutedRef.current) return;
+    void unlockOnUserGesture().then(() => {
+      void playSymbolWinSound(symbol);
+    });
+  }, []);
+
+  /** Anuncio epico de jackpot — fanfarra ultra + voz + acao especial. */
+  const announceJackpot = useCallback((amount: number) => {
+    if (mutedRef.current) return;
+    void unlockOnUserGesture().then(() => {
+      void playMegaFanfare("ultra");
+      window.setTimeout(() => speakJackpotWin(amount), 400);
+    });
+  }, []);
+
   const toggleMute = useCallback(() => {
     setMuted((m) => {
       const next = !m;
@@ -176,6 +195,8 @@ export function useSounds() {
     ensureMusic,
     stopBgMusic,
     announceMegaWin,
+    announceJackpot,
+    playSymbolWin,
     muted,
     toggleMute,
   };

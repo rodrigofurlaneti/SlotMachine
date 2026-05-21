@@ -5,6 +5,8 @@ namespace SlotMachine.Application.DTOs
         decimal PrizeWon,
         decimal CurrentBalance,
         bool IsWinner,
-        decimal BetAmount
+        decimal BetAmount,
+        decimal JackpotWon,
+        decimal JackpotPot
     );
 }

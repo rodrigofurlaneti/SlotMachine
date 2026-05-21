@@ -39,7 +39,7 @@ namespace SlotMachine.Application.Services
                 Timestamp = DateTime.UtcNow
             });
 
-            return new PlayerDto(player.Id, player.Name, player.Balance);
+            return new PlayerDto(player.Id, player.Name, player.Balance, player.JackpotPot);
         }
 
         public SpinResponseDto PlaySpin(Guid playerId, decimal betAmount)
@@ -63,10 +63,13 @@ namespace SlotMachine.Application.Services
                 PlayerId = player.Id,
                 BetAmount = spinResult.BetAmount,
                 PrizeWon = spinResult.PrizeWon,
+                JackpotWon = spinResult.JackpotWon,
+                JackpotPot = spinResult.JackpotPot,
                 BalanceBefore = balanceBefore,
                 BalanceAfter = player.Balance,
                 Matrix = spinResult.Rows.Select(row => row.Select(s => s.Face).ToArray()).ToArray(),
                 IsWinner = spinResult.IsWinner,
+                IsJackpotWinner = spinResult.IsJackpotWinner,
                 Timestamp = DateTime.UtcNow
             });
 
@@ -75,7 +78,9 @@ namespace SlotMachine.Application.Services
                 PrizeWon: spinResult.PrizeWon,
                 CurrentBalance: player.Balance,
                 IsWinner: spinResult.IsWinner,
-                BetAmount: spinResult.BetAmount
+                BetAmount: spinResult.BetAmount,
+                JackpotWon: spinResult.JackpotWon,
+                JackpotPot: spinResult.JackpotPot
             );
         }
 
