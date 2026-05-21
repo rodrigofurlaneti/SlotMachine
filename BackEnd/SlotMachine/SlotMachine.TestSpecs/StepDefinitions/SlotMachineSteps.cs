@@ -49,8 +49,9 @@ namespace SlotMachine.Test.Specs.StepDefinitions
         [Given(@"que a máquina está configurada para retornar símbolos variados sem prêmio")]
         public void DadoQueAMaquinaEstaConfiguradaParaRetornarSimbolosVariadosSemPremio()
         {
-            // Peso alto para cair no símbolo 'X' (derrota)
-            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(100);
+            // Indice 95 cai na faixa do Bambu [87-99] (mult 0 = sem premio).
+            // Pesos somam 100 — manter dentro do range valido.
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(95);
         }
 
         [When(@"eu clico no botão de girar")]

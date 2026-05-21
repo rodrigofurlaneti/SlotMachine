@@ -15,8 +15,8 @@ Cenário: Jogador realiza um giro e ganha em todas as 10 linhas
     Dado que a máquina está configurada para retornar sempre o símbolo "🐯"
     Quando eu clico no botão de girar
     Então o sistema deve debitar 3.00 do meu saldo
-    E o meu saldo atualizado deve ser 157.00
-    E o resultado deve indicar que eu sou um vencedor com prêmio de 60.00
+    E o meu saldo atualizado deve ser 187.00
+    E o resultado deve indicar que eu sou um vencedor com prêmio de 90.00
 
 Cenário: Jogador realiza um giro e não ganha nada
     Dado que a máquina está configurada para retornar símbolos variados sem prêmio

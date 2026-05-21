@@ -6,17 +6,18 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 {
     public class SlotMachineTests
     {
-        // Indices dos simbolos baseados no array do Domain (pesos cumulativos):
-        //   Tigre   [0-39]   (peso 40, mult 2)
-        //   Moeda   [40-59]  (peso 20, mult 5)
-        //   Lanterna[60-69]  (peso 10, mult 10)
-        //   Dragao  [70-71]  (peso 2,  mult 100)
-        //   Envelope[72-75]  (peso 4,  mult 0  - JACKPOT TRIGGER)
-        //   Bambu   [76-135] (peso 60, mult 0)
+        // Indices dos simbolos baseados no array do Domain (pesos cumulativos).
+        // Calibragem comercial (Casa ~25%, RTP ~75%, total weight = 100):
+        //   Tigre   [0-34]   (peso 35, mult 3)
+        //   Moeda   [35-57]  (peso 23, mult 6)
+        //   Lanterna[58-70]  (peso 13, mult 35)
+        //   Dragao  [71-74]  (peso 4,  mult 600)
+        //   Envelope[75-77]  (peso 3,  mult 0  - JACKPOT TRIGGER)
+        //   Bambu   [78-99]  (peso 22, mult 0)
         private const int TIGER = 0;
-        private const int DRAGON = 70;
-        private const int ENVELOPE = 72;
-        private const int BAMBOO = 80;
+        private const int DRAGON = 71;
+        private const int ENVELOPE = 75;
+        private const int BAMBOO = 85;
 
         private readonly IRandomGenerator _rngMock;
         private readonly SlotMachine.Domain.Entities.SlotMachine _slotMachine;
@@ -46,10 +47,10 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // 10 linhas pagantes (4H + 4V + 2D) com tigre (mult 2): 10 * 3 * 2 = 60
-            result.PrizeWon.Should().Be(60m);
+            // 10 linhas pagantes (4H + 4V + 2D) com tigre (mult 3): 10 * 3 * 3 = 90
+            result.PrizeWon.Should().Be(90m);
             result.BetAmount.Should().Be(3.00m);
-            player.Balance.Should().Be(107m);
+            player.Balance.Should().Be(137m);
             result.Rows.Should().HaveCount(4);
             result.Rows[0].Should().HaveCount(4);
             // Tigre nao dispara jackpot
@@ -64,9 +65,10 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 5.00m);
 
-            result.PrizeWon.Should().Be(100m);
+            // 10 linhas × R$5 × 3 = R$150
+            result.PrizeWon.Should().Be(150m);
             result.BetAmount.Should().Be(5.00m);
-            player.Balance.Should().Be(295m);
+            player.Balance.Should().Be(345m);
         }
 
         [Fact]
@@ -87,8 +89,9 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            result.PrizeWon.Should().Be(6m);
-            player.Balance.Should().Be(53m);
+            // 1 linha × R$3 × 3 = R$9
+            result.PrizeWon.Should().Be(9m);
+            player.Balance.Should().Be(56m);
         }
 
         [Fact]
@@ -108,7 +111,8 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            result.PrizeWon.Should().Be(6m);
+            // 1 linha × R$3 × 3 = R$9
+            result.PrizeWon.Should().Be(9m);
         }
 
         [Fact]
@@ -128,7 +132,8 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            result.PrizeWon.Should().Be(6m);
+            // 1 linha × R$3 × 3 = R$9
+            result.PrizeWon.Should().Be(9m);
         }
 
         [Fact]
@@ -199,14 +204,14 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m);
 
-            // 10 linhas de dragao (mult 100): 10 * 3 * 100 = 3000
-            result.PrizeWon.Should().Be(3000m);
+            // 10 linhas de dragao (mult 600): 10 * 3 * 600 = 18000
+            result.PrizeWon.Should().Be(18000m);
             // Jackpot NAO disparado por dragao
             result.JackpotWon.Should().Be(0m);
             // Pote permanece intacto + 1% deste giro
             player.JackpotPot.Should().Be(100.03m);
-            // Saldo: 50 - 3 + 3000 = 3047
-            player.Balance.Should().Be(3047m);
+            // Saldo: 50 - 3 + 18000 = 18047
+            player.Balance.Should().Be(18047m);
         }
 
         [Fact]
