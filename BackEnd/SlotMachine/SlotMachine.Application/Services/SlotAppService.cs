@@ -110,5 +110,10 @@ namespace SlotMachine.Application.Services
 
             return result;
         }
+
+        public decimal GetCurrentJackpot()
+        {
+            return _jackpotRepository.GetPot();
+        }
     }
 }
