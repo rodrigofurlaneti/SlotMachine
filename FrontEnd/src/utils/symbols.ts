@@ -1,11 +1,16 @@
 /**
- * Mantem metadados dos simbolos espelhando o backend.
- * Tema "Fortune" oriental:
- *   Tigre    - multiplicador  2x  (peso 40)
- *   Moeda    - multiplicador  5x  (peso 20)
- *   Lanterna - multiplicador 10x  (peso 10)
- *   Dragao   - multiplicador 100x (peso  2)
- *   Bambu    - vazio          0x  (peso 60)
+ * Mantem metadados dos simbolos espelhando o backend (.NET).
+ *
+ * Calibragem atual: Casa lucra ~25% (RTP ~75%, alta volatilidade).
+ * Pesos somam 100 (= probabilidade direta em %).
+ *
+ *   Tigre    - multiplicador  3x  (peso 35) - comum, pequenas vitorias
+ *   Moeda    - multiplicador  6x  (peso 23) - medio
+ *   Lanterna - multiplicador 35x  (peso 13) - alto, vitorias emocionantes
+ *   Dragao   - multiplicador 600x (peso  4) - topo, premio raro grande
+ *   Bambu    - vazio          0x  (peso 22) - filler vazio
+ *
+ * (Hongbao fica fora desta lista porque so dispara o jackpot.)
  */
 export interface SymbolMeta {
   face: string;
@@ -15,15 +20,15 @@ export interface SymbolMeta {
   label: string;
 }
 
-export const BLANK_FACE = "\u{1F38B}"; // bambu
-export const TOP_FACE = "\u{1F409}";   // dragao
+export const BLANK_FACE = "\u{1F38B}";
+export const TOP_FACE = "\u{1F409}";
 
 export const SYMBOLS: SymbolMeta[] = [
-  { face: "\u{1F42F}", payout: 2,   weight: 40, color: "#ff6b3d", label: "Tigre" },
-  { face: "\u{1FA99}", payout: 5,   weight: 20, color: "#f5c518", label: "Moeda" },
-  { face: "\u{1F3EE}", payout: 10,  weight: 10, color: "#ff2e4a", label: "Lanterna" },
-  { face: "\u{1F409}", payout: 100, weight: 2,  color: "#3ddc97", label: "Dragao" },
-  { face: "\u{1F38B}", payout: 0,   weight: 60, color: "#6b6b6b", label: "Bambu" },
+  { face: "\u{1F42F}", payout: 3,   weight: 35, color: "#ff6b3d", label: "Tigre" },
+  { face: "\u{1FA99}", payout: 6,   weight: 23, color: "#f5c518", label: "Moeda" },
+  { face: "\u{1F3EE}", payout: 35,  weight: 13, color: "#ff2e4a", label: "Lanterna" },
+  { face: "\u{1F409}", payout: 600, weight: 4,  color: "#3ddc97", label: "Dragao" },
+  { face: "\u{1F38B}", payout: 0,   weight: 22, color: "#6b6b6b", label: "Bambu" },
 ];
 
 export const REEL_STRIP: string[] = (() => {

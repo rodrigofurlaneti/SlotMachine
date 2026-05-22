@@ -12,18 +12,18 @@ namespace SlotMachine.Test.UnitTest.Application.Services
     {
         private readonly IPlayerRepository _repositoryMock;
         private readonly IRandomGenerator _rngMock;
-        private readonly IAuditLogger _loggerMock; // Novo Mock para o Logger
+        private readonly IAuditLogger _loggerMock;
+        private readonly IJackpotPotRepository _jackpotMock;
         private readonly SlotAppService _service;
 
         public SlotAppServiceTests()
         {
-            // Criamos "dublês" (mocks) das interfaces necessárias
             _repositoryMock = Substitute.For<IPlayerRepository>();
             _rngMock = Substitute.For<IRandomGenerator>();
-            _loggerMock = Substitute.For<IAuditLogger>(); // Inicializa o mock do logger
+            _loggerMock = Substitute.For<IAuditLogger>();
+            _jackpotMock = Substitute.For<IJackpotPotRepository>();
 
-            // Instanciamos o serviço injetando os mocks (inclusive o novo logger)
-            _service = new SlotAppService(_repositoryMock, _rngMock, _loggerMock);
+            _service = new SlotAppService(_repositoryMock, _rngMock, _loggerMock, _jackpotMock);
         }
 
         [Fact]

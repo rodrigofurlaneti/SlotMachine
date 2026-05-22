@@ -7,5 +7,7 @@ namespace SlotMachine.Application.Services
         PlayerDto CreatePlayer(string name, decimal initialBalance);
         SpinResponseDto PlaySpin(Guid playerId, decimal betAmount);
         AuditResultDto RunAuditSimulation(int numberOfSpins);
+        /// <summary>Valor atual do pote progressivo global (R$).</summary>
+        decimal GetCurrentJackpot();
     }
 }

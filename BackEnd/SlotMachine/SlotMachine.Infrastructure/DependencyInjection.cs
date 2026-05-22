@@ -14,6 +14,9 @@ namespace SlotMachine.Infrastructure
             services.AddSingleton<IGlobalJackpotRepository, InMemoryGlobalJackpotRepository>();
             services.AddSingleton<IRandomGenerator, SystemRandomGenerator>();
             services.AddSingleton<IAuditLogger, FileAuditLogger>();
+            // Pote progressivo GLOBAL — singleton garante que o mesmo
+            // pote eh compartilhado entre todas as requisicoes.
+            services.AddSingleton<IJackpotPotRepository, InMemoryJackpotPotRepository>();
             return services;
         }
     }

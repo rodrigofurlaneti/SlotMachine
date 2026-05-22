@@ -57,7 +57,7 @@ export function JackpotPanel({ pot, justWon }: JackpotPanelProps) {
             Jackpot Imperial
           </div>
           <div className="text-[9px] tracking-widest text-fortune-jade/70 uppercase">
-            4 Dragoes em linha pagam tudo
+            4 envelopes {"\u{1F9E7}"} em linha pagam tudo
           </div>
         </div>
       </div>
