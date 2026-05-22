@@ -56,13 +56,17 @@ namespace SlotMachine.Domain.Entities
         /// Executa um giro com a aposta informada pelo jogador.
         /// Grid 4x4 com 10 linhas pagantes (4 horizontais + 4 verticais + 2 diagonais).
         ///
-        /// Mecânica do JACKPOT PROGRESSIVO:
-        ///   - 1% da aposta vai para o pote pessoal do jogador.
-        ///   - Quando QUALQUER linha de 4 dragões 🐉 venceu, o jogador
-        ///     ganha o pote inteiro (alem do premio normal da linha).
-        ///   - O pote zera apos o pagamento.
+        /// Mecânica do JACKPOT PROGRESSIVO GLOBAL:
+        ///   - 1% de CADA aposta (de qualquer jogador) vai para o pote global.
+        ///   - Quando QUALQUER linha de 4 envelopes 🧧 alinhar, o jogador
+        ///     ganha o pote global inteiro (independente de quem contribuiu).
+        ///   - O pote zera após o pagamento e recomeça a acumular.
         /// </summary>
-        public SpinResult Spin(Player player, IRandomGenerator rng, decimal betAmount)
+        public SpinResult Spin(
+            Player player,
+            IRandomGenerator rng,
+            decimal betAmount,
+            IGlobalJackpotRepository jackpotRepo)
         {
             ValidateBet(betAmount);
 
@@ -71,9 +75,9 @@ namespace SlotMachine.Domain.Entities
 
             player.Debit(betAmount);
 
-            // 1% da aposta vai para o pote progressivo
+            // 1% de cada aposta alimenta o pote global compartilhado
             var contribution = decimal.Round(betAmount * JackpotContributionRate, 2);
-            player.ContributeJackpot(contribution);
+            jackpotRepo.AddContribution(contribution);
 
             // Sorteia matriz 4x4
             var grid = new Symbol[GridSize][];
@@ -85,9 +89,7 @@ namespace SlotMachine.Domain.Entities
             decimal prize = 0;
             bool jackpotLineWon = false;
 
-            // Helper: detecta se a linha eh inteiramente do simbolo do jackpot.
-            // (O multiplicador eh 0, portanto a linha nao paga premio normal,
-            // mas dispara o jackpot.)
+            // Helper: detecta se a linha é inteiramente do símbolo do jackpot.
             bool IsJackpotLine(Symbol[] line)
             {
                 for (int i = 0; i < line.Length; i++)
@@ -133,11 +135,11 @@ namespace SlotMachine.Domain.Entities
                 player.Credit(prize);
             }
 
-            // JACKPOT: se alguma linha de 4 envelopes 🧧 alinhou, paga o pote inteiro.
+            // JACKPOT GLOBAL: se alguma linha de 4 envelopes 🧧 alinhou, paga o pote inteiro.
             decimal jackpotWon = 0m;
             if (jackpotLineWon)
             {
-                jackpotWon = player.ClaimJackpot();
+                jackpotWon = jackpotRepo.ClaimPot();
                 if (jackpotWon > 0)
                 {
                     player.Credit(jackpotWon);
@@ -149,7 +151,7 @@ namespace SlotMachine.Domain.Entities
                 PrizeWon: prize,
                 BetAmount: betAmount,
                 JackpotWon: jackpotWon,
-                JackpotPot: player.JackpotPot
+                JackpotPot: jackpotRepo.GetPot()  // retorna o pote global atualizado
             );
         }
 

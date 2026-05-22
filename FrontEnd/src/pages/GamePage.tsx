@@ -197,7 +197,7 @@ export function GamePage() {
 
           <SlotGrid result={lastResult?.rows ?? null} spinning={isSpinning} />
 
-          <div className="mt-6">
+          <div className="mt-3">
             <BetSelector
               value={selectedBet}
               onChange={handleBetSelect}
@@ -206,67 +206,77 @@ export function GamePage() {
             />
           </div>
 
-          <div className="flex flex-col items-center mt-6 gap-3">
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              <button
-                type="button"
-                onClick={handleToggleTurbo}
-                className={[
-                  "px-3 py-2 rounded-xl text-xs font-display tracking-widest border-2 transition",
-                  turboMode
-                    ? "bg-fortune-jade text-black border-fortune-jade shadow-[0_0_18px_rgba(61,220,151,0.6)]"
-                    : "border-fortune-gold/40 text-fortune-goldLight hover:bg-fortune-red/20",
-                ].join(" ")}
-                aria-pressed={turboMode}
-                title="Acelera a animacao dos reels"
-              >
-                {turboMode ? "TURBO ON" : "TURBO"}
-              </button>
+          {/* Área de ação: TURBO | GIRAR | AUTO lado a lado sem gaps */}
+          <div className="mt-4 flex items-stretch gap-0 rounded-2xl overflow-hidden border-2 border-fortune-gold/40 shadow-[0_0_18px_rgba(245,197,24,0.2)]">
+            {/* TURBO */}
+            <button
+              type="button"
+              onClick={handleToggleTurbo}
+              className={[
+                "flex-none w-20 flex flex-col items-center justify-center py-3 text-[10px] font-display tracking-widest border-r-2 border-fortune-gold/30 transition",
+                turboMode
+                  ? "bg-fortune-jade/20 text-fortune-jade"
+                  : "bg-fortune-redDeep/60 text-fortune-goldLight/70 hover:bg-fortune-redDeep/80",
+              ].join(" ")}
+              aria-pressed={turboMode}
+              title="Acelera a animacao dos reels"
+            >
+              <span className="text-lg mb-0.5">⚡</span>
+              <span>{turboMode ? "ON" : "TURBO"}</span>
+            </button>
 
+            {/* GIRAR — cresce para preencher */}
+            <div className="flex-1">
               <SpinButton
                 onClick={handleManualSpin}
                 disabled={isSpinning || insufficientBalance || autoSpin}
                 loading={isSpinning}
                 bet={selectedBet}
+                fullWidth
               />
-
-              <button
-                type="button"
-                onClick={handleToggleAuto}
-                disabled={!autoSpin && insufficientBalance}
-                className={[
-                  "px-3 py-2 rounded-xl text-xs font-display tracking-widest border-2 transition",
-                  autoSpin
-                    ? "bg-fortune-redLight text-white border-fortune-redLight animate-pulse shadow-[0_0_18px_rgba(255,54,81,0.6)]"
-                    : "border-fortune-gold/40 text-fortune-goldLight hover:bg-fortune-red/20",
-                  "disabled:opacity-40 disabled:cursor-not-allowed",
-                ].join(" ")}
-                aria-pressed={autoSpin}
-                title="Auto-spin: gira automaticamente ate acabar o saldo"
-              >
-                {autoSpin ? `AUTO (${autoSpinCount})` : "AUTO"}
-              </button>
             </div>
 
+            {/* AUTO */}
+            <button
+              type="button"
+              onClick={handleToggleAuto}
+              disabled={!autoSpin && insufficientBalance}
+              className={[
+                "flex-none w-20 flex flex-col items-center justify-center py-3 text-[10px] font-display tracking-widest border-l-2 border-fortune-gold/30 transition",
+                autoSpin
+                  ? "bg-fortune-redLight/20 text-fortune-redLight"
+                  : "bg-fortune-redDeep/60 text-fortune-goldLight/70 hover:bg-fortune-redDeep/80",
+                "disabled:opacity-40 disabled:cursor-not-allowed",
+              ].join(" ")}
+              aria-pressed={autoSpin}
+              title="Auto-spin: gira automaticamente ate acabar o saldo"
+            >
+              <span className="text-lg mb-0.5">🔄</span>
+              <span>{autoSpin ? `${autoSpinCount}` : "AUTO"}</span>
+            </button>
+          </div>
+
+          {/* Mensagens de status abaixo dos botões */}
+          <div className="mt-2 min-h-[20px] text-center">
             {insufficientBalance && (
               <p className="text-xs text-fortune-redLight">
-                Saldo insuficiente para essa aposta. Escolha um valor menor ou recarregue.
+                Saldo insuficiente · escolha um valor menor
               </p>
             )}
             {autoSpin && (
               <p className="text-[11px] text-fortune-jade/90 tracking-wider uppercase">
-                Auto rodando · clique em AUTO para parar
+                Auto rodando · toque em AUTO para parar
               </p>
             )}
-            {lastResult && !isSpinning && !autoSpin && (
+            {lastResult && !isSpinning && !autoSpin && !insufficientBalance && (
               <div
-                className={`text-sm mt-1 ${
-                  lastResult.isWinner ? "text-fortune-gold" : "text-neutral-400"
+                className={`text-xs ${
+                  lastResult.isWinner ? "text-fortune-gold" : "text-neutral-500"
                 }`}
               >
                 {lastResult.isWinner
-                  ? `Voce ganhou ${kind.toUpperCase()} - premio acumulado das linhas`
-                  : "A sorte esta chegando - tente de novo!"}
+                  ? `${kind.toUpperCase()} · premio nas linhas`
+                  : "Tente de novo!"}
               </div>
             )}
           </div>

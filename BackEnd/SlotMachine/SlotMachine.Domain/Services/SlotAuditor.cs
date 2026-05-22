@@ -4,6 +4,18 @@ using SlotMachine.Domain.Interfaces;
 
 namespace SlotMachine.Domain.Services
 {
+    /// <summary>
+    /// Repositório de jackpot descartável para simulações de auditoria.
+    /// Acumula e drena em memória local, sem afetar o pote global de produção.
+    /// </summary>
+    internal sealed class AuditJackpotRepository : IGlobalJackpotRepository
+    {
+        private decimal _pot = 0m;
+        public decimal GetPot() => _pot;
+        public void AddContribution(decimal amount) { _pot += amount; _pot = decimal.Round(_pot, 2); }
+        public decimal ClaimPot() { var v = _pot; _pot = 0m; return v; }
+    }
+
     public sealed class SlotAuditor
     {
         /// <summary>Aposta usada na simulação de auditoria.</summary>
@@ -20,10 +32,12 @@ namespace SlotMachine.Domain.Services
 
             decimal totalNeededBalance = numberOfSpins * AuditBetAmount;
             var botPlayer = new Player("AuditorBot", totalNeededBalance);
+            // Usa pote local isolado — não contamina o jackpot global de produção
+            var auditJackpot = new AuditJackpotRepository();
 
             for (int i = 0; i < numberOfSpins; i++)
             {
-                var result = machine.Spin(botPlayer, rng, AuditBetAmount);
+                var result = machine.Spin(botPlayer, rng, AuditBetAmount, auditJackpot);
 
                 TotalSpins++;
                 TotalWagered += result.BetAmount;

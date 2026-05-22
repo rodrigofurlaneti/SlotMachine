@@ -5,16 +5,22 @@ interface SpinButtonProps {
   disabled: boolean;
   loading: boolean;
   bet: number;
+  fullWidth?: boolean;
 }
 
-export function SpinButton({ onClick, disabled, loading, bet }: SpinButtonProps) {
+export function SpinButton({ onClick, disabled, loading, bet, fullWidth }: SpinButtonProps) {
   return (
     <motion.button
-      whileTap={{ scale: 0.94 }}
-      whileHover={!disabled ? { scale: 1.04 } : {}}
+      whileTap={{ scale: 0.96 }}
+      whileHover={!disabled ? { scale: 1.01 } : {}}
       onClick={onClick}
       disabled={disabled}
-      className="relative px-10 py-4 rounded-full text-imperial text-2xl gold-text bg-gradient-to-b from-fortune-redLight via-fortune-red to-fortune-redDeep border-2 border-fortune-gold disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-imperial"
+      className={[
+        "relative text-imperial text-xl gold-text bg-gradient-to-b from-fortune-redLight via-fortune-red to-fortune-redDeep border-0 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden",
+        fullWidth
+          ? "w-full h-full py-4 rounded-none"
+          : "px-10 py-4 rounded-full border-2 border-fortune-gold shadow-imperial",
+      ].join(" ")}
     >
       <span
         className="pointer-events-none absolute inset-1 rounded-full border border-fortune-gold/60"

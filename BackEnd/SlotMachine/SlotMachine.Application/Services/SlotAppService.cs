@@ -10,16 +10,19 @@ namespace SlotMachine.Application.Services
     public class SlotAppService : ISlotAppService
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly IGlobalJackpotRepository _jackpotRepository;
         private readonly IRandomGenerator _randomGenerator;
-        private readonly IAuditLogger _auditLogger; // Adicionado para conformidade
+        private readonly IAuditLogger _auditLogger;
         private readonly Domain.Entities.SlotMachine _slotMachine;
 
         public SlotAppService(
             IPlayerRepository playerRepository,
+            IGlobalJackpotRepository jackpotRepository,
             IRandomGenerator randomGenerator,
-            IAuditLogger auditLogger) // Injeção do novo serviço de Log
+            IAuditLogger auditLogger)
         {
             _playerRepository = playerRepository;
+            _jackpotRepository = jackpotRepository;
             _randomGenerator = randomGenerator;
             _auditLogger = auditLogger;
             _slotMachine = new Domain.Entities.SlotMachine();
@@ -30,16 +33,17 @@ namespace SlotMachine.Application.Services
             var player = new Player(name, initialBalance);
             _playerRepository.Save(player);
 
-            // Log Assíncrono da criação do jogador
             _auditLogger.LogAction("PLAYER_CREATED", new
             {
                 player.Id,
                 player.Name,
                 player.Balance,
+                GlobalJackpotPot = _jackpotRepository.GetPot(),
                 Timestamp = DateTime.UtcNow
             });
 
-            return new PlayerDto(player.Id, player.Name, player.Balance, player.JackpotPot);
+            // Retorna o pote GLOBAL acumulado, não o pote pessoal (que seria zero)
+            return new PlayerDto(player.Id, player.Name, player.Balance, _jackpotRepository.GetPot());
         }
 
         public SpinResponseDto PlaySpin(Guid playerId, decimal betAmount)
@@ -50,9 +54,8 @@ namespace SlotMachine.Application.Services
 
             var balanceBefore = player.Balance;
 
-            // Realiza o giro com a aposta informada pelo cliente.
-            // A validação de range (R$ 0,50 ≤ bet ≤ R$ 30,00) acontece dentro do Domain.
-            var spinResult = _slotMachine.Spin(player, _randomGenerator, betAmount);
+            // Passa o repositório global de jackpot para o domínio
+            var spinResult = _slotMachine.Spin(player, _randomGenerator, betAmount, _jackpotRepository);
 
             // Persiste a mudança de saldo
             _playerRepository.Save(player);

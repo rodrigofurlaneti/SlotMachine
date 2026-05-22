@@ -11,6 +11,7 @@ namespace SlotMachine.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSingleton<IPlayerRepository, InMemoryPlayerRepository>();
+            services.AddSingleton<IGlobalJackpotRepository, InMemoryGlobalJackpotRepository>();
             services.AddSingleton<IRandomGenerator, SystemRandomGenerator>();
             services.AddSingleton<IAuditLogger, FileAuditLogger>();
             return services;

@@ -11,7 +11,7 @@ interface ReelProps {
   isWinning?: boolean;
 }
 
-const SYMBOL_HEIGHT = 60; // px — mais compacto pra caber 4 colunas
+const SYMBOL_HEIGHT = 72; // px — altura do símbolo dentro do reel unificado
 
 export function Reel({ finalSymbol, spinning, stopDelayMs, onStop, isWinning }: ReelProps) {
   const controls = useAnimation();
@@ -51,8 +51,8 @@ export function Reel({ finalSymbol, spinning, stopDelayMs, onStop, isWinning }: 
 
   return (
     <motion.div
-      className={`reel-window relative overflow-hidden rounded-lg w-16 sm:w-20 h-[60px] ${
-        isWinning ? "ring-2 ring-fortune-gold" : ""
+      className={`relative overflow-hidden w-[22vw] max-w-[88px] min-w-[60px] h-[72px] ${
+        isWinning ? "bg-fortune-gold/10" : ""
       }`}
       aria-label="reel"
       animate={
@@ -81,7 +81,7 @@ export function Reel({ finalSymbol, spinning, stopDelayMs, onStop, isWinning }: 
           <div
             key={`${face}-${idx}`}
             style={{ height: SYMBOL_HEIGHT }}
-            className="flex items-center justify-center text-3xl sm:text-4xl select-none"
+            className="flex items-center justify-center text-4xl sm:text-5xl select-none"
           >
             <span aria-hidden>{face}</span>
           </div>

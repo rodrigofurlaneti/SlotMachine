@@ -64,7 +64,7 @@ function analyzeWins(result: string[][] | null): WinAnalysis {
     for (let i = 0; i < GRID_SIZE; i++) cells.add(`${i}-${i}`);
   }
 
-  // Diagonal secundária
+  // Diagonal secundaria
   const antiArr = [0, 1, 2, 3].map((i) => result[i]?.[GRID_SIZE - 1 - i]);
   if (allEqualAndNotBlank(antiArr)) {
     antiDiagonal = true;
@@ -111,9 +111,7 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
     [result, spinning]
   );
 
-  // Chave que muda a cada novo resultado/giro — forca o AnimatePresence das
-  // linhas SVG a desmontar tudo entre rodadas, eliminando o bug visual
-  // onde a linha dourada anterior persistia ao iniciar o proximo giro.
+  // Chave que muda a cada novo resultado/giro
   const winKey = useMemo(() => {
     if (spinning || !result) return "spinning";
     return result.flat().join("|");
@@ -165,14 +163,15 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
   }, [result, spinning]);
 
   return (
-    <div ref={containerRef} className="relative space-y-2 sm:space-y-3">
+    <div ref={containerRef} className="relative slot-grid-frame">
       {[0, 1, 2, 3].map((rowIdx) => {
         const row = result?.[rowIdx] ?? null;
         const isHorizWin = !spinning && wins.horizontalLines.includes(rowIdx);
+        const rowBorder = rowIdx < 3 ? " border-b border-fortune-gold/20" : "";
         return (
           <motion.div
             key={rowIdx}
-            className="relative flex justify-center items-center gap-1.5 sm:gap-2 px-2 py-1.5 rounded-lg"
+            className={"relative flex justify-center items-center" + rowBorder}
             animate={isHorizWin ? { scale: [1, 1.03, 1] } : { scale: 1 }}
             transition={
               isHorizWin
@@ -202,19 +201,20 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
 
             {[0, 1, 2, 3].map((colIdx) => {
               const cellKey = `${rowIdx}-${colIdx}`;
+              const colBorder = colIdx < 3 ? "border-r border-fortune-gold/20" : "";
               return (
                 <div
                   key={cellKey}
                   ref={(el) => {
                     cellRefs.current[cellKey] = el;
                   }}
+                  className={colBorder}
                 >
                   <Reel
                     finalSymbol={row?.[colIdx] ?? null}
                     spinning={spinning}
                     stopDelayMs={turbo ? rowIdx * 60 + colIdx * 50 : rowIdx * 200 + colIdx * 160}
                     onStop={() => {
-                      // Conta o ultimo reel de cada linha para saber quando todos pararam
                       if (rowIdx === GRID_SIZE - 1) {
                         setStoppedCount((c) => c + 1);
                       }

@@ -14,16 +14,16 @@ export default {
           neonCyan: "#2afad1",
           rim: "#4a1010",
         },
-        // Nova paleta "Fortune" oriental
+        // Paleta "Fortune" oriental — vermelho lacre + dourado imperial
         fortune: {
-          red: "#c8102e",       // vermelho imperial
-          redDeep: "#7a0a1c",   // vermelho de sombra
-          redLight: "#ff3651",  // vermelho de destaque
+          red: "#d41230",       // vermelho lacre mais vivo (era #c8102e)
+          redDeep: "#6b0818",   // sombra vinho escura
+          redLight: "#ff3651",  // vermelho destaque / alertas
           gold: "#f5c518",      // dourado base
           goldLight: "#fff2a8", // dourado claro de highlight
           goldDeep: "#7a5e08",  // sombra dourada
           jade: "#3ddc97",      // verde jade
-          ink: "#1a0606",       // fundo escuro avermelhado
+          ink: "#1a0005",       // fundo preto-avermelhado
         },
       },
       boxShadow: {
@@ -54,11 +54,11 @@ export default {
         goldPulse: {
           "0%, 100%": {
             boxShadow:
-              "0 0 16px rgba(245,197,24,0.35), inset 0 0 14px rgba(245,197,24,0.25)",
+              "0 0 0 1px #2a0808, 0 0 0 4px rgba(245,197,24,0.75), 0 0 0 5px #1e0408, 0 0 40px rgba(245,197,24,0.4), inset 0 0 24px rgba(100,6,18,0.8)",
           },
           "50%": {
             boxShadow:
-              "0 0 32px rgba(245,197,24,0.7), inset 0 0 22px rgba(245,197,24,0.5)",
+              "0 0 0 1px #2a0808, 0 0 0 4px rgba(245,197,24,1), 0 0 0 5px #1e0408, 0 0 70px rgba(245,197,24,0.7), 0 0 120px rgba(200,16,46,0.4), inset 0 0 30px rgba(100,6,18,0.9)",
           },
         },
         lanternSway: {

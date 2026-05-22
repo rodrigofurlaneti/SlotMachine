@@ -16,13 +16,29 @@ body,
 
 body {
   font-family: theme("fontFamily.body");
-  /* Vermelho imperial mais profundo, saturado e quente —
-     mantem brilho dourado no topo e degrade vermelho intenso no fundo. */
+  /*
+   * Tema oriental: vermelho lacre intenso (#c8102e) como cor base,
+   * reflexos dourados no centro-topo e nas bordas laterais,
+   * sombra profunda marrom-escura (#1a0005) na base.
+   * Resultado: ambiente de cassino asiático de luxo.
+   */
   background:
-    radial-gradient(1400px 800px at 50% -10%, rgba(255, 210, 80, 0.35), transparent 62%),
-    radial-gradient(1000px 700px at 5% 110%, rgba(255, 60, 60, 0.28), transparent 58%),
-    radial-gradient(1000px 700px at 95% 110%, rgba(220, 20, 40, 0.34), transparent 58%),
-    linear-gradient(180deg, #6a0815 0%, #4a0a10 35%, #2c0608 70%, #150304 100%);
+    /* reflexo dourado no centro-topo — ilumina o cabinet */
+    radial-gradient(ellipse 1200px 500px at 50% -5%, rgba(245, 197, 24, 0.28) 0%, transparent 65%),
+    /* brilho quente nas bordas laterais */
+    radial-gradient(ellipse 600px 900px at 0% 60%,  rgba(200, 16, 46, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 900px at 100% 60%, rgba(200, 16, 46, 0.55) 0%, transparent 60%),
+    /* reflexo vermelho vivo no centro */
+    radial-gradient(ellipse 900px 600px at 50% 40%, rgba(180, 10, 35, 0.4) 0%, transparent 70%),
+    /* gradiente base: vermelho lacre → vinho escuro → preto-vermelho */
+    linear-gradient(180deg,
+      #8b0c1f 0%,
+      #c8102e 15%,
+      #a00c24 35%,
+      #6b0818 55%,
+      #3a040d 78%,
+      #1a0005 100%
+    );
   background-attachment: fixed;
   color: #f5f5f5;
   overflow-x: hidden;
@@ -67,48 +83,76 @@ body {
 
 .cabinet {
   position: relative;
+  /* Interior do cabinet: vermelho-vinho profundo com brilho interno */
   background:
-    radial-gradient(120% 80% at 50% 0%, #4a0e1a 0%, #2a0808 55%, #160404 100%);
+    radial-gradient(ellipse 110% 70% at 50% 0%, #6a1020 0%, #3a0810 50%, #1e0408 100%);
   border: 2px solid #f5c518;
   box-shadow:
-    0 0 0 4px #7a0a1c,
-    0 0 0 6px #f5c518,
-    0 0 40px rgba(245, 197, 24, 0.45),
-    inset 0 0 22px rgba(122, 10, 28, 0.7);
+    /* dupla borda dourada externa */
+    0 0 0 1px #2a0808,
+    0 0 0 4px rgba(245, 197, 24, 0.85),
+    0 0 0 5px #1e0408,
+    /* brilho dourado externo */
+    0 0 50px rgba(245, 197, 24, 0.5),
+    0 0 100px rgba(200, 16, 46, 0.3),
+    /* sombra interna vermelha */
+    inset 0 0 30px rgba(100, 6, 18, 0.8);
 }
 
+/* Ornamentos de canto dourados — agora maiores e mais brilhantes */
 .cabinet::before,
 .cabinet::after {
   content: "";
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   pointer-events: none;
   border: 3px solid #f5c518;
-  border-radius: 6px;
-  box-shadow: 0 0 12px rgba(245, 197, 24, 0.55);
+  border-radius: 4px;
+  box-shadow:
+    0 0 14px rgba(245, 197, 24, 0.8),
+    inset 0 0 6px rgba(245, 197, 24, 0.3);
 }
 .cabinet::before {
-  top: -10px;
-  left: -10px;
+  top: -12px;
+  left: -12px;
   border-right: none;
   border-bottom: none;
 }
 .cabinet::after {
-  bottom: -10px;
-  right: -10px;
+  bottom: -12px;
+  right: -12px;
   border-left: none;
   border-top: none;
 }
 
 .cabinet-roof {
+  /* Teto: vermelho lacre #c8102e puro, mais saturado */
   background:
-    linear-gradient(180deg, #8a0d20 0%, #c8102e 50%, #7a0a1c 100%);
+    linear-gradient(180deg,
+      #a0102a 0%,
+      #d41230 40%,
+      #c8102e 55%,
+      #8a0b22 100%
+    );
   border-top: 2px solid #f5c518;
   border-bottom: 2px solid #f5c518;
   box-shadow:
-    inset 0 0 18px rgba(0, 0, 0, 0.55),
-    0 4px 12px rgba(0, 0, 0, 0.45);
+    inset 0 2px 12px rgba(255, 255, 255, 0.08),
+    inset 0 -4px 16px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Frame unificado do grid — substitui bordas individuais dos reels */
+.slot-grid-frame {
+  background: linear-gradient(180deg, #1a0404 0%, #2a0808 50%, #1a0404 100%);
+  border: 2px solid #f5c518;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 10px 28px rgba(0, 0, 0, 0.75),
+    inset 0 -10px 28px rgba(0, 0, 0, 0.75),
+    0 0 20px rgba(245, 197, 24, 0.35);
 }
 
 .reel-window {
