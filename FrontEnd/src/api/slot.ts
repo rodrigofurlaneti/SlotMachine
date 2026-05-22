@@ -1,99 +1,73 @@
+/**
+ * Camada de acesso ao jogo — 100% autônoma, sem dependência de rede.
+ *
+ * Toda a lógica de negócio (sorteio, prêmios, jackpot progressivo) roda
+ * no motor offline local. O app funciona sem internet, sem servidor,
+ * sem qualquer chamada de rede durante o jogo.
+ *
+ * As únicas funções que ainda usam rede (getBetConfig / runAudit) são
+ * ferramentas administrativas opcionais — não afetam o jogo.
+ */
 import { apiClient } from "./client";
-import { useConnectionStore } from "../store/connectionStore";
-import { spinOffline, initOfflineState, getOfflineState } from "../offline/offlineEngine";
+import {
+  spinOffline,
+  initOfflineState,
+  getOfflineState,
+} from "../offline/offlineEngine";
 import type {
   AuditResultDto,
   BetConfigDto,
   CreatePlayerRequest,
   PlayerDto,
-  SpinRequestDto,
   SpinResponseDto,
 } from "../types/api";
 
-let _offlinePlayer: PlayerDto | null = null;
-void _offlinePlayer;
-
-export async function createPlayer(payload: CreatePlayerRequest): Promise<PlayerDto> {
-  const { status } = useConnectionStore.getState();
-
-  if (status !== "offline") {
-    try {
-      const { data } = await apiClient.post<PlayerDto>("/slot/player", payload);
-      initOfflineState(data.balance, data.jackpotPot ?? 0);
-      return data;
-    } catch {
-      // Network failure -- interceptor already marked offline
-    }
-  }
-
-  const offlinePlayer: PlayerDto = {
-    id: `offline-${Date.now()}`,
-    name: payload.name,
+/**
+ * Cria o jogador 100% localmente.
+ * ID único gerado via crypto.randomUUID() e persistido no localStorage
+ * pelo zustand-persist — sem chamada de rede, sem latência.
+ */
+export function createPlayer(payload: CreatePlayerRequest): Promise<PlayerDto> {
+  const player: PlayerDto = {
+    id: crypto.randomUUID(),
+    name: payload.name.trim(),
     balance: payload.initialBalance,
     jackpotPot: 0,
   };
-  _offlinePlayer = offlinePlayer;
-  initOfflineState(offlinePlayer.balance, 0);
-  return offlinePlayer;
+  initOfflineState(player.balance, 0);
+  return Promise.resolve(player);
 }
 
-export async function spin(
-  playerId: string,
-  betAmount: number
-): Promise<SpinResponseDto> {
-  const { status, markOffline } = useConnectionStore.getState();
-
-  if (status !== "offline") {
-    try {
-      const body: SpinRequestDto = { betAmount };
-      const { data } = await apiClient.post<SpinResponseDto>(
-        `/slot/spin/${playerId}`,
-        body
-      );
-      initOfflineState(data.currentBalance, data.jackpotPot);
-      return data;
-    } catch (err) {
-      const isNetworkErr =
-        err instanceof Error &&
-        (err.message.includes("Network") ||
-          err.message.includes("timeout") ||
-          err.message.includes("ECONNREFUSED") ||
-          err.message.includes("status code 500") ||
-          err.message.includes("status code 502") ||
-          err.message.includes("status code 503") ||
-          err.message.includes("status code 504") ||
-          err.message.includes("Erro de comunicacao"));
-
-      if (isNetworkErr) {
-        markOffline();
-        const offlineState = getOfflineState();
-        if (!offlineState) {
-          throw new Error("Modo offline indisponivel: saldo nao sincronizado. Reinicie o jogo.");
-        }
-        return spinOffline(betAmount);
-      }
-
-      throw err;
-    }
+/**
+ * Executa um giro 100% no motor local — sem rede, sem latência, sem falhas de API.
+ * O parâmetro playerId é mantido apenas por compatibilidade de interface.
+ */
+export function spin(_playerId: string, betAmount: number): Promise<SpinResponseDto> {
+  const state = getOfflineState();
+  if (!state) {
+    return Promise.reject(
+      new Error("Motor de jogo não inicializado. Por favor, reinicie o app.")
+    );
   }
-
-  const offlineState = getOfflineState();
-  if (!offlineState) {
-    throw new Error("Motor offline nao inicializado. Por favor, reinicie o jogo.");
-  }
-  return spinOffline(betAmount);
+  return Promise.resolve(spinOffline(betAmount));
 }
 
-export async function getJackpot(): Promise<number> {
-  const { data } = await apiClient.get<{ jackpotPot: number }>("/slot/jackpot");
-  return data.jackpotPot;
+/**
+ * Retorna o pote de jackpot atual do motor local — sem rede.
+ */
+export function getJackpot(): Promise<number> {
+  return Promise.resolve(getOfflineState()?.jackpotPot ?? 0);
 }
 
+// ─── Funções administrativas (requerem servidor) ──────────────────────────────
+
+/** Busca configuração de aposta no servidor (uso admin/debug). */
 export async function getBetConfig(): Promise<BetConfigDto> {
   const { data } = await apiClient.get<BetConfigDto>("/slot/bet-config");
   return data;
 }
 
+/** Executa simulação de auditoria no servidor (uso admin/debug). */
 export async function runAudit(spins = 100_000): Promise<AuditResultDto> {
   const { data } = await apiClient.get<AuditResultDto>("/slot/audit", {
     params: { spins },

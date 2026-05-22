@@ -14,8 +14,8 @@ namespace SlotMachine.Domain.Entities
         /// <summary>Valor máximo permitido por giro (R$).</summary>
         public const decimal MaxBetAmount = 30.00m;
 
-        /// <summary>Dimensão do grid (4x4).</summary>
-        public const int GridSize = 4;
+        /// <summary>Dimensão do grid (5x5).</summary>
+        public const int GridSize = 5;
 
         /// <summary>Símbolo top normal (dragão) — apenas paga 100x quando alinhado.</summary>
         public const string TopSymbol = "🐉";
@@ -54,7 +54,7 @@ namespace SlotMachine.Domain.Entities
 
         /// <summary>
         /// Executa um giro com a aposta informada pelo jogador.
-        /// Grid 4x4 com 10 linhas pagantes (4 horizontais + 4 verticais + 2 diagonais).
+        /// Grid 5x5 com 12 linhas pagantes (5 horizontais + 5 verticais + 2 diagonais).
         ///
         /// Mecânica do JACKPOT PROGRESSIVO GLOBAL:
         ///   - 1% de CADA aposta (de qualquer jogador) vai para o pote global.
@@ -75,8 +75,12 @@ namespace SlotMachine.Domain.Entities
 
             player.Debit(betAmount);
 
-            // 1% de cada aposta alimenta o pote global compartilhado
-            var contribution = decimal.Round(betAmount * JackpotContributionRate, 2);
+            // 1% de cada aposta alimenta o pote global compartilhado.
+            // Usa AwayFromZero para garantir que a aposta mínima (R$0,50)
+            // contribua R$0,01 em vez de R$0,00 (banker's rounding padrão do C#
+            // arredondaria 0,005 para 0,00, zerando a contribuição).
+            var contribution = decimal.Round(
+                betAmount * JackpotContributionRate, 2, MidpointRounding.AwayFromZero);
             jackpotRepo.AddContribution(contribution);
 
             // Sorteia matriz 4x4

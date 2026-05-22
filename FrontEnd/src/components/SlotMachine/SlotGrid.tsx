@@ -9,7 +9,7 @@ interface SlotGridProps {
   onAllStopped?: () => void;
 }
 
-const GRID_SIZE = 4;
+const GRID_SIZE = 5;
 const BLANK = "\u{1F38B}"; // bambu
 
 interface WinAnalysis {
@@ -50,7 +50,7 @@ function analyzeWins(result: string[][] | null): WinAnalysis {
 
   // Verticais
   for (let c = 0; c < GRID_SIZE; c++) {
-    const col = [0, 1, 2, 3].map((r) => result[r]?.[c]);
+    const col = [0, 1, 2, 3, 4].map((r) => result[r]?.[c]);
     if (allEqualAndNotBlank(col)) {
       verticalLines.push(c);
       for (let r = 0; r < GRID_SIZE; r++) cells.add(`${r}-${c}`);
@@ -58,14 +58,14 @@ function analyzeWins(result: string[][] | null): WinAnalysis {
   }
 
   // Diagonal principal
-  const mainArr = [0, 1, 2, 3].map((i) => result[i]?.[i]);
+  const mainArr = [0, 1, 2, 3, 4].map((i) => result[i]?.[i]);
   if (allEqualAndNotBlank(mainArr)) {
     mainDiagonal = true;
     for (let i = 0; i < GRID_SIZE; i++) cells.add(`${i}-${i}`);
   }
 
   // Diagonal secundaria
-  const antiArr = [0, 1, 2, 3].map((i) => result[i]?.[GRID_SIZE - 1 - i]);
+  const antiArr = [0, 1, 2, 3, 4].map((i) => result[i]?.[GRID_SIZE - 1 - i]);
   if (allEqualAndNotBlank(antiArr)) {
     antiDiagonal = true;
     for (let i = 0; i < GRID_SIZE; i++) cells.add(`${i}-${GRID_SIZE - 1 - i}`);
@@ -87,8 +87,8 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
     main?: LineCoords;
     anti?: LineCoords;
   }>({
-    rows: [undefined, undefined, undefined, undefined],
-    cols: [undefined, undefined, undefined, undefined],
+    rows: [undefined, undefined, undefined, undefined, undefined],
+    cols: [undefined, undefined, undefined, undefined, undefined],
   });
 
   useEffect(() => {
@@ -120,8 +120,8 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
   useEffect(() => {
     if (spinning || !containerRef.current) {
       setLineCoords({
-        rows: [undefined, undefined, undefined, undefined],
-        cols: [undefined, undefined, undefined, undefined],
+        rows: [undefined, undefined, undefined, undefined, undefined],
+        cols: [undefined, undefined, undefined, undefined, undefined],
       });
       return;
     }
@@ -133,7 +133,7 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
       return [r.left - c.left + r.width / 2, r.top - c.top + r.height / 2];
     };
 
-    const rowEndpoints: (LineCoords | undefined)[] = [0, 1, 2, 3].map((r) => {
+    const rowEndpoints: (LineCoords | undefined)[] = [0, 1, 2, 3, 4].map((r) => {
       const left = center(`${r}-0`);
       const right = center(`${r}-${GRID_SIZE - 1}`);
       return left && right
@@ -141,7 +141,7 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
         : undefined;
     });
 
-    const colEndpoints: (LineCoords | undefined)[] = [0, 1, 2, 3].map((c) => {
+    const colEndpoints: (LineCoords | undefined)[] = [0, 1, 2, 3, 4].map((c) => {
       const top = center(`0-${c}`);
       const bot = center(`${GRID_SIZE - 1}-${c}`);
       return top && bot
@@ -164,10 +164,10 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
 
   return (
     <div ref={containerRef} className="relative slot-grid-frame">
-      {[0, 1, 2, 3].map((rowIdx) => {
+      {[0, 1, 2, 3, 4].map((rowIdx) => {
         const row = result?.[rowIdx] ?? null;
         const isHorizWin = !spinning && wins.horizontalLines.includes(rowIdx);
-        const rowBorder = rowIdx < 3 ? " border-b border-fortune-gold/20" : "";
+        const rowBorder = rowIdx < 4 ? " border-b border-fortune-gold/20" : "";
         return (
           <motion.div
             key={rowIdx}
@@ -199,9 +199,9 @@ export function SlotGrid({ result, spinning, onAllStopped }: SlotGridProps) {
               )}
             </AnimatePresence>
 
-            {[0, 1, 2, 3].map((colIdx) => {
+            {[0, 1, 2, 3, 4].map((colIdx) => {
               const cellKey = `${rowIdx}-${colIdx}`;
-              const colBorder = colIdx < 3 ? "border-r border-fortune-gold/20" : "";
+              const colBorder = colIdx < 4 ? "border-r border-fortune-gold/20" : "";
               return (
                 <div
                   key={cellKey}

@@ -18,7 +18,7 @@ export interface SpinRequestDto {
 }
 
 export interface SpinResponseDto {
-  /** Matriz 4x4 com a face dos simbolos retornada pela API */
+  /** Matriz 5x5 com a face dos simbolos retornada pela API */
   rows: string[][];
   prizeWon: number;
   currentBalance: number;

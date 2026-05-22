@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copiar para android/app/src/main/res/xml/network_security_config.xml -->
+<!-- Permite HTTP para a API local durante desenvolvimento -->
+<network-security-config>
+  <domain-config cleartextTrafficPermitted="true">
+    <!-- Range de IPs da rede local -->
+    <domain includeSubdomains="true">192.168.0.0</domain>
+    <domain includeSubdomains="true">192.168.1.0</domain>
+    <domain includeSubdomains="true">10.0.0.0</domain>
+    <domain includeSubdomains="true">10.0.2.2</domain>
+  </domain-config>
+  <base-config cleartextTrafficPermitted="false">
+    <trust-anchors>
+      <certificates src="system" />
+    </trust-anchors>
+  </base-config>
+</network-security-config>

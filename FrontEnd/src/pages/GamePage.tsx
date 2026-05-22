@@ -15,12 +15,12 @@ import { useGameStore } from "../store/gameStore";
 import { classifyPrize, useSpin } from "../hooks/useSpin";
 import { useSounds } from "../hooks/useSounds";
 import { formatBRL } from "../utils/format";
-import { getJackpot } from "../api/slot";
+import { initOfflineState, getOfflineState } from "../offline/offlineEngine";
 
 export function GamePage() {
   const navigate = useNavigate();
   const player = usePlayerStore((s) => s.player);
-  const setJackpotPot = usePlayerStore((s) => s.setJackpotPot);
+
   const lastResult = useGameStore((s) => s.lastResult);
   const isSpinning = useGameStore((s) => s.isSpinning);
   const selectedBet = useGameStore((s) => s.selectedBet);
@@ -49,24 +49,16 @@ export function GamePage() {
     }
   }, [player, navigate]);
 
-  // Hidrata o pote GLOBAL do jackpot ao carregar a pagina de jogo.
-  // Esse valor cresce com os giros de todos os jogadores e nao deve
-  // vir zerado para um jogador que acabou de logar.
+  // Re-inicializa o motor offline com o estado persistido no localStorage.
+  // Necessário quando o jogador fecha e reabre o app: o zustand-persist
+  // restaura player.balance e player.jackpotPot, mas o motor offline
+  // (variável de módulo) é resetado a cada recarga de página.
   useEffect(() => {
     if (!player) return;
-    let cancelled = false;
-    (async () => {
-      try {
-        const pot = await getJackpot();
-        if (!cancelled) setJackpotPot(pot);
-      } catch {
-        // silencioso — o pote sera atualizado no primeiro spin
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [player, setJackpotPot]);
+    if (!getOfflineState()) {
+      initOfflineState(player.balance, player.jackpotPot ?? 0);
+    }
+  }, [player]);
 
   // Para a musica e o auto-spin quando sair da pagina de jogo.
   useEffect(() => {

@@ -11,9 +11,9 @@ import { formatBRL } from "../utils/format";
 export type SpinKind = "lose" | "win" | "bigWin" | "jackpot";
 
 const DRAGON = "\u{1F409}";
-const GRID_SIZE = 4;
+const GRID_SIZE = 5;
 
-/** Conta quantas linhas pagantes venceram no grid 4x4 (4H + 4V + 2D = max 10). */
+/** Conta quantas linhas pagantes venceram no grid 5x5 (5H + 5V + 2D = max 12). */
 function countWinningLines(rows: string[][]): number {
   if (!rows || rows.length < GRID_SIZE) return 0;
   let count = 0;
@@ -31,19 +31,19 @@ function countWinningLines(rows: string[][]): number {
   }
   // Verticais
   for (let c = 0; c < GRID_SIZE; c++) {
-    const col = [0, 1, 2, 3].map((r) => rows[r]?.[c]);
+    const col = [0, 1, 2, 3, 4].map((r) => rows[r]?.[c]);
     if (isLine(col)) count += 1;
   }
   // Diagonais
-  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[i]))) count += 1;
-  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[GRID_SIZE - 1 - i]))) count += 1;
+  if (isLine([0, 1, 2, 3, 4].map((i) => rows[i]?.[i]))) count += 1;
+  if (isLine([0, 1, 2, 3, 4].map((i) => rows[i]?.[GRID_SIZE - 1 - i]))) count += 1;
 
   return count;
 }
 
 /**
- * Classifica o premio considerando o grid 4x4:
- *   - jackpot = TODAS as 16 celulas com dragao (todas 10 linhas vencem)
+ * Classifica o premio considerando o grid 5x5:
+ *   - jackpot = TODAS as 25 celulas com dragao (todas 12 linhas vencem)
  *   - bigWin  = 3 ou mais linhas vencedoras OU premio >= 50x a aposta
  *   - win     = qualquer premio > 0
  */
@@ -81,10 +81,10 @@ function findWinningSymbol(rows: string[][]): string | null {
     if (rows[r]) checkLine(rows[r]);
   }
   for (let c = 0; c < GRID_SIZE; c++) {
-    checkLine([0, 1, 2, 3].map((r) => rows[r]?.[c]));
+    checkLine([0, 1, 2, 3, 4].map((r) => rows[r]?.[c]));
   }
-  checkLine([0, 1, 2, 3].map((i) => rows[i]?.[i]));
-  checkLine([0, 1, 2, 3].map((i) => rows[i]?.[GRID_SIZE - 1 - i]));
+  checkLine([0, 1, 2, 3, 4].map((i) => rows[i]?.[i]));
+  checkLine([0, 1, 2, 3, 4].map((i) => rows[i]?.[GRID_SIZE - 1 - i]));
   for (const sym of PRIORITY) {
     if (winners.has(sym)) return sym;
   }
@@ -97,10 +97,10 @@ function hasDragonLine(rows: string[][]): boolean {
     arr.every((v) => v === DRAGON);
   for (const r of rows) if (isLine(r)) return true;
   for (let c = 0; c < GRID_SIZE; c++) {
-    if (isLine([0, 1, 2, 3].map((r) => rows[r]?.[c]))) return true;
+    if (isLine([0, 1, 2, 3, 4].map((r) => rows[r]?.[c]))) return true;
   }
-  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[i]))) return true;
-  if (isLine([0, 1, 2, 3].map((i) => rows[i]?.[GRID_SIZE - 1 - i]))) return true;
+  if (isLine([0, 1, 2, 3, 4].map((i) => rows[i]?.[i]))) return true;
+  if (isLine([0, 1, 2, 3, 4].map((i) => rows[i]?.[GRID_SIZE - 1 - i]))) return true;
   return false;
 }
 

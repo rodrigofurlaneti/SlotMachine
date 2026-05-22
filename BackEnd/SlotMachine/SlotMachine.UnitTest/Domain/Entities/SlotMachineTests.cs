@@ -50,7 +50,7 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         }
 
         [Fact]
-        public void Spin_WhenAllSymbolsAreTiger_ShouldPayAll10Lines()
+        public void Spin_WhenAllSymbolsAreTiger_ShouldPayAll12Lines()
         {
             var player = new Player("Vencedor", 50m);
             var jackpot = new TestJackpotRepository();
@@ -58,12 +58,12 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m, jackpot);
 
-            // 10 linhas pagantes (4H + 4V + 2D) com tigre (mult 2): 10 * 3 * 2 = 60
-            result.PrizeWon.Should().Be(60m);
+            // 12 linhas pagantes (5H + 5V + 2D) com tigre (mult 2): 12 * 3 * 2 = 72
+            result.PrizeWon.Should().Be(72m);
             result.BetAmount.Should().Be(3.00m);
-            player.Balance.Should().Be(107m);
-            result.Rows.Should().HaveCount(4);
-            result.Rows[0].Should().HaveCount(4);
+            player.Balance.Should().Be(119m);
+            result.Rows.Should().HaveCount(5);
+            result.Rows[0].Should().HaveCount(5);
             // Tigre nao dispara jackpot
             result.JackpotWon.Should().Be(0m);
         }
@@ -77,9 +77,10 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 5.00m, jackpot);
 
-            result.PrizeWon.Should().Be(100m);
+            // 12 linhas (5H + 5V + 2D) * 5 * 2 = 120
+            result.PrizeWon.Should().Be(120m);
             result.BetAmount.Should().Be(5.00m);
-            player.Balance.Should().Be(295m);
+            player.Balance.Should().Be(315m);
         }
 
         [Fact]
@@ -87,13 +88,14 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         {
             var player = new Player("Sortudo", 50m);
             var jackpot = new TestJackpotRepository();
-            var sequence = new int[16];
-            for (int i = 0; i < 16; i++) sequence[i] = BAMBOO;
-            // Diagonal principal: indices 0, 5, 10, 15 no array linear
-            sequence[0] = TIGER;
-            sequence[5] = TIGER;
-            sequence[10] = TIGER;
-            sequence[15] = TIGER;
+            var sequence = new int[25];
+            for (int i = 0; i < 25; i++) sequence[i] = BAMBOO;
+            // Diagonal principal no grid 5x5: indices 0, 6, 12, 18, 24 no array linear
+            sequence[0]  = TIGER;
+            sequence[6]  = TIGER;
+            sequence[12] = TIGER;
+            sequence[18] = TIGER;
+            sequence[24] = TIGER;
 
             var callCount = 0;
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>())
@@ -110,12 +112,14 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         {
             var player = new Player("Sortudo", 50m);
             var jackpot = new TestJackpotRepository();
-            var sequence = new int[16];
-            for (int i = 0; i < 16; i++) sequence[i] = BAMBOO;
+            var sequence = new int[25];
+            for (int i = 0; i < 25; i++) sequence[i] = BAMBOO;
+            // Linha 0 no grid 5x5: indices 0-4
             sequence[0] = TIGER;
             sequence[1] = TIGER;
             sequence[2] = TIGER;
             sequence[3] = TIGER;
+            sequence[4] = TIGER;
 
             var callCount = 0;
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>())
@@ -131,12 +135,14 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         {
             var player = new Player("Sortudo", 50m);
             var jackpot = new TestJackpotRepository();
-            var sequence = new int[16];
-            for (int i = 0; i < 16; i++) sequence[i] = BAMBOO;
-            sequence[0] = TIGER;
-            sequence[4] = TIGER;
-            sequence[8] = TIGER;
-            sequence[12] = TIGER;
+            var sequence = new int[25];
+            for (int i = 0; i < 25; i++) sequence[i] = BAMBOO;
+            // Coluna 0 no grid 5x5: indices 0, 5, 10, 15, 20 no array linear
+            sequence[0]  = TIGER;
+            sequence[5]  = TIGER;
+            sequence[10] = TIGER;
+            sequence[15] = TIGER;
+            sequence[20] = TIGER;
 
             var callCount = 0;
             _rngMock.Next(Arg.Any<int>(), Arg.Any<int>())
@@ -189,9 +195,9 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         }
 
         [Fact]
-        public void GridSize_ShouldBe4()
+        public void GridSize_ShouldBe5()
         {
-            SlotMachine.Domain.Entities.SlotMachine.GridSize.Should().Be(4);
+            SlotMachine.Domain.Entities.SlotMachine.GridSize.Should().Be(5);
         }
 
         [Fact]
@@ -210,6 +216,23 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
         }
 
         [Fact]
+        public void Spin_ShouldContributeForMinimumBet_AwayFromZeroRounding()
+        {
+            // Valida que aposta minima R$0,50 contribui R$0,01 ao pote global.
+            // Sem MidpointRounding.AwayFromZero, decimal.Round(0.005, 2) = 0,00
+            // e a contribuicao seria silenciosamente ignorada pelo AddContribution.
+            var player = new Player("Teste", 10m);
+            var jackpot = new TestJackpotRepository();
+            _rngMock.Next(Arg.Any<int>(), Arg.Any<int>()).Returns(BAMBOO);
+
+            var result = _slotMachine.Spin(player, _rngMock, 0.50m, jackpot);
+
+            // 1% de R$0,50 = R$0,005 → com AwayFromZero arredonda para R$0,01
+            jackpot.GetPot().Should().Be(0.01m);
+            result.JackpotPot.Should().Be(0.01m);
+        }
+
+        [Fact]
         public void Spin_WithDragonLine_ShouldPayPrizeButNotJackpot()
         {
             // Dragao NAO dispara o jackpot (so envelope dispara).
@@ -221,15 +244,15 @@ namespace SlotMachine.Test.UnitTest.Domain.Entities
 
             var result = _slotMachine.Spin(player, _rngMock, 3.00m, jackpot);
 
-            // 10 linhas de dragao (mult 100): 10 * 3 * 100 = 3000
-            result.PrizeWon.Should().Be(3000m);
+            // 12 linhas de dragao (mult 100): 12 * 3 * 100 = 3600
+            result.PrizeWon.Should().Be(3600m);
             // Jackpot NAO disparado por dragao
             result.JackpotWon.Should().Be(0m);
             // Pote global: 100 (anterior) + 0.03 (1% de R$3) = 100.03
             jackpot.GetPot().Should().Be(100.03m);
             result.JackpotPot.Should().Be(100.03m);
-            // Saldo: 50 - 3 + 3000 = 3047
-            player.Balance.Should().Be(3047m);
+            // Saldo: 50 - 3 + 3600 = 3647
+            player.Balance.Should().Be(3647m);
         }
 
         [Fact]

@@ -41,14 +41,14 @@ export function OfflineBanner() {
         <span>Reconectando ao servidor...</span>
       ) : (
         <>
-          <span>Modo offline ativo &mdash; o jogo continua localmente</span>
+          <span>Servidor sem sinal &mdash; jogo roda normalmente</span>
           {elapsed && (
             <span style={{ opacity: 0.7, fontWeight: 400, fontSize: 12 }}>
               ({elapsed})
             </span>
           )}
           <span style={{ opacity: 0.6, fontWeight: 400, fontSize: 11, fontStyle: "italic" }}>
-            Jackpot pausado &bull; Saldo sincroniza ao reconectar
+            Jackpot global pausado &bull; Sync retoma ao reconectar
           </span>
         </>
       )}

@@ -47,7 +47,7 @@ export function HomePage() {
         <div className="text-7xl mb-3">{"\u{1F42F}"}</div>
         <h1 className="text-imperial text-4xl sm:text-5xl imperial-text">FORTUNE SPIN</h1>
         <p className="text-fortune-goldLight/80 mt-2">
-          Caca-niquel 4x4 com 10 linhas pagantes e jackpot progressivo - regras direto da nossa API .NET.
+          Caça-níquel 5x5 com 12 linhas pagantes e jackpot progressivo — roda 100% sem internet.
         </p>
       </motion.div>
 
@@ -105,7 +105,7 @@ export function HomePage() {
             disabled={loading}
             className="w-full py-3 rounded-lg bg-gradient-to-b from-fortune-gold to-fortune-goldDeep text-black font-semibold disabled:opacity-50"
           >
-            {loading ? "Conectando..." : "Comecar a jogar"}
+            {loading ? "Iniciando..." : "Comecar a jogar"}
           </button>
         </motion.div>
       )}
@@ -131,13 +131,13 @@ export function HomePage() {
           ))}
         </div>
         <p className="text-xs text-fortune-goldLight/70 mt-3 leading-relaxed">
-          Aposta: R$ 0,50 a R$ 30,00 por giro · grid 4x4 com 10 linhas pagantes
-          (4 horizontais + 4 verticais + 2 diagonais) · paga quando os 4 simbolos
+          Aposta: R$ 0,50 a R$ 30,00 por giro · grid 5x5 com 12 linhas pagantes
+          (5 horizontais + 5 verticais + 2 diagonais) · paga quando os 5 simbolos
           da linha sao iguais (premio = aposta x multiplicador).
         </p>
         <p className="text-xs text-fortune-jade mt-2">
-          {"\u{1F451}"} Jackpot progressivo: 1% de cada aposta vai pro seu pote pessoal.
-          Linha completa de 4 dragoes leva o pote inteiro!
+          {"\u{1F451}"} Jackpot progressivo: 1% de cada aposta vai pro pote acumulado.
+          Linha completa de 5 envelopes {"\u{1F9E7}"} leva o pote inteiro!
         </p>
       </div>
     </div>

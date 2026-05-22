@@ -16,7 +16,7 @@ const SYMBOLS: SymbolDef[] = [
 ];
 
 const JACKPOT_FACE = "🧧";
-const GRID_SIZE = 4;
+const GRID_SIZE = 5;
 const JACKPOT_CONTRIBUTION_RATE = 0.01;
 const TOTAL_WEIGHT = SYMBOLS.reduce((acc, s) => acc + s.weight, 0);
 
@@ -57,6 +57,17 @@ let _state: OfflineState | null = null;
 
 export function initOfflineState(balance: number, jackpotPot: number): void {
   _state = { balance, jackpotPot };
+}
+
+/**
+ * Sincroniza apenas o pote global com o valor vindo do servidor,
+ * sem tocar no saldo local. Chamado após getJackpot() retornar
+ * o pote acumulado por todos os jogadores.
+ */
+export function syncJackpotPot(pot: number): void {
+  if (_state) {
+    _state.jackpotPot = pot;
+  }
 }
 
 export function getOfflineState(): OfflineState | null {
@@ -100,15 +111,22 @@ export function spinOffline(betAmount: number): SpinResponseDto {
   if (prize > 0) {
     _state.balance = Math.round((_state.balance + prize) * 100) / 100;
   }
-  void jackpotLineWon;
+
+  // Paga o jackpot global quando uma linha completa de envelopes 🧧 alinha.
+  let jackpotWon = 0;
+  if (jackpotLineWon && _state.jackpotPot > 0) {
+    jackpotWon = _state.jackpotPot;
+    _state.balance = Math.round((_state.balance + jackpotWon) * 100) / 100;
+    _state.jackpotPot = 0;
+  }
 
   return {
     rows: grid.map((row) => row.map((s) => s.face)),
     prizeWon: prize,
     currentBalance: _state.balance,
-    isWinner: prize > 0,
+    isWinner: prize > 0 || jackpotWon > 0,
     betAmount,
-    jackpotWon: 0,
+    jackpotWon,
     jackpotPot: _state.jackpotPot,
   };
 }
