@@ -1,4 +1,6 @@
 import { apiClient } from "./client";
+import { useConnectionStore } from "../store/connectionStore";
+import { spinOffline, initOfflineState, getOfflineState } from "../offline/offlineEngine";
 import type {
   AuditResultDto,
   BetConfigDto,
@@ -8,53 +10,86 @@ import type {
   SpinResponseDto,
 } from "../types/api";
 
-/**
- * Cria um jogador no backend.
- * POST /api/slot/player
- */
+let _offlinePlayer: PlayerDto | null = null;
+void _offlinePlayer;
+
 export async function createPlayer(payload: CreatePlayerRequest): Promise<PlayerDto> {
-  const { data } = await apiClient.post<PlayerDto>("/slot/player", payload);
-  return data;
+  const { status } = useConnectionStore.getState();
+
+  if (status !== "offline") {
+    try {
+      const { data } = await apiClient.post<PlayerDto>("/slot/player", payload);
+      initOfflineState(data.balance, data.jackpotPot ?? 0);
+      return data;
+    } catch {
+      // Network failure -- interceptor already marked offline
+    }
+  }
+
+  const offlinePlayer: PlayerDto = {
+    id: `offline-${Date.now()}`,
+    name: payload.name,
+    balance: payload.initialBalance,
+    jackpotPot: 0,
+  };
+  _offlinePlayer = offlinePlayer;
+  initOfflineState(offlinePlayer.balance, 0);
+  return offlinePlayer;
 }
 
-/**
- * Executa um spin para o jogador informado, enviando o valor da aposta.
- * POST /api/slot/spin/{playerId}
- */
 export async function spin(
   playerId: string,
   betAmount: number
 ): Promise<SpinResponseDto> {
-  const body: SpinRequestDto = { betAmount };
-  const { data } = await apiClient.post<SpinResponseDto>(
-    `/slot/spin/${playerId}`,
-    body
-  );
-  return data;
+  const { status, markOffline } = useConnectionStore.getState();
+
+  if (status !== "offline") {
+    try {
+      const body: SpinRequestDto = { betAmount };
+      const { data } = await apiClient.post<SpinResponseDto>(
+        `/slot/spin/${playerId}`,
+        body
+      );
+      initOfflineState(data.currentBalance, data.jackpotPot);
+      return data;
+    } catch (err) {
+      const isNetworkErr =
+        err instanceof Error &&
+        (err.message.includes("Network") ||
+          err.message.includes("timeout") ||
+          err.message.includes("ECONNREFUSED") ||
+          err.message.includes("Erro de comunicacao"));
+
+      if (isNetworkErr) {
+        markOffline();
+        const offlineState = getOfflineState();
+        if (!offlineState) {
+          throw new Error("Modo offline indisponivel: saldo nao sincronizado. Reinicie o jogo.");
+        }
+        return spinOffline(betAmount);
+      }
+
+      throw err;
+    }
+  }
+
+  const offlineState = getOfflineState();
+  if (!offlineState) {
+    throw new Error("Motor offline nao inicializado. Por favor, reinicie o jogo.");
+  }
+  return spinOffline(betAmount);
 }
 
-/**
- * Le o valor atual do pote progressivo GLOBAL.
- * GET /api/slot/jackpot
- */
 export async function getJackpot(): Promise<number> {
   const { data } = await apiClient.get<{ jackpotPot: number }>("/slot/jackpot");
   return data.jackpotPot;
 }
 
-/**
- * Le configuracao de aposta (presets e limites) direto do backend.
- * GET /api/slot/bet-config
- */
 export async function getBetConfig(): Promise<BetConfigDto> {
   const { data } = await apiClient.get<BetConfigDto>("/slot/bet-config");
   return data;
 }
 
-/**
- * Roda uma simulacao de auditoria (RTP / House Edge).
- * GET /api/slot/audit?spins=...
- */
 export async function runAudit(spins = 100_000): Promise<AuditResultDto> {
   const { data } = await apiClient.get<AuditResultDto>("/slot/audit", {
     params: { spins },
