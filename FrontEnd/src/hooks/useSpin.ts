@@ -111,6 +111,7 @@ export function useSpin() {
   const startSpin = useGameStore((s) => s.startSpin);
   const finishSpin = useGameStore((s) => s.finishSpin);
   const stopSpin = useGameStore((s) => s.stopSpin);
+  const setAutoSpin = useGameStore((s) => s.setAutoSpin);
   const isSpinning = useGameStore((s) => s.isSpinning);
   const selectedBet = useGameStore((s) => s.selectedBet);
   const turboMode = useGameStore((s) => s.turboMode);
@@ -215,6 +216,7 @@ export function useSpin() {
       const msg = err instanceof Error ? err.message : "Erro ao executar o giro.";
       toast.error(msg);
       stopSpin();
+      setAutoSpin(false); // stop auto-spin on any API/network error
       return null;
     }
   }, [
@@ -225,6 +227,7 @@ export function useSpin() {
     startSpin,
     finishSpin,
     stopSpin,
+    setAutoSpin,
     setBalance,
     setJackpotPot,
     play,

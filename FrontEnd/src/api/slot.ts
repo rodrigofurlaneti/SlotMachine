@@ -58,6 +58,10 @@ export async function spin(
         (err.message.includes("Network") ||
           err.message.includes("timeout") ||
           err.message.includes("ECONNREFUSED") ||
+          err.message.includes("status code 500") ||
+          err.message.includes("status code 502") ||
+          err.message.includes("status code 503") ||
+          err.message.includes("status code 504") ||
           err.message.includes("Erro de comunicacao"));
 
       if (isNetworkErr) {
